@@ -16,6 +16,7 @@
     }
 
 
+
 /**
  * TODO:
  * Call the function 'sayHello' and pass your name as a string literal argument.
@@ -38,6 +39,7 @@ console.log(helloMessage);
  */
 var myName = "Austin Joiner"
 sayHello(myName);
+console.log(sayHello(myName));
 // Don't modify the following line, it generates a random number between 1 and 3
 // and stores it in a variable named random
 var random = Math.floor((Math.random() * 3) + 1);
@@ -79,13 +81,17 @@ var random = Math.floor((Math.random() * 3) + 1);
  */
     function calculateTip(tip,total) {
         var tipAmount = tip * total;
-        if (tipAmount > total) {
-            alert("WOW. Thank you for the Big tip.")
+        if (tipAmount >= total) {
+            alert("WOW. Thank you for the Big tip.");
+            return tipAmount;
+        } else if (tipAmount <= 0) {
+            alert("Rude!");
             return tipAmount;
         } else {
-            alert("Thank you for the tip.")
-            return tipAmount;
-        }
+        alert("Thank you for the tip.");
+        return tipAmount;
+
+    }
     }
 
 /**
@@ -113,7 +119,7 @@ var random = Math.floor((Math.random() * 3) + 1);
  * > applyDiscount(45.99, 0.12) // 40.4712
  */
 
-    function applyDiscount(price,discount) {
+    function  applyDiscount(price,discount) {
         discount = Math.min(discount, 1);
         discount = Math.max(discount, 0);
         var difference = price * discount;
