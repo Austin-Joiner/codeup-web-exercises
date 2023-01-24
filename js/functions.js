@@ -11,7 +11,7 @@
     alert("Welcome to my Website!");
 
     function sayHello(name) {     // (name) is parameter
-        alert("Hello, " + name + "!");
+
         return "Hello, " + name + "!";
     }
 
@@ -38,8 +38,8 @@ console.log(helloMessage);
  * console.
  */
 var myName = "Austin Joiner"
-sayHello(myName);
-console.log(sayHello(myName));
+var resultMyName = sayHello(myName);
+console.log(resultMyName);
 // Don't modify the following line, it generates a random number between 1 and 3
 // and stores it in a variable named random
 var random = Math.floor((Math.random() * 3) + 1);
@@ -82,13 +82,13 @@ var random = Math.floor((Math.random() * 3) + 1);
     function calculateTip(tip,total) {
         var tipAmount = tip * total;
         if (tipAmount >= total) {
-            alert("WOW. Thank you for the Big tip.");
+            alert("WOW. Thank you for the Big tip of " + tipAmount + ".");
             return tipAmount;
         } else if (tipAmount <= 0) {
-            alert("Rude!");
+            alert("Rude!, Your tip amount was only" + tipAmount + ".");
             return tipAmount;
         } else {
-        alert("Thank you for the tip.");
+        alert("Thank you for the tip of " + tipAmount + ".");
         return tipAmount;
 
     }
@@ -122,9 +122,9 @@ var random = Math.floor((Math.random() * 3) + 1);
     function  applyDiscount(price,discount) {
         discount = Math.min(discount, 1);
         discount = Math.max(discount, 0);
-        var difference = price * discount;
-        var discountApplied = price - difference;
-        return discountApplied;
+        var calculateMath = price - (price * discount);
+
+        return calculateMath;
     }
     var testDiscount = applyDiscount(100, 2); // 0   Should correct any number over 1 or under 0.
 
