@@ -148,7 +148,7 @@ console.log(userColorTest);
             var discountOne = .1 * total;
             alert("your total before discount is " + total + "$.")
             alert("You got " + discountOne + "$ off your total today.");
-            return alert("Making your total " + discountAlert + "$.");
+            return alert("Making your total " + discountOne + "$.");
         } else if (lucky === 2) {
             var discountTwo = .25 * total;
             alert("your total before discount is " + total + "$.")
@@ -216,7 +216,7 @@ console.log(userColorTest);
                return alert("okay thanks for coming.");
             }
             do {
-                alert("Be sure to enter in a number. Whole numbers will be the all that is accepted. IF YOU SEE THIS AGAIN IT MEANS YOU DIDN'T TYPE A NUMBER IN.")
+                alert("Be sure to enter in a number. Whole numbers will be the only numbers that is accepted. IF YOU SEE THIS AGAIN IT MEANS YOU DIDN'T TYPE A NUMBER IN CORRECTLY.")
                 var promptTest = prompt("Type in a number.");
             }
             while (isNaN(parseFloat(promptTest)));
@@ -248,6 +248,9 @@ console.log(userColorTest);
         }
 
 }
+
+
+
 
 
 
