@@ -26,14 +26,19 @@
    /* function analyzeColor(color) {
         if (color.toLocaleLowerCase().replace("."," ").trim() === "red") {
             alert("WOW! Red is my favorite color.");
+            return "WOW! Red is my favorite color.";
         } else if (color.toLocaleLowerCase().replace("."," ").trim() === "blue") {
             alert("Blue, that is the same color as sky");
+            return ""Blue, that is the same color as sky"";
         } else if (color.toLocaleLowerCase().replace("."," ").trim() === "brown") {
             alert("Brown, that is the same color as mud");
+            return "Brown, that is the same color as mud";
         } else if (color.toLocaleLowerCase().replace("."," ").trim() === "green") {
             alert("green, that is the same color as grass");
+            return "green, that is the same color as grass";
         } else {
             alert("Sorry that is not in my database.");
+            return "Sorry that is not in my database.";
         }
     }    */
 
@@ -215,6 +220,7 @@ console.log(userColorTest);
             } else {
                return alert("okay thanks for coming.");
             }
+
             do {
                 alert("Be sure to enter in a number. Whole numbers will be the only numbers that is accepted. IF YOU SEE THIS AGAIN IT MEANS YOU DIDN'T TYPE A NUMBER IN CORRECTLY.")
                 var promptTest = prompt("Type in a number.");
