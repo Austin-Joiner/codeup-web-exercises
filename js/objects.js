@@ -91,6 +91,14 @@
      * > console.log(books[0].author.firstName) // "Douglas"
      * > console.log(books[0].author.lastName) // "Adams"
      */
+    var books = [
+            {title:"The Art of Loyalty", author: {firstName:"Benedict", lastName:"Arnold"}},
+            {title:"Common Cents", author: {firstName:"Thomas", lastName:"Lincoln"}},
+            {title:"The Little Giant", author: {firstName:"Peter", lastName:"Dinklage"}},
+            {title:"Bonds of Family", author: {firstName:"Jaime", lastName:"Lannister"}},
+            {title:"Don\'t Lose Your Head", author: {firstName:"Ned", lastName:"Stark"}}
+        ];
+
 
     /**
      * TODO:
@@ -117,6 +125,11 @@
      *      ...
      */
 
+    books.forEach(function(bookInfo) {
+
+        console.log("Book #" + (books.indexOf(bookInfo) + 1) + "\n" + "Title: " + bookInfo.title + "\n" + "Author: " + bookInfo.author.firstName + " " + bookInfo.author.lastName  + "\n---");
+    }); // book.indexOf(bookInfo) gives you the index of the books since books up top can not be pulled by the function. Why?
+
     /**
      * Bonus:
      * - Create a function named `createBook` that accepts a title and author
@@ -127,5 +140,28 @@
      *   outputs the information described above. Refactor your loop to use your
      *   `showBookInfo` function.
      */
+    function createBook (title, first, last) {
+        return {
+            title: title,
+            author: {
+                firstName: first,
+                lastName: last
+            }
+        }
+    }
+    var books = [
+
+        createBook("The Art of Loyalty", "Benedict", "Arnold"),
+        createBook("Common Cents", "Thomas", "Arnold"),
+        createBook("The Little Giant", "Peter", "Dinklage"),
+        createBook("Bonds of Family", "Jaime", "Lannister"),
+        createBook("Don\'t Lose Your Head", "Ned", "Stark")
+
+    ];
+
+
+
+
+
 
 })();
