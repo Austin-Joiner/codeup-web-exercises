@@ -125,11 +125,11 @@
      *      ...
      */
 
-    books.forEach(function(bookInfo) {
+    books.forEach(function(showBookInfo) {
 
-        console.log("Book #" + (books.indexOf(bookInfo) + 1) + "\n" + "Title: " + bookInfo.title + "\n" + "Author: " + bookInfo.author.firstName + " " + bookInfo.author.lastName  + "\n---");
+        console.log("Book #" + (books.indexOf(showBookInfo) + 1) + "\n" + "Title: " + showBookInfo.title + "\n" + "Author: " + showBookInfo.author.firstName + " " + showBookInfo.author.lastName  + "\n---");
     }); // book.indexOf(bookInfo) gives you the index of the books since books up top can not be pulled by the function. Why?
-
+    //(books.indexOf(showBookInfo) + 1)
     /**
      * Bonus:
      * - Create a function named `createBook` that accepts a title and author
