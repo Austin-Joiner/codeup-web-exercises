@@ -1,4 +1,4 @@
-(function() {
+(function(radius) {
     "use strict";
 
     // create a circle object
@@ -20,26 +20,26 @@
             } else {
                 return doRounding;
             }
-
             // If doRounding is true, round the result to the nearest integer.
             // Otherwise, output the complete value
 
-            console.log("Area of a circle with radius: " + this.radius + ", is: ");
+            console.log("Area of a circle with radius: " + this.radius + ", is: " + this.getArea(this.radius));
         }
     };
 
     // log info about the circle
-    console.log("Raw circle information");
+    console.log("The radius of the circle is " + circle.radius + ".");
     circle.logInfo(false);
-    console.log("Circle information rounded to the nearest whole number");
+    console.log(circle.logInfo(circle.getArea(circle.radius)) + " is the area of the circle.");
     circle.logInfo(true);
 
     console.log("=======================================================");
     // TODO: Change the radius of the circle to 5.
 
     // log info about the circle
-    console.log("Raw circle information");
+    circle.radius = 5;
+    console.log("The radius of the circle is " + (circle.radius) + ".");
     circle.logInfo(false);
-    console.log("Circle information rounded to the nearest whole number");
+    console.log(circle.logInfo(circle.getArea(circle.radius)) + " is the area of the circle.");
     circle.logInfo(true);
 })();
