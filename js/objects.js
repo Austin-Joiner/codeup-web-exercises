@@ -159,7 +159,9 @@
 
     ];
 
+    function showBook(book) {
 
+    }
 
 
 
