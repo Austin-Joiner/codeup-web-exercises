@@ -77,6 +77,7 @@
        }
         });
    };
+   discountCalculator();
 
 
     /** TODO:
@@ -125,9 +126,9 @@
      *      ...
      */
 
-    books.forEach(function(showBookInfo) {
+    books.forEach(function(showBook) {
 
-        console.log("Book #" + (books.indexOf(showBookInfo) + 1) + "\n" + "Title: " + showBookInfo.title + "\n" + "Author: " + showBookInfo.author.firstName + " " + showBookInfo.author.lastName  + "\n---");
+        console.log("Book #" + (books.indexOf(showBook) + 1) + "\n" + "Title: " + showBook.title + "\n" + "Author: " + showBook.author.firstName + " " + showBook.author.lastName  + "\n---");
     }); // book.indexOf(bookInfo) gives you the index of the books since books up top can not be pulled by the function. Why?
     //(books.indexOf(showBookInfo) + 1)
     /**
@@ -140,6 +141,7 @@
      *   outputs the information described above. Refactor your loop to use your
      *   `showBookInfo` function.
      */
+    // bonus question 1 below
     function createBook (title, first, last) {
         return {
             title: title,
@@ -149,21 +151,28 @@
             }
         }
     }
-    var books = [
+    var newBooks = [
 
         createBook("The Art of Loyalty", "Benedict", "Arnold"),
-        createBook("Common Cents", "Thomas", "Arnold"),
+        createBook("Common Cents", "Thomas", "Lincoln"),
         createBook("The Little Giant", "Peter", "Dinklage"),
         createBook("Bonds of Family", "Jaime", "Lannister"),
         createBook("Don\'t Lose Your Head", "Ned", "Stark")
-
     ];
 
-    function showBook(book) {
+console.log(newBooks);
 
-    }
+// bonus question 2 below
+function showBookInfo(x) {
+    console.log("Book #" + (newBooks.indexOf(newBooks[x]) + 1) + "\n" +
+        "Title: " + newBooks[x].title + "\n" +
+        "Author: " + newBooks[x].author.firstName + " " + newBooks[x].author.lastName + "\n---");
 
+}
+showBookInfo(3);
 
-
+    newBooks.forEach(function(showBook) {
+        console.log(showBook);
+    });
 
 })();

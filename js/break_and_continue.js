@@ -7,7 +7,7 @@
 
 
 function breakContinue() {
-    var userInput = parseInt(prompt("Pick an odd number."));
+    var userInput = parseInt(prompt("Pick an odd number, between 1 - 50."));
 
 
 

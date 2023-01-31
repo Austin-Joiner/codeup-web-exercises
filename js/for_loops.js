@@ -6,6 +6,7 @@ function showMultiplicationTable(number) {
         console.log(number + " x " + i + " = " + result);
     }
 }
+showMultiplicationTable(3);
 
 // Math.floor()    takes a number and rounds down useful for random number in case of a decimal.
 // Math.random() gives a random number between 0 and 1 ex: .23412451
@@ -21,6 +22,7 @@ function numberGenCheck() {
         }
     }
 }
+numberGenCheck();
 
 function concatenationNumbers() {
     for (var i = 1; i <= 9; i++) {
@@ -35,12 +37,13 @@ function concatenationNumbers() {
         console.log(concatNumber)
     }
 }
-function CountdownFive() {
+concatenationNumbers();
+function countDownFive() {
     for (var i = 100; i >= 5; i -= 5) { //countdown from 100 by 5 until it equals 5.
         console.log(i);
     }
 }
-
+countDownFive();
 
 
 
