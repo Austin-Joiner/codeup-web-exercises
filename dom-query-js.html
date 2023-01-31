@@ -6,7 +6,13 @@
 </head>
 <body>
 
+<button id="btn1">Javascript is Cool!</button>
+
 <h1 id="main-header">Hello World!</h1>
+
+<button id="btn3">odds to grey.</button>
+<button id="btn4">Item 1 to blue!</button>
+
 <ul>
     <li data-dbid="1">Item 1</li>
     <li data-dbid="2">Item 2</li>
@@ -14,8 +20,13 @@
     <li data-dbid="4">Item 4</li>
     <li data-dbid="5">Item 5</li>
 </ul>
+
+<button id="btn2">SubHeader blue!</button>
 <h2 id="sub-header">Hello Again.</h2>
+
+<button id="btn5">MISSION ACCOMPLISHED!</button>
 <p class="sub-paragraph">
+
     Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
     eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
     ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
@@ -34,30 +45,30 @@
        // console.log(mainHeader.innerHTML);
 
         // TODO: Set inner html of mainHeader to "JavaScript is Cool"
-        mainHeader.innerHTML = "JavaScript is Cool";
+        //mainHeader.innerHTML = "JavaScript is Cool"; // commented out to complete event exercise
         //console.log(mainHeader.innerHTML);
         // TODO: Uncomment the next line and get the sub header element by id
         var subHeader = document.getElementById('sub-header');
 
         // TODO: Set the text color of subHeader to blue
-        subHeader.style.color = 'blue';
+        //subHeader.style.color = 'blue'; // commented out to complete event exercise
         // TODO: Uncomment the next line and get all list items
         var listItems = document.getElementsByTagName('li');
         //console.log(listItems);
 
         // TODO: Set text color on every other list item to grey
-        for (var i = 0; i < listItems.length; i++) {
-            if (i % 2 !== 0) { // checks if it is odd based on its index 0,1,2,3,4. 1 and 3 here would be the odd grey listed.
-                listItems[i].style.color = 'grey';
-            }
-        }
+        //for (var i = 0; i < listItems.length; i++) {
+            //if (i % 2 !== 0) { // checks if it is odd based on its index 0,1,2,3,4. 1 and 3 here would be the odd grey listed.
+                //listItems[i].style.color = 'grey';
+            //}
+        //}  commented out above lines for Events exercise.
         // TODO: Set text color of li with dbid = 1 to blue
-        let dbId = document.getElementsByTagName("li"); // call on the list so we can later call on the attribute.
-        for (let i = 0; i < dbId.length; i++) { //starts a loop to count and number our list
-            if (dbId[i].getAttribute("data-dbid") === "1") { // if the li is equal to 1 then next line is executed.
-                dbId[i].style.color = "blue"; // paints it blue----Item 1.
-            }
-        }
+       // let dbId = document.getElementsByTagName("li"); // call on the list so we can later call on the attribute.
+        //for (let i = 0; i < dbId.length; i++) { //starts a loop to count and number our list
+           // if (dbId[i].getAttribute("data-dbid") === "1") { // if the li is equal to 1 then next line is executed.
+              //  dbId[i].style.color = "blue"; // paints it blue----Item 1.
+           // }
+       // }   commented out above lines for Events exercise.
         // TODO: Uncomment the next line and get all elements with class name sub-paragraph
         var subParagraphs = document.getElementsByClassName('sub-paragraph')[0];
 
@@ -65,7 +76,51 @@
 
         // TODO: Change the text in the first sub paragraph to "Mission Accomplished!"
 
-        subParagraphs.innerHTML = "Mission Accomplished!";
+        //subParagraphs.innerHTML = "Mission Accomplished!"; //commented out above lines for Events exercise.
+
+        //------
+        //--------------
+        //-----------------------
+        //--------------------------------
+        // below this line is the Events for DOM EVENTS exercises.
+        //--------------------------------
+        //-----------------------
+        //--------------
+        //------
+        var listenerOne = function () {
+            mainHeader.innerHTML = "JavaScript is Cool";
+        }
+        document.getElementById('btn1').addEventListener('click', listenerOne);
+
+        var listenerTwo = function () {
+            subHeader.style.color = 'blue';
+        }
+        document.getElementById('btn2').addEventListener('click', listenerTwo);
+
+        var listenerThree = function () {
+            for (var i = 0; i < listItems.length; i++) {
+                if (i % 2 !== 0) { // checks if it is odd based on its index 0,1,2,3,4. 1 and 3 here would be the odd grey listed.
+                    listItems[i].style.color = 'grey';
+                }
+            }
+        }
+        document.getElementById('btn3').addEventListener('click', listenerThree);
+
+        var listenerFour = function () {
+            let dbId = document.getElementsByTagName("li"); // call on the list so we can later call on the attribute.
+            for (let i = 0; i < dbId.length; i++) { //starts a loop to count and number our list
+                if (dbId[i].getAttribute("data-dbid") === "1") { // if the li is equal to 1 then next line is executed.
+                    dbId[i].style.color = "blue"; // paints it blue----Item 1.
+                }
+            }
+        }
+        document.getElementById('btn4').addEventListener('click', listenerFour);
+
+        var listenerFive = function () {
+            subParagraphs.innerHTML = "Mission Accomplished!";
+        }
+        document.getElementById('btn5').addEventListener('click', listenerFive);
+
     })();
 </script>
 </body>
