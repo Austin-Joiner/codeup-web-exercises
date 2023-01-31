@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register With Us</title>
+</head>
+<body>
+
+    <h1>Register With Us</h1>
+    <form method="POST" action="https://request-inspector.glitch.me/">
+        <label for="email">Email</label>
+        <input id="email" name="email" type="text" placeholder="Enter email here">
+        <br>
+
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" placeholder="Password here">
+        <br>
+
+        <label for="bio">bio</label><br>
+        <textarea id="bio" name="bio" placeholder="Tell us something about yourself."></textarea>
+        <br>
+        <br>
+
+
+        <section>
+            <label>How did you hear about us?</label> <!-- if you have all the same name values on a radio type then you will only be able to select one answer value. -->
+            <p>Check <strong>ALL</strong> that apply: </p>
+            <label for="answer1">Billboard</label> <!-- radio allows for only one selection while checkbox lets multiple inputs. -->
+            <input type="checkbox" id="answer1" name="hearabout" value="billboard"><br>
+            <label for="answer2">radio advertisement</label>
+            <input type="checkbox" id="answer2" name="hearabout" value="radio advertisement"><br>
+            <label for="answer3">internet advertisement</label>
+            <input type="checkbox" id="answer3" name="hearabout" value="internet advertisement"><br>
+            <label for="answer4">other</label>
+            <input type="checkbox" id="answer4" name="hearabout" value="other"><br>
+        </section>
+        <br>
+        <br>
+
+
+        <label for="browser_use">Which web browser do you use?</label>
+        <select name="browser_use" id="browser_use">
+            <option value="chrome">Google Chrome</option>
+            <option value="firefox">Firefox</option>
+            <option value="safari">Safari</option>
+            <option value="edge">Microsoft Edge</option>
+            <option value="explorer">Internet Explorer</option>
+        </select>
+
+        <button type="submit">Register</button>
+
+
+    </form>
+
+
+</body>
+</html>
