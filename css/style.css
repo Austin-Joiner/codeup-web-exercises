@@ -1,3 +1,68 @@
 .fancy-header {
-    color: red;
+    color: #a20e0e;
+    text-align: center;
+    font-size: 40px;
 }
+
+h1, h2 {
+    color: #26269b;
+    text-decoration: underline;
+    font-size: 30px;
+}
+
+body {
+    background-color: #8f8989;
+    font-family: "Baloo Bhaina 2"
+    /*lets add a background image here*/
+
+}
+div {
+    background-image: url("https://img.freepik.com/free-vector/modern-banner-with-abstract-low-poly-design_1048-14340.jpg?w=900&t=st=1675201382~exp=1675201982~hmac=fb6583fdfc666b09c281e07cd160654f1f7890bc06b7ef62dd375a530279a9e8");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+.fancy-list {
+    list-style: square;
+}
+
+
+#table-container td {
+    font-size: 20px;
+    padding: 15px 10px 20px 65px;
+}
+
+#table-container th {
+    font-size: 25px;
+    padding: 0px 0px 5px 50px
+
+}
+
+
+a:link {
+    color: blue;
+}
+ a:visited {
+     color: purple;
+ }
+ a:hover {
+     display: block;
+     color: green;
+     transform: scale(1.3);
+     transition: all .1s ease-in;
+     padding-left: 100px;
+ }
+
+ a:active {
+     color: black;
+ }
+
+.img {
+    width: 400px;
+    height: 300px;
+    padding: 10px;
+
+}
+
+
+
