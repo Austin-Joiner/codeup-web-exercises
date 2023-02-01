@@ -43,7 +43,7 @@
      * TODO:
      * Refactor your above code to use a `forEach` loop
      */
-
+    console.log("----- For each loop -----")
     names.forEach(function(name) {
         console.log("This is "+ name + "!");
     });
@@ -63,7 +63,7 @@
      *  > second([1, 2, 3, 4, 5]) // returns 2
      *  > last([1, 2, 3, 4, 5]) // return 5
      */
-var numbers = [2, 4, 6, 7, 9];
+var numbers = [1, 2, 3, 4, 5];
     function firstItem() {
         console.log(numbers[0]);
     }
@@ -81,3 +81,7 @@ var numbers = [2, 4, 6, 7, 9];
     thirdItem(numbers);
 
 })();
+
+
+
+
