@@ -62,6 +62,14 @@ a:link {
     height: 300px;
     padding: 10px;
 
+
+}
+
+.img-container {
+    width: 55%;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    background: none;
 }
 
 
