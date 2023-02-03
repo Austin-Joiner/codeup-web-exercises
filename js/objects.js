@@ -164,15 +164,15 @@ console.log(newBooks);
 
 // bonus question 2 below
 function showBookInfo(x) {
+
     console.log("Book #" + (newBooks.indexOf(newBooks[x]) + 1) + "\n" +
         "Title: " + newBooks[x].title + "\n" +
         "Author: " + newBooks[x].author.firstName + " " + newBooks[x].author.lastName + "\n---");
 
 }
-showBookInfo(3);
+showBookInfo(1);
 
     newBooks.forEach(function(showBook) {
-        console.log(showBook);
     });
 
 })();
