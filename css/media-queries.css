@@ -5,7 +5,7 @@
     }
 
     .hidden-on-desktop {
-        font-size: 0px;
+        font-size: 0;
     }
 
     li {
@@ -47,7 +47,7 @@
     }
     .sub-section {
         display: flex;
-        border: green 5px solid;
+        /*border: green 5px solid;*/
         margin-bottom: 15em;
         justify-content: flex-start;
         margin-top: 3em;

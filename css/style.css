@@ -60,17 +60,19 @@ a:link {
 .img {
     width: 400px;
     height: 300px;
-    padding: 10px;
-
-
+    border: 3px black solid;
 }
 
-.img-container {
-    width: 55%;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    background: none;
+#img4 {
+    margin-right: 10em;
+
+}
+#img2 {
+    margin-right: 10em;
 }
 
+tr, td, th {
+    border: 1px solid black;
+}
 
 
