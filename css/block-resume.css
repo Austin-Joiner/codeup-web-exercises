@@ -1,0 +1,21 @@
+h1 {
+    text-align: center;
+    font-weight: bold;
+}
+h2 {
+    text-align: center;
+}
+
+hr {
+    border: 3px rgb(137, 161, 111) solid;
+    opacity: 100;
+}
+
+h3 {
+    color: rgba(54, 121, 242);
+    font-weight: bold;
+}
+
+.sub-header {
+    margin-bottom: 15px;
+}
