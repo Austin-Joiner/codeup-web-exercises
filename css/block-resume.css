@@ -8,11 +8,12 @@
 
 }
 
-.tester {
-    margin: 0;
-    padding: 0;
-    display: inline-block;
-}
+
+/*.tester {*/
+/*    margin: 0;*/
+/*    padding: 0;*/
+/*    display: inline-block;*/
+/*}*/
 
 .margin-header {
     /*margin: 0em 10em 0em 10em;*/
@@ -21,7 +22,7 @@
 
 .margin-article {
     /*margin: 0em 4em 0em 14em;*/
-    margin: 20px 0;
+    /*margin: 20px 0;*/
 }
 
 h1 {
