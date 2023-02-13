@@ -72,6 +72,13 @@ const emailKing = users.reduce((email, user) => {
 console.log(`${emailKing} is the KING of all Emails`);
 
 
+// function to put all names into a string together .reduce does .join automatically, so we don't need it at all here...SIMPLE!
+    const allUsers = users.reduce((string, user) => {
+     return `${string} ${user.email}`;
+}, '');
+console.log(allUsers);
+
+
 
 
 
