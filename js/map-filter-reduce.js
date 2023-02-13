@@ -46,6 +46,8 @@ const users = [
 const newLang = users.filter(lang => lang.languages.length > 2);
 newLang;
 
+const userEmail = users.map(displayEmail => displayEmail.email);
+userEmail;
 
 
 
