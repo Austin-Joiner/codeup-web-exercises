@@ -44,10 +44,22 @@ const users = [
 
 // es6
 const newLang = users.filter(lang => lang.languages.length > 2);
-newLang;
+console.log(newLang);
 
 const userEmail = users.map(displayEmail => displayEmail.email);
-userEmail;
+console.log(userEmail);
+
+
+// using reduce to fine total years of experience and 0 at then cause were not adding any to it.
+const yearsTotal = users.reduce((expYears, user) => {
+    return expYears + user.yearsOfExperience;
+}, 0);
+console.log(yearsTotal);
+
+
+// taking the total experience from above and the total amount of users to find the average experience... 7
+var averageYear = yearsTotal / users.length;
+console.log(averageYear);
 
 
 
