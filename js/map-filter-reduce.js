@@ -79,6 +79,20 @@ console.log(`${emailKing} is the KING of all Emails`);
 console.log(allUsers);
 
 
+//BONUS
+
+
+    const langName = users.reduce((lang, user) => {
+        if(user.languages !== lang) {
+            console.log(user.languages);
+            return user.languages;
+        }
+        console.log(lang);
+        return lang;
+    }, '');
+console.log(langName);
+
+
 
 
 
