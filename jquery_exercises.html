@@ -5,7 +5,7 @@
     <title>JQuery Introduction</title>
 </head>
 <body>
-<h1>JQuery Selectors</h1>
+<h1 id="header">JQuery Selectors</h1>
 
 <div id="container">
     <div id="sub-container">
@@ -30,6 +30,10 @@
 $(function() {
 alert( 'The DOM has finished loading!' );
 });
+
+
+var headerContents = $('#header').html();
+alert(headerContents);
 </script>
 
 
