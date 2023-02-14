@@ -96,6 +96,12 @@
     $(this).next().css('font-weight', 'normal');
   });
 
+  $('li').click(function() {
+    $('ul').each(function() {
+    $(this).children().first().css('color', 'blue');
+    });
+  });
+
 
 
 
