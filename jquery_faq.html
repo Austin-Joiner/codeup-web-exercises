@@ -24,6 +24,8 @@
     <dd>Crater Lake National Park has America's deepest lake.</dd>
 </dl>
 
+<a id="show-me" href="#">Show Me The Facts!</a>
+<a id="hide-me" href="#">Hide Those Facts!</a>
 
 
 
@@ -34,6 +36,21 @@
 <script>
  $('dd').addClass("invisible");
 $('.invisible').css('visibility', 'hidden');
+$('#hide-me').css('visibility', 'hidden');
+
+ $('#show-me').click(function(){
+   $('.invisible').css('visibility', 'visible');
+   $(this).css('visibility', 'hidden');
+   $('#hide-me').css('visibility', 'visible');
+
+
+   $('#hide-me').click(function(){
+     $('.invisible').css('visibility', 'hidden');
+     $(this).css('visibility', 'hidden');
+     $('#show-me').css('visibility', 'visible');
+   });
+ });
+
 
 
 </script>
