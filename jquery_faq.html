@@ -85,34 +85,76 @@
     <!--left frame-->
     <!---->
     <!---->
-    <div class="frame">
-
+    <div class="frame" id="left-frame">
+        <img src="img/yellowstone.png">
     </div>
+
     <!---->
     <!---->
     <!--center frame-->
     <!---->
     <!---->
-    <div class="frame">
-
-
+    <div class="frame" id="center-frame">
+        <img src="img/sequoia.png">
     </div>
+
     <!---->
     <!---->
     <!--right frame-->
     <!---->
     <!---->
-    <div class="frame">
-
+    <div class="frame" id="right-frame">
+        <img src="img/glacier.png">
     </div>
+
 </div>
 </div>
+    <div id="button-container">
+        <button id="left-frame-btn">Image 1</button>
+        <button id="center-frame-btn">Image 2</button>
+        <button id="right-frame-btn">Image 3</button>
+    </div>
+
+<br>
+<br>
+<br>
+<br>
+
 
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"
         integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
 
 
 <script>
+    var lContents = $('#left-frame').html();
+    var cContents = $('#center-frame').html();
+    var rContents = $('#right-frame').html();
+
+
+    $('.left-frame-btn').click(function() {
+
+    });
+
+
+
+
+
+
+
+
+
+    $('#button-container').css({
+        display: 'flex',
+        justifyContent: 'center',
+        JustifyContent: 'space-evenly',
+        margin: '5px',
+    });
+
+   $('img').css({
+       height: '300px',
+       width: '200px',
+   });
+
     $('#nat-img').css('text-align', 'center');
 
     $('#container').css({
@@ -132,8 +174,9 @@
         border: 'brown solid 10px',
         height: '300px',
         width: '200px',
-        // display: 'inline-block',
-        // margin: 'auto',
+        display: 'flex',
+        'flex-direction': 'column',
+
 
     });
 
