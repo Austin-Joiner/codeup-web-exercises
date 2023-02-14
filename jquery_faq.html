@@ -64,6 +64,8 @@
   <li>Glacier has welcomed over 100 million visitors to the park</li>
 </ul>
 
+<button id="l-li">Highlight last facts!</button>
+
 <br>
 <br>
 <br>
@@ -81,6 +83,19 @@
 
 
 <script>
+  $('#l-li').click(function() {
+    $('ul').each(function() {
+      $(this).find('li').last().css('background-color', 'yellow');
+    });
+  });
+
+
+
+
+
+
+
+
  $('dd').addClass("invisible");
 $('.invisible').css('visibility', 'hidden');
 $('#hide-me').css('visibility', 'hidden');
