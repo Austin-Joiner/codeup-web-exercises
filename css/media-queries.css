@@ -5,7 +5,8 @@
     }
 
     .hidden-on-desktop {
-        font-size: 0;
+        /*font-size: 0;*/
+        display: none;
     }
 
     li {

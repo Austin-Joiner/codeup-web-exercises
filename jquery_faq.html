@@ -72,7 +72,7 @@
     <li>Glacier has welcomed over 100 million visitors to the park</li>
 </ul>
 
-<button id="l-li">Highlight last facts!</button>
+<button id="l-li" style="cursor: pointer">Highlight last facts!</button>
 
 <br>
 
@@ -86,7 +86,7 @@
     <!---->
     <!---->
     <div class="frame" id="left-frame">
-        <img src="img/yellowstone.png">
+        <img id="left-img" src="img/yellowstone.png">
     </div>
 
     <!---->
@@ -95,7 +95,7 @@
     <!---->
     <!---->
     <div class="frame" id="center-frame">
-        <img src="img/sequoia.png">
+        <img id="center-img" src="img/sequoia.png">
     </div>
 
     <!---->
@@ -104,15 +104,15 @@
     <!---->
     <!---->
     <div class="frame" id="right-frame">
-        <img src="img/glacier.png">
+        <img id="right-img" src="img/glacier.png">
     </div>
 
 </div>
 </div>
     <div id="button-container">
-        <button id="left-frame-btn">Image 1</button>
-        <button id="center-frame-btn">Image 2</button>
-        <button id="right-frame-btn">Image 3</button>
+        <button id="left-frame-btn" style="cursor: pointer">Image 1</button>
+        <button id="center-frame-btn" style="cursor: pointer">Image 2</button>
+        <button id="right-frame-btn" style="cursor: pointer">Image 3</button>
     </div>
 
 <br>
@@ -126,106 +126,210 @@
 
 
 <script>
-    var lContents = $('#left-frame').html();
-    var cContents = $('#center-frame').html();
-    var rContents = $('#right-frame').html();
+    var lContents = $('#left-frame');
+    var cContents = $('#center-frame');
+    var rContents = $('#right-frame');
+
+//try swapping images by name?
+
+var leftFrame = document.getElementById('#left-frame');
+var leftImgChecker = leftFrame.querySelector('img');
+
+var centerFrame = document.getElementById('#center-frame');
+var  centerImgChecker = centerFrame.query('img');
 
 
-    $('.left-frame-btn').click(function() {
+    $('#left-frame-btn').click(function() {
+        if (leftImgChecker.src == 'img/yellowstone.png' && centerImgChecker.src == 'img/sequoia.png') {
+            $("#left-img").attr("src", 'img/sequoia.png');
+            $("#center-img").attr("src", 'img/yellowstone.png');
+        } else {
+            console.log('invalid1');
+        }
+     });
 
+    $('#right-frame-btn').click(function() {
+        $("#right-img").attr("src", 'img/sequoia.png');
+        $("#center-img").attr("src", 'img/glacier.png');
+    });
+
+    $('#center-frame-btn').click(function() {
+        var random = Math.random();
+        if (random > 0.5) {
+            $("#center-img").attr("src", 'img/yellowstone.png');
+            $("#left-img").attr("src", 'img/sequoia.png');
+        } else if (random <= 0.5) {
+            $("#center-img").attr("src", 'img/glacier.png');
+            $("#right-img").attr("src", 'img/sequoia.png');
+        } else {
+            console.log("invalid");
+        }
     });
 
 
 
 
+    // $('#left-frame-btn').click(function() {
+     //   $('#left-frame').parent().css("border", "10px black solid");
+    // });
+    // var leftDiv = document.getElementById('left-frame');
+    // var centerDiv = document.getElementById('center-frame');
+    // var rightDiv = document.getElementById('right-frame');
+    //
+    // var imageArray = [leftDiv, centerDiv, rightDiv];
+
+
+    // $('#left-frame-btn').click(function() {
+    //
+    // $('#sub-container').each(function() {
+    //    if ( leftDivv === 0) {
+    //        $('#left-frame').insertAfter('#center-frame');
+    //        console.log("left");
+    //    } else if (leftDivv === 1) {
+    //        $('#center-frame').insertBefore('#left-frame');
+    //        console.log("center");
+    //    } else {
+    //        console.log("none");
+    //    }
+    // });
+    // });
 
 
 
+        // $('#left-frame-btn').click(function() {
+        //
+        //     $('#left-frame').insertAfter('#center-frame');
+           //  ('#center-img').children.detach().appendTo('#left-img');
+           // });
+    // $('#right-frame-btn').click(function() {
+    //     $('#right-frame').insertAfter('#center-frame');
+//var leftImage = $('#left-img').children().detach();
+    //var centerImage = $('#center-img').children().detach();
+
+// var leftDivv = $('#sub-container').children('.frame').index($('#left-frame'));
 
 
-    $('#button-container').css({
-        display: 'flex',
-        justifyContent: 'center',
-        JustifyContent: 'space-evenly',
-        margin: '5px',
-    });
+          //var images1 = document.getElementById("left-frame").querySelector("img[src='img/yellowstone.png']");
+         // var images2 = document.getElementById("left-frame").querySelector("img[src='img/sequoia.png']");
+         // var images3 = document.getElementById("left-frame").querySelector("img[src='img/glacier.png']");
 
-   $('img').css({
-       height: '300px',
-       width: '200px',
-   });
-
-    $('#nat-img').css('text-align', 'center');
-
-    $('#container').css({
-        display: 'flex',
-        justifyContent: 'center',
-    });
-
-    $('#sub-container').css({
-        width: '80%',
-        display: 'flex',
-        justifyContent: 'center',
-        justifyContent: 'space-evenly',
-
-    });
-
-    $('.frame').css({
-        border: 'brown solid 10px',
-        height: '300px',
-        width: '200px',
-        display: 'flex',
-        'flex-direction': 'column',
+          // $(document).ready(function () {
+          //     $('#left-frame-btn').click(function () {
+          //         if (document.getElementById("left-frame").querySelector("img[src='img/yellowstone.png']")) {
+          //
+          //
+          //             console.log("yellowstone");
+          //         } else if (document.getElementById("left-frame").querySelector("img[src='img/sequoia.png']")) {
+          //
+          //             console.log("sequoia");
+          //         } else if (document.getElementById("left-frame").querySelector("img[src='img/glacier.png']")) {
+          //
+          //             console.log("glacier");
+          //         } else {
+          //             console.log("INVALID");
+          //         }
+          //     });
+          // });
 
 
-    });
+          //.parent?
+          // $('#left-frame-btn').click(function() {
+          //
+          // });
+
+          //.child
+          // $('#left-frame-btn').click(function() {
+          //
+          // });
 
 
-    $('#l-li').click(function () {
-        $('ul').each(function () {
-            $(this).children().last().css('background-color', 'yellow'); //.find and .children work the same for this.
-        });
-    });
+          $('#button-container').css({
+              display: 'flex',
+              justifyContent: 'center',
+              JustifyContent: 'space-evenly',
+              margin: '5px',
+              width: '100%',
 
-    $('h3').click(function () {
-        $(this).next().css('font-weight', 'bold');
-    });
-    $('h3').dblclick(function () {
-        $(this).next().css('font-weight', 'normal');
-    });
+          });
 
-    $('li').click(function () {
-        $('ul').each(function () {
-            $(this).children().first().css('color', 'blue');
-        });
-    });
-    $('li').dblclick(function () {
-        $('ul').each(function () {
-            $(this).children().first().css('color', 'black');
-        });
-    });
+          $('img').css({
+              height: '300px',
+              width: '200px',
+          });
+
+          $('#nat-img').css('text-align', 'center');
+
+          $('#container').css({
+              display: 'flex',
+              justifyContent: 'center',
+              width: '100%'
+          });
+
+          $('#sub-container').css({
+              width: '80%',
+              display: 'flex',
+              justifyContent: 'center',
+              justifyContent: 'space-evenly',
+
+          });
+
+          $('.frame').css({
+              border: 'brown solid 10px',
+              height: '300px',
+              width: '200px',
+              display: 'flex',
+              'flex-direction': 'column',
 
 
-    $('dd').addClass("invisible");
-    $('.invisible').css('visibility', 'hidden');
-    $('#hide-me').css('visibility', 'hidden');
-
-    $('#show-me').click(function () {
-        $('.invisible').css('visibility', 'visible');
-        $(this).css('visibility', 'hidden');
-        $('#hide-me').css('visibility', 'visible');
+          });
 
 
-        $('#hide-me').click(function () {
-            $('.invisible').css('visibility', 'hidden');
-            $(this).css('visibility', 'hidden');
-            $('#show-me').css('visibility', 'visible');
-        });
-    });
+          $('#l-li').click(function () {
+              $('ul').each(function () {
+                  $(this).children().last().css('background-color', 'yellow'); //.find and .children work the same for this.
+              });
+          });
 
-    $('dt').click(function () {
-        $(this).css('background-color', 'yellow');
-    });
+
+          $('h3').click(function () {
+              $(this).next().css('font-weight', 'bold');
+          });
+          $('h3').dblclick(function () {
+              $(this).next().css('font-weight', 'normal');
+          });
+
+          $('li').click(function () {
+              $('ul').each(function () {
+                  $(this).children().first().css('color', 'blue');
+              });
+          });
+          $('li').dblclick(function () {
+              $('ul').each(function () {
+                  $(this).children().first().css('color', 'black');
+              });
+          });
+
+
+          $('dd').addClass("invisible");
+          $('.invisible').css('visibility', 'hidden');
+          $('#hide-me').css('visibility', 'hidden');
+
+          $('#show-me').click(function () {
+              $('.invisible').css('visibility', 'visible');
+              $(this).css('visibility', 'hidden');
+              $('#hide-me').css('visibility', 'visible');
+
+
+              $('#hide-me').click(function () {
+                  $('.invisible').css('visibility', 'hidden');
+                  $(this).css('visibility', 'hidden');
+                  $('#show-me').css('visibility', 'visible');
+              });
+          });
+
+          $('dt').click(function () {
+              $(this).css('background-color', 'yellow');
+          });
 </script>
 
 
