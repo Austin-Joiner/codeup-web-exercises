@@ -20,22 +20,69 @@
     <tbody id="insertProducts"></tbody>
 </table>
 
-<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+<button id="refresh" type="button">Refresh</button>
+<button id="adding" type="button">add</button>
+
+
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"
+        integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
 
 <script>
-    (function() {
+    (function () {
         "use strict";
         // TODO: Create an AJAX GET request for the file under data/inventory.json
-                $.get("data/inventory.json").done(function(data, status) {
 
+
+       $.get("data/inventory.json").done(function (data, status) {
+            $.each(data, function (cycle, inventory) {
+                //         $("<tr>")
+                console.log(data);
+                // TODO: Take the data from inventory.json and append it to the products table
+                //       HINT: Your data should come back as a JSON object; use console.log() to inspect
+                //             its contents and fields
+                //       HINT: You will want to target #insertProducts for your new HTML elements
+
+                $("#insertProducts").append($("<tr><td>" + inventory.title + "</td>" + "<td>" + inventory.quantity + "</td>" + "<td>" + inventory.price + "</td>" + "<td>" + inventory.categories + "</td></tr>"));
+
+
+            });
+        });
+
+
+        $("#refresh").click(function () {
+
+        });
+
+
+        var newData = {
+            title: 'hedger',
+            quantity: '10',
+            price: '50',
+            categories: ['tool', 'powered']
+        };
+
+
+
+        $("#adding").click(function(e) {
+            e.preventDefault();
+            $.post("data/inventory.json", newData, function() {
+                // After the POST request is successful at sending data to JSON, send a GET request to retrieve the updated data
+                $.get("data/inventory.json", function(data) {
+                    // Clear the table, so you can add it all back with the new data added on
+                    $("#insertProducts").empty();
+                    // Append the updated data to the table cleared table
+                    $.each(data, function(cycle, inventory) {
+                        $("#insertProducts").append($("<tr><td>" + inventory.title + "</td><td>" + inventory.quantity + "</td><td>" + inventory.price + "</td><td>" + inventory.categories.join(", ") + "</td></tr>"));
+                    });
                 });
-        // TODO: Take the data from inventory.json and append it to the products table
-        //       HINT: Your data should come back as a JSON object; use console.log() to inspect
-        //             its contents and fields
-        //       HINT: You will want to target #insertProducts for your new HTML elements
-    })();
-</script>
+            });
+        });
 
+
+     })();
+
+
+</script>
 
 
 </body>

@@ -18,6 +18,7 @@ $(document).keyup(function(event) {
         alert('You have added 30 lives!');
         $('*').css('background-color', 'black')
         $('h1').css('color', 'white')
+        $('.invis').css('display', 'block')
         $('#secret-pass').css('color', 'black')
         var fireAudio = $('#fireworksAudio');
         fireAudio[0].play();
