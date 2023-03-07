@@ -92,6 +92,13 @@
         // append the table with existing data on page load
         appendTable(existingData);
 
+
+
+        // clears the local storage
+        $('#clear').click(function () {
+            localStorage.clear();
+            location.reload();
+        });
     })();
 </script>
 
