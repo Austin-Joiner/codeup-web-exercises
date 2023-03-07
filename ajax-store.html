@@ -41,13 +41,16 @@
         // Get data from the JSON file and add it to local storage
 
         var existingData = JSON.parse(localStorage.getItem("appendData")) || [];
+        var hasAppendedData = localStorage.getItem("hasAppendedData");
 
-        if (existingData.length === 0) { // prevents existingData from appending everytime you refresh page.
+        if (!hasAppendedData && (existingData.length === 0)) { // prevents existingData from appending everytime you refresh page.
             $.get("data/inventory.json").done(function (data) {
                 $.each(data, function (index, inventory) {
                     existingData.push(inventory);
                 });
                 localStorage.setItem("appendData", JSON.stringify(existingData));
+                localStorage.setItem("hasAppendedData", "true"); // set to indicate data has been appended
+                appendTable(existingData); // append the table with the existing data
             });
         }
 
@@ -65,6 +68,29 @@
 
         });
 
+        // Display data from local storage in the HTML
+        $("#refresh").click(function () {
+            localStorage.setItem("appendData", JSON.stringify(existingData));
+            appendTable(existingData); // Populate the table with the updated data
+        });
+
+        // appends the data to the table
+        function appendTable(data) {
+            $("#insertProducts").empty();
+            $.each(data, function (index, inventory) {
+                $("#insertProducts").append(
+                    $(
+                        "<tr><td>" + inventory.title +
+                        "</td><td>" + inventory.quantity +
+                        "</td><td>" + inventory.price +
+                        "</td><td>" + inventory.categories.join(", ") +
+                        "</td></tr>"
+                    )
+                );
+            });
+        }
+        // append the table with existing data on page load
+        appendTable(existingData);
 
     })();
 </script>
