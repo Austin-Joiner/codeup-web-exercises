@@ -40,6 +40,16 @@
 
         // Get data from the JSON file and add it to local storage
 
+        var existingData = JSON.parse(localStorage.getItem("appendData")) || [];
+
+        if (existingData.length === 0) { // prevents existingData from appending everytime you refresh page.
+            $.get("data/inventory.json").done(function (data) {
+                $.each(data, function (index, inventory) {
+                    existingData.push(inventory);
+                });
+                localStorage.setItem("appendData", JSON.stringify(existingData));
+            });
+        }
 
 
 
