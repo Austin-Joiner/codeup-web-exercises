@@ -51,6 +51,19 @@
             });
         }
 
+        // Add new data to local storage
+        $("#adding").click(function (e) {
+            e.preventDefault();
+            if (existingData.length === 5) //limits you to only 1 add of data since the length is === 5 (the existingData) it can only add 1 more.
+                var newData = {
+                    title: "hedger",
+                    quantity: "10",
+                    price: "50",
+                    categories: ["tool", "powered"],
+                };
+            existingData.push(newData);
+
+        });
 
 
     })();
