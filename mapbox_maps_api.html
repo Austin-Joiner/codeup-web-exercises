@@ -46,7 +46,7 @@
         map.setZoom(10);
     });
 
-    var alamoInfo = {
+    var firstMarkerInfo = {
         address: "2915 Kerry Forest Pkwy #301, Tallahassee, FL 32309",
         popupHTML: "<p>El Jalisco! Happy Hour All Day!</p>"
     };
@@ -59,11 +59,10 @@
                 .setLngLat(coordinates)
                 .addTo(map)
                 .setPopup(popup);
-            popup.addTo(map);
         });
     }
 
-    placeMarkerAndPopup(alamoInfo, accessToken, map);
+    placeMarkerAndPopup(firstMarkerInfo, accessToken, map);
     //reverse geocode for using given coordinates to console log string of place.
     // function reverseGeocode(coordinates, token) {
     //     var baseUrl = 'https://api.mapbox.com';
