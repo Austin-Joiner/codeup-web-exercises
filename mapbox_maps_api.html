@@ -3,16 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>Map-Box-API</title>
-  <script src='https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.js'></script>
-  <link href='https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.css' rel='stylesheet' />
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.css' rel='stylesheet'/>
 </head>
 <body>
 <h1>Map Box API</h1>
 
 
-
-
 <div id='map' style='width: 400px; height: 300px;'></div>
+<button id="zoom-in" type="button">Zoom In</button>
+<button id="zoom-out" type="button">Zoom Out</button>
+
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"
+        integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
 <script>
     accessToken = 'pk.eyJ1IjoiYXVzdGluajk1IiwiYSI6ImNsZXp6Mnl1ejAwdmIzdG1ra3FkNHdzdXoifQ.PMmC9psSUgno2UcUPJEWdw'
     mapboxgl.accessToken = accessToken;
@@ -28,19 +32,20 @@
         var baseUrl = 'https://api.mapbox.com';
         var endPoint = '/geocoding/v5/mapbox.places/';
         return fetch(baseUrl + endPoint + encodeURIComponent(search) + '.json' + "?" + 'access_token=' + token)
-            .then(function(res) {
+            .then(function (res) {
                 return res.json();
                 // to get all the data from the request, comment out the following three lines...
-            }).then(function(data) {
+            }).then(function (data) {
                 return data.features[0].center;
             });
     }
 
-    geocode("Tallahassee, FL", mapboxgl.accessToken).then(function(result) {
+    geocode("Tallahassee, FL", mapboxgl.accessToken).then(function (result) {
         console.log(result);
         map.setCenter(result.center);
         map.setZoom(10);
     });
+
 
     //reverse geocode for using given coordinates to console log string of place.
     // function reverseGeocode(coordinates, token) {
@@ -63,8 +68,26 @@
     //     map.setZoom(10);
     // });
 
+    $('#zoom-in').click(function () {
+        let zoom = map.getZoom();
+        if (zoom < 20) {
+            map.setZoom(zoom + 5);
+            console.log("You Zoomed in to level: " + (parseInt(zoom) + 5));
+        } else {
+            alert("You are zoomed in all the way!")
 
+        }
+    });
+    $('#zoom-out').click(function () {
+        let zoom = map.getZoom();
 
+        if (zoom > 1) {
+            map.setZoom(zoom - 5);
+            console.log("You Zoomed out to level: " + (parseInt(zoom) + -5));
+        } else {
+            alert("You are zoomed in all the way!")
+        }
+    });
 
 
 </script>
