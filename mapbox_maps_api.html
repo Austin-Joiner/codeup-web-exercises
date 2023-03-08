@@ -50,19 +50,51 @@
         address: "2915 Kerry Forest Pkwy #301, Tallahassee, FL 32309",
         popupHTML: "<p>El Jalisco! Happy Hour All Day!</p>"
     };
+    var secondMarkerInfo = {
+        address: "1460 Timberlane Rd, Tallahassee, FL 32312",
+        popupHTML: "<p>Sonny's! BBQ!</p>"
+    };
+    var thirdMarkerInfo = {
+        address: "1925 N Monroe St, Tallahassee, FL 32303",
+        popupHTML: "<p>Nagoya! Japanese Steakhouse!</p>"
+    };
 
-    function placeMarkerAndPopup(info, token, map) {
+    function firstRestraunt(info, token, map) {
         geocode(info.address, token).then(function(coordinates) {
-            var popup = new mapboxgl.Popup()
+            let popup = new mapboxgl.Popup()
                 .setHTML(info.popupHTML);
-            var marker = new mapboxgl.Marker()
+            let marker = new mapboxgl.Marker()
+                .setLngLat(coordinates)
+                .addTo(map)
+                .setPopup(popup);
+        });
+    }
+    function secondRestraunt(info, token, map) {
+        geocode(info.address, token).then(function(coordinates) {
+            let popup = new mapboxgl.Popup()
+                .setHTML(info.popupHTML);
+            let marker = new mapboxgl.Marker()
+                .setLngLat(coordinates)
+                .addTo(map)
+                .setPopup(popup);
+        });
+    }
+    function thirdRestraunt(info, token, map) {
+        geocode(info.address, token).then(function(coordinates) {
+            let popup = new mapboxgl.Popup()
+                .setHTML(info.popupHTML);
+            let marker = new mapboxgl.Marker()
                 .setLngLat(coordinates)
                 .addTo(map)
                 .setPopup(popup);
         });
     }
 
-    placeMarkerAndPopup(firstMarkerInfo, accessToken, map);
+
+
+    firstRestraunt(firstMarkerInfo, accessToken, map);
+    secondRestraunt(secondMarkerInfo, accessToken, map);
+    thirdRestraunt(thirdMarkerInfo, accessToken, map);
     //reverse geocode for using given coordinates to console log string of place.
     // function reverseGeocode(coordinates, token) {
     //     var baseUrl = 'https://api.mapbox.com';
