@@ -126,47 +126,6 @@
 
 
 <script>
-    //     var lContents = $('#left-frame');
-    //     var cContents = $('#center-frame');
-    //     var rContents = $('#right-frame');
-    //
-    // //try swapping images by name?
-    //
-    // var leftFrame = document.getElementById('#left-frame');
-    // var leftImgChecker = leftFrame.querySelector('img');
-    //
-    // var centerFrame = document.getElementById('#center-frame');
-    // var  centerImgChecker = centerFrame.query('img');
-
-
-    // $('#left-frame-btn').click(function() {
-    //     if (leftImgChecker.src == 'img/yellowstone.png' && centerImgChecker.src == 'img/sequoia.png') {
-    //         $("#left-img").attr("src", 'img/sequoia.png');
-    //         $("#center-img").attr("src", 'img/yellowstone.png');
-    //     } else {
-    //         console.log('invalid1');
-    //     }
-    //  });
-    //
-    // $('#right-frame-btn').click(function() {
-    //     $("#right-img").attr("src", 'img/sequoia.png');
-    //     $("#center-img").attr("src", 'img/glacier.png');
-    // });
-    //
-    // $('#center-frame-btn').click(function() {
-    //     var random = Math.random();
-    //     if (random > 0.5) {
-    //         $("#center-img").attr("src", 'img/yellowstone.png');
-    //         $("#left-img").attr("src", 'img/sequoia.png');
-    //     } else if (random <= 0.5) {
-    //         $("#center-img").attr("src", 'img/glacier.png');
-    //         $("#right-img").attr("src", 'img/sequoia.png');
-    //     } else {
-    //         console.log("invalid");
-    //     }
-    // });
-    //
-
     var lContents = $('#left-frame');
     var cContents = $('#center-frame');
     var rContents = $('#right-frame');
@@ -181,6 +140,7 @@
         leftImg.attr('src', centerSrc); // setter that moves the left img src to the center and below does the opposite for center to move to left
         centerImg.attr('src', leftSrc);
     });
+
     $('#right-frame-btn').click(function () {
         let rightImg = rContents.find('img');
         let centerImg = cContents.find('img');
@@ -216,77 +176,6 @@
     });
 
 
-    // $('#left-frame-btn').click(function() {
-    //   $('#left-frame').parent().css("border", "10px black solid");
-    // });
-    // var leftDiv = document.getElementById('left-frame');
-    // var centerDiv = document.getElementById('center-frame');
-    // var rightDiv = document.getElementById('right-frame');
-    //
-    // var imageArray = [leftDiv, centerDiv, rightDiv];
-
-
-    // $('#left-frame-btn').click(function() {
-    //
-    // $('#sub-container').each(function() {
-    //    if ( leftDivv === 0) {
-    //        $('#left-frame').insertAfter('#center-frame');
-    //        console.log("left");
-    //    } else if (leftDivv === 1) {
-    //        $('#center-frame').insertBefore('#left-frame');
-    //        console.log("center");
-    //    } else {
-    //        console.log("none");
-    //    }
-    // });
-    // });
-
-
-    // $('#left-frame-btn').click(function() {
-    //
-    //     $('#left-frame').insertAfter('#center-frame');
-    //  ('#center-img').children.detach().appendTo('#left-img');
-    // });
-    // $('#right-frame-btn').click(function() {
-    //     $('#right-frame').insertAfter('#center-frame');
-    //var leftImage = $('#left-img').children().detach();
-    //var centerImage = $('#center-img').children().detach();
-
-    // var leftDivv = $('#sub-container').children('.frame').index($('#left-frame'));
-
-
-    //var images1 = document.getElementById("left-frame").querySelector("img[src='img/yellowstone.png']");
-    // var images2 = document.getElementById("left-frame").querySelector("img[src='img/sequoia.png']");
-    // var images3 = document.getElementById("left-frame").querySelector("img[src='img/glacier.png']");
-
-    // $(document).ready(function () {
-    //     $('#left-frame-btn').click(function () {
-    //         if (document.getElementById("left-frame").querySelector("img[src='img/yellowstone.png']")) {
-    //
-    //
-    //             console.log("yellowstone");
-    //         } else if (document.getElementById("left-frame").querySelector("img[src='img/sequoia.png']")) {
-    //
-    //             console.log("sequoia");
-    //         } else if (document.getElementById("left-frame").querySelector("img[src='img/glacier.png']")) {
-    //
-    //             console.log("glacier");
-    //         } else {
-    //             console.log("INVALID");
-    //         }
-    //     });
-    // });
-
-
-    //.parent?
-    // $('#left-frame-btn').click(function() {
-    //
-    // });
-
-    //.child
-    // $('#left-frame-btn').click(function() {
-    //
-    // });
 
 
     $('#button-container').css({
