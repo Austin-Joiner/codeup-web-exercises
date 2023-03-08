@@ -46,55 +46,88 @@
         map.setZoom(10);
     });
 
-    var firstMarkerInfo = {
+    // var firstMarkerInfo = {
+    //     address: "2915 Kerry Forest Pkwy #301, Tallahassee, FL 32309",
+    //     popupHTML: "<p>El Jalisco! Happy Hour All Day!</p>"
+    // };
+    // var secondMarkerInfo = {
+    //     address: "1460 Timberlane Rd, Tallahassee, FL 32312",
+    //     popupHTML: "<p>Sonny's! BBQ!</p>"
+    // };
+    // var thirdMarkerInfo = {
+    //     address: "1925 N Monroe St, Tallahassee, FL 32303",
+    //     popupHTML: "<p>Nagoya! Japanese Steakhouse!</p>"
+    // };
+
+
+    var restaurantList = [{
+        Name: "El Jalisco",
         address: "2915 Kerry Forest Pkwy #301, Tallahassee, FL 32309",
-        popupHTML: "<p>El Jalisco! Happy Hour All Day!</p>"
-    };
-    var secondMarkerInfo = {
+        information: "Mexican restraunt"
+    }, {
+        Name: "Sonny's",
         address: "1460 Timberlane Rd, Tallahassee, FL 32312",
-        popupHTML: "<p>Sonny's! BBQ!</p>"
-    };
-    var thirdMarkerInfo = {
+        information: "BBQ"
+    }, {
+        Name: "Nagoya",
         address: "1925 N Monroe St, Tallahassee, FL 32303",
-        popupHTML: "<p>Nagoya! Japanese Steakhouse!</p>"
-    };
-
-    function firstRestraunt(info, token, map) {
-        geocode(info.address, token).then(function(coordinates) {
-            let popup = new mapboxgl.Popup()
-                .setHTML(info.popupHTML);
-            let marker = new mapboxgl.Marker()
-                .setLngLat(coordinates)
-                .addTo(map)
-                .setPopup(popup);
+        information: "Japanese Steakhouse"
+    }]
+    function test(restaurantList, token, map) {
+        Object.values(restaurantList).forEach(info => {
+            console.log(info);
+            geocode(info.address, token).then(function (coordinates) {
+                let popup = new mapboxgl.Popup()
+                    .setHTML(info.Name + ' --- ' + info.information);
+                let marker = new mapboxgl.Marker()
+                    .setLngLat(coordinates)
+                    .addTo(map)
+                    .setPopup(popup);
+            });
         });
     }
-    function secondRestraunt(info, token, map) {
-        geocode(info.address, token).then(function(coordinates) {
-            let popup = new mapboxgl.Popup()
-                .setHTML(info.popupHTML);
-            let marker = new mapboxgl.Marker()
-                .setLngLat(coordinates)
-                .addTo(map)
-                .setPopup(popup);
-        });
-    }
-    function thirdRestraunt(info, token, map) {
-        geocode(info.address, token).then(function(coordinates) {
-            let popup = new mapboxgl.Popup()
-                .setHTML(info.popupHTML);
-            let marker = new mapboxgl.Marker()
-                .setLngLat(coordinates)
-                .addTo(map)
-                .setPopup(popup);
-        });
-    }
+     test(restaurantList, accessToken, map);
 
 
+    // function firstRestraunt(info, token, map) {
+    //     geocode(info.address, token).then(function (coordinates) {
+    //         let popup = new mapboxgl.Popup()
+    //             .setHTML(info.popupHTML);
+    //         let marker = new mapboxgl.Marker()
+    //             .setLngLat(coordinates)
+    //             .addTo(map)
+    //             .setPopup(popup);
+    //     });
+    // }
+    //
+    // function secondRestraunt(info, token, map) {
+    //     geocode(info.address, token).then(function (coordinates) {
+    //         let popup = new mapboxgl.Popup()
+    //             .setHTML(info.popupHTML);
+    //         let marker = new mapboxgl.Marker()
+    //             .setLngLat(coordinates)
+    //             .addTo(map)
+    //             .setPopup(popup);
+    //     });
+    // }
+    //
+    // function thirdRestraunt(info, token, map) {
+    //     geocode(info.address, token).then(function (coordinates) {
+    //         let popup = new mapboxgl.Popup()
+    //             .setHTML(info.popupHTML);
+    //         let marker = new mapboxgl.Marker()
+    //             .setLngLat(coordinates)
+    //             .addTo(map)
+    //             .setPopup(popup);
+    //     });
+    // }
 
-    firstRestraunt(firstMarkerInfo, accessToken, map);
-    secondRestraunt(secondMarkerInfo, accessToken, map);
-    thirdRestraunt(thirdMarkerInfo, accessToken, map);
+
+    // firstRestraunt(firstMarkerInfo, accessToken, map);
+    // secondRestraunt(secondMarkerInfo, accessToken, map);
+    // thirdRestraunt(thirdMarkerInfo, accessToken, map);
+
+
     //reverse geocode for using given coordinates to console log string of place.
     // function reverseGeocode(coordinates, token) {
     //     var baseUrl = 'https://api.mapbox.com';
