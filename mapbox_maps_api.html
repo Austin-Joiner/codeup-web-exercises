@@ -48,13 +48,13 @@
 
     var alamoInfo = {
         address: "2915 Kerry Forest Pkwy #301, Tallahassee, FL 32309",
-
+        popupHTML: "<p>El Jalisco! Happy Hour All Day!</p>"
     };
 
     function placeMarkerAndPopup(info, token, map) {
         geocode(info.address, token).then(function(coordinates) {
-
-
+            var popup = new mapboxgl.Popup()
+                .setHTML(info.popupHTML);
             var marker = new mapboxgl.Marker()
                 .setLngLat(coordinates)
                 .addTo(map)
