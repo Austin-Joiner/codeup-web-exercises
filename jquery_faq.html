@@ -79,41 +79,41 @@
 <h2 id="nat-img">National Park Pictures</h2>
 
 <div id="container">
-<div id="sub-container">
-    <!---->
-    <!---->
-    <!--left frame-->
-    <!---->
-    <!---->
-    <div class="frame" id="left-frame">
-        <img id="left-img" src="img/yellowstone.png">
-    </div>
+    <div id="sub-container">
+        <!---->
+        <!---->
+        <!--left frame-->
+        <!---->
+        <!---->
+        <div class="frame" id="left-frame">
+            <img id="left-img" src="img/yellowstone.png">
+        </div>
 
-    <!---->
-    <!---->
-    <!--center frame-->
-    <!---->
-    <!---->
-    <div class="frame" id="center-frame">
-        <img id="center-img" src="img/sequoia.png">
-    </div>
+        <!---->
+        <!---->
+        <!--center frame-->
+        <!---->
+        <!---->
+        <div class="frame" id="center-frame">
+            <img id="center-img" src="img/sequoia.png">
+        </div>
 
-    <!---->
-    <!---->
-    <!--right frame-->
-    <!---->
-    <!---->
-    <div class="frame" id="right-frame">
-        <img id="right-img" src="img/glacier.png">
-    </div>
+        <!---->
+        <!---->
+        <!--right frame-->
+        <!---->
+        <!---->
+        <div class="frame" id="right-frame">
+            <img id="right-img" src="img/glacier.png">
+        </div>
 
+    </div>
 </div>
+<div id="button-container">
+    <button id="left-frame-btn" style="cursor: pointer">Image 1</button>
+    <button id="center-frame-btn" style="cursor: pointer">Image 2</button>
+    <button id="right-frame-btn" style="cursor: pointer">Image 3</button>
 </div>
-    <div id="button-container">
-        <button id="left-frame-btn" style="cursor: pointer">Image 1</button>
-        <button id="center-frame-btn" style="cursor: pointer">Image 2</button>
-        <button id="right-frame-btn" style="cursor: pointer">Image 3</button>
-    </div>
 
 <br>
 <br>
@@ -126,51 +126,98 @@
 
 
 <script>
+    //     var lContents = $('#left-frame');
+    //     var cContents = $('#center-frame');
+    //     var rContents = $('#right-frame');
+    //
+    // //try swapping images by name?
+    //
+    // var leftFrame = document.getElementById('#left-frame');
+    // var leftImgChecker = leftFrame.querySelector('img');
+    //
+    // var centerFrame = document.getElementById('#center-frame');
+    // var  centerImgChecker = centerFrame.query('img');
+
+
+    // $('#left-frame-btn').click(function() {
+    //     if (leftImgChecker.src == 'img/yellowstone.png' && centerImgChecker.src == 'img/sequoia.png') {
+    //         $("#left-img").attr("src", 'img/sequoia.png');
+    //         $("#center-img").attr("src", 'img/yellowstone.png');
+    //     } else {
+    //         console.log('invalid1');
+    //     }
+    //  });
+    //
+    // $('#right-frame-btn').click(function() {
+    //     $("#right-img").attr("src", 'img/sequoia.png');
+    //     $("#center-img").attr("src", 'img/glacier.png');
+    // });
+    //
+    // $('#center-frame-btn').click(function() {
+    //     var random = Math.random();
+    //     if (random > 0.5) {
+    //         $("#center-img").attr("src", 'img/yellowstone.png');
+    //         $("#left-img").attr("src", 'img/sequoia.png');
+    //     } else if (random <= 0.5) {
+    //         $("#center-img").attr("src", 'img/glacier.png');
+    //         $("#right-img").attr("src", 'img/sequoia.png');
+    //     } else {
+    //         console.log("invalid");
+    //     }
+    // });
+    //
+
     var lContents = $('#left-frame');
     var cContents = $('#center-frame');
     var rContents = $('#right-frame');
 
-//try swapping images by name?
+    $('#left-frame-btn').click(function () {
+        let leftImg = lContents.find('img'); // getter that .finds the img element inside the #left-frame
+        let centerImg = cContents.find('img');
 
-var leftFrame = document.getElementById('#left-frame');
-var leftImgChecker = leftFrame.querySelector('img');
+        let leftSrc = leftImg.attr('src'); // using the let variable above this goes and grabs the src from that img element
+        let centerSrc = centerImg.attr('src');
 
-var centerFrame = document.getElementById('#center-frame');
-var  centerImgChecker = centerFrame.query('img');
+        leftImg.attr('src', centerSrc); // setter that moves the left img src to the center and below does the opposite for center to move to left
+        centerImg.attr('src', leftSrc);
+    });
+    $('#right-frame-btn').click(function () {
+        let rightImg = rContents.find('img');
+        let centerImg = cContents.find('img');
 
+        let rightSrc = rightImg.attr('src');
+        let centerSrc = centerImg.attr('src');
 
-    $('#left-frame-btn').click(function() {
-        if (leftImgChecker.src == 'img/yellowstone.png' && centerImgChecker.src == 'img/sequoia.png') {
-            $("#left-img").attr("src", 'img/sequoia.png');
-            $("#center-img").attr("src", 'img/yellowstone.png');
-        } else {
-            console.log('invalid1');
-        }
-     });
-
-    $('#right-frame-btn').click(function() {
-        $("#right-img").attr("src", 'img/sequoia.png');
-        $("#center-img").attr("src", 'img/glacier.png');
+        rightImg.attr('src', centerSrc);
+        centerImg.attr('src', rightSrc);
     });
 
-    $('#center-frame-btn').click(function() {
-        var random = Math.random();
+    $('#center-frame-btn').click(function () {
+        let rightImg = rContents.find('img');
+        let centerImg = cContents.find('img');
+        let leftImg = lContents.find('img');
+
+        let rightSrc = rightImg.attr('src');
+        let centerSrc = centerImg.attr('src');
+        let leftSrc = leftImg.attr('src');
+
+        let random = Math.random();
         if (random > 0.5) {
-            $("#center-img").attr("src", 'img/yellowstone.png');
-            $("#left-img").attr("src", 'img/sequoia.png');
+            console.log("first");
+            centerImg.attr('src', leftSrc);
+            leftImg.attr('src', centerSrc);
         } else if (random <= 0.5) {
-            $("#center-img").attr("src", 'img/glacier.png');
-            $("#right-img").attr("src", 'img/sequoia.png');
+            console.log("second");
+            rightImg.attr('src', centerSrc);
+            centerImg.attr('src', rightSrc);
         } else {
             console.log("invalid");
         }
     });
 
 
-
-
     // $('#left-frame-btn').click(function() {
-     //   $('#left-frame').parent().css("border", "10px black solid");
+    //   $('#left-frame').parent().css("border", "10px black solid");
     // });
     // var leftDiv = document.getElementById('left-frame');
     // var centerDiv = document.getElementById('center-frame');
@@ -195,141 +242,142 @@ var  centerImgChecker = centerFrame.query('img');
     // });
 
 
-
-        // $('#left-frame-btn').click(function() {
-        //
-        //     $('#left-frame').insertAfter('#center-frame');
-           //  ('#center-img').children.detach().appendTo('#left-img');
-           // });
+    // $('#left-frame-btn').click(function() {
+    //
+    //     $('#left-frame').insertAfter('#center-frame');
+    //  ('#center-img').children.detach().appendTo('#left-img');
+    // });
     // $('#right-frame-btn').click(function() {
     //     $('#right-frame').insertAfter('#center-frame');
-//var leftImage = $('#left-img').children().detach();
+    //var leftImage = $('#left-img').children().detach();
     //var centerImage = $('#center-img').children().detach();
 
-// var leftDivv = $('#sub-container').children('.frame').index($('#left-frame'));
+    // var leftDivv = $('#sub-container').children('.frame').index($('#left-frame'));
 
 
-          //var images1 = document.getElementById("left-frame").querySelector("img[src='img/yellowstone.png']");
-         // var images2 = document.getElementById("left-frame").querySelector("img[src='img/sequoia.png']");
-         // var images3 = document.getElementById("left-frame").querySelector("img[src='img/glacier.png']");
+    //var images1 = document.getElementById("left-frame").querySelector("img[src='img/yellowstone.png']");
+    // var images2 = document.getElementById("left-frame").querySelector("img[src='img/sequoia.png']");
+    // var images3 = document.getElementById("left-frame").querySelector("img[src='img/glacier.png']");
 
-          // $(document).ready(function () {
-          //     $('#left-frame-btn').click(function () {
-          //         if (document.getElementById("left-frame").querySelector("img[src='img/yellowstone.png']")) {
-          //
-          //
-          //             console.log("yellowstone");
-          //         } else if (document.getElementById("left-frame").querySelector("img[src='img/sequoia.png']")) {
-          //
-          //             console.log("sequoia");
-          //         } else if (document.getElementById("left-frame").querySelector("img[src='img/glacier.png']")) {
-          //
-          //             console.log("glacier");
-          //         } else {
-          //             console.log("INVALID");
-          //         }
-          //     });
-          // });
-
-
-          //.parent?
-          // $('#left-frame-btn').click(function() {
-          //
-          // });
-
-          //.child
-          // $('#left-frame-btn').click(function() {
-          //
-          // });
+    // $(document).ready(function () {
+    //     $('#left-frame-btn').click(function () {
+    //         if (document.getElementById("left-frame").querySelector("img[src='img/yellowstone.png']")) {
+    //
+    //
+    //             console.log("yellowstone");
+    //         } else if (document.getElementById("left-frame").querySelector("img[src='img/sequoia.png']")) {
+    //
+    //             console.log("sequoia");
+    //         } else if (document.getElementById("left-frame").querySelector("img[src='img/glacier.png']")) {
+    //
+    //             console.log("glacier");
+    //         } else {
+    //             console.log("INVALID");
+    //         }
+    //     });
+    // });
 
 
-          $('#button-container').css({
-              display: 'flex',
-              justifyContent: 'center',
-              JustifyContent: 'space-evenly',
-              margin: '5px',
-              width: '100%',
+    //.parent?
+    // $('#left-frame-btn').click(function() {
+    //
+    // });
 
-          });
-
-          $('img').css({
-              height: '300px',
-              width: '200px',
-          });
-
-          $('#nat-img').css('text-align', 'center');
-
-          $('#container').css({
-              display: 'flex',
-              justifyContent: 'center',
-              width: '100%'
-          });
-
-          $('#sub-container').css({
-              width: '80%',
-              display: 'flex',
-              justifyContent: 'center',
-              justifyContent: 'space-evenly',
-
-          });
-
-          $('.frame').css({
-              border: 'brown solid 10px',
-              height: '300px',
-              width: '200px',
-              display: 'flex',
-              'flex-direction': 'column',
+    //.child
+    // $('#left-frame-btn').click(function() {
+    //
+    // });
 
 
-          });
+    $('#button-container').css({
+        display: 'flex',
+        justifyContent: 'center',
+        JustifyContent: 'space-evenly',
+        margin: '5px',
+        width: '100%',
+
+    });
+
+    $('img').css({
+        height: '300px',
+        width: '200px',
+    });
+
+    $('#nat-img').css('text-align', 'center');
+
+    $('#container').css({
+        display: 'flex',
+        justifyContent: 'center',
+        width: '100%'
+    });
+
+    $('#sub-container').css({
+        width: '80%',
+        display: 'flex',
+        justifyContent: 'center',
+        justifyContent: 'space-evenly',
+
+    });
+
+    $('.frame').css({
+        border: 'brown solid 10px',
+        height: '300px',
+        width: '200px',
+        display: 'flex',
+        'flex-direction': 'column',
 
 
-          $('#l-li').click(function () {
-              $('ul').each(function () {
-                  $(this).children().last().css('background-color', 'yellow'); //.find and .children work the same for this.
-              });
-          });
+    });
 
 
-          $('h3').click(function () {
-              $(this).next().css('font-weight', 'bold');
-          });
-          $('h3').dblclick(function () {
-              $(this).next().css('font-weight', 'normal');
-          });
-
-          $('li').click(function () {
-              $('ul').each(function () {
-                  $(this).children().first().css('color', 'blue');
-              });
-          });
-          $('li').dblclick(function () {
-              $('ul').each(function () {
-                  $(this).children().first().css('color', 'black');
-              });
-          });
+    $('#l-li').click(function () {
+        $('ul').each(function () {
+            $(this).children().last().css('background-color', 'yellow'); //.find and .children work the same for this.
+        });
+    });
 
 
-          $('dd').addClass("invisible");
-          $('.invisible').css('visibility', 'hidden');
-          $('#hide-me').css('visibility', 'hidden');
+    $('h3').click(function () {
+        $(this).next().css('font-weight', 'bold');
+    });
+    $('h3').dblclick(function () {
+        $(this).next().css('font-weight', 'normal');
+    });
 
-          $('#show-me').click(function () {
-              $('.invisible').css('visibility', 'visible');
-              $(this).css('visibility', 'hidden');
-              $('#hide-me').css('visibility', 'visible');
+    $('li').click(function () {
+        $('ul').each(function () {
+            $(this).children().first().css('color', 'blue');
+        });
+    });
+    $('li').dblclick(function () {
+        $('ul').each(function () {
+            $(this).children().first().css('color', 'black');
+        });
+    });
 
 
-              $('#hide-me').click(function () {
-                  $('.invisible').css('visibility', 'hidden');
-                  $(this).css('visibility', 'hidden');
-                  $('#show-me').css('visibility', 'visible');
-              });
-          });
+    $('dd').addClass("invisible");
+    $('.invisible').css('visibility', 'hidden');
+    $('#hide-me').css('visibility', 'hidden');
 
-          $('dt').click(function () {
-              $(this).css('background-color', 'yellow');
-          });
+    $('#show-me').click(function () {
+        console.log("you clicked show me");
+        $('.invisible').css('visibility', 'visible');
+        $(this).css('visibility', 'hidden');
+        $('#hide-me').css('visibility', 'visible');
+
+
+        $('#hide-me').click(function () {
+            console.log("You clicked hide me");
+            $('.invisible').css('visibility', 'hidden');
+            $(this).css('visibility', 'hidden');
+            $('#show-me').css('visibility', 'visible');
+        });
+    });
+
+    $('dt').click(function () {
+        $(this).css('background-color', 'yellow');
+    });
 </script>
 
 

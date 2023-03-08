@@ -25,7 +25,7 @@
         <tbody id="insertProducts"></tbody>
     </table>
 
-    <div class="d-flex justify-content-center">
+    <div class="d-flex justify-content-center" >
         <button id="refresh" type="button">Refresh</button>
         <button id="adding" type="button">add</button>
         <button id="clear" type="button">Clear</button>
@@ -35,11 +35,9 @@
         #quantity {
             margin: 0px;
         }
-
         button {
             margin: 10px;
         }
-
         th {
             border: black 2px solid;
             text-align: center;
@@ -134,22 +132,26 @@
             location.reload();
         });
 
-        //
-        // $('#quantity').click(function () {
-        //     $('tr').each(function () {
-        //         if ($(this).find('td').toLowerCase() === 'drill') {
-        //             var quantity = parseInt($(this).find());
-        //             console.log('drills:', quantity);
-        //
-        //             if (quantity > 0) {
-        //                 quantity - 1;
-        //             } else {
-        //                 alert("you are sold out buy more supplies!")
-        //             }
-        //         }
-        //     });
-        //
-        // });
+
+        $('#quantity').click(function() {
+            $('tr').each(function() {
+                var itemName = $(this).find('td:first').text().toLowerCase();
+                if (itemName === 'drill') {
+                    var quantity = parseInt($(this).find('td:eq(1)').text());
+                    if (quantity > 0) {
+                        quantity--;
+                        $(this).find('td:eq(1)').text(quantity);
+                        console.log('Quantity of drill:', quantity);
+                    }
+                }
+            });
+        });
+
+
+
+
+
+
 
 
     })();

@@ -28,6 +28,7 @@
         margin-right: 10px;
         margin-bottom: 50px;
     }
+
     hr {
         border: 3px black solid;
         border-radius: 10px;
@@ -61,7 +62,6 @@
                         "</h3><p>" + entries.content +
                         "</p><ul><li>" + entries.categories.join("<li>") +
                         "</li></ul><time>" + entries.date + "</time><hr>"
-
                     )
                 );
             });
@@ -70,75 +70,74 @@
 
         addEntry(existingBlog);
 
-            // adds the first added entry and button layout
-            $('#entry-one').click(function (e) {
-                e.preventDefault();
-                if (existingBlog.length === 4)
-                    var entryOne = {
-                        title: "The Fifth Post",
-                        content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-                        categories: ["drinks", "funny"],
-                        date: "March 6, 2015"
-                    }
-                existingBlog.push(entryOne);
+        // adds the first added entry and button layout
+        $('#entry-one').click(function (e) {
+            e.preventDefault();
+            if (existingBlog.length === 4)
+                var entryOne = {
+                    title: "The Fifth Post",
+                    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                    categories: ["drinks", "funny"],
+                    date: "March 6, 2015"
+                }
+            existingBlog.push(entryOne);
 
-                //this sets it on page but above saves it to the object
-                localStorage.setItem("appendData", JSON.stringify(existingBlog));
-                addEntry(existingBlog);
+            //this sets it on page but above saves it to the object
+            localStorage.setItem("appendData", JSON.stringify(existingBlog));
+            addEntry(existingBlog);
 
-                $('#remove-btn-one').removeClass("d-none");
-                $('#entry-two').removeClass("d-none");
-                $('#entry-one').addClass("d-none");
-            });
-
-
-            // adds the second added entry and button layout
-            $('#entry-two').click(function (e) {
-                e.preventDefault();
-                if (existingBlog.length === 5)
-                    var entryTwo = {
-                        title: "The Sixth Post",
-                        content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-                        categories: ["Birthday", "Family", "Dinner", "Cake", "presents"],
-                        date: "April 10, 2015"
-                    }
-                existingBlog.push(entryTwo);
-
-                //this sets it on page but above saves it to the object
-                localStorage.setItem("appendData", JSON.stringify(existingBlog));
-                addEntry(existingBlog);
+            $('#remove-btn-one').removeClass("d-none");
+            $('#entry-two').removeClass("d-none");
+            $('#entry-one').addClass("d-none");
+        });
 
 
-                $('#entry-three').removeClass("d-none");
-                $('#entry-two').addClass("d-none");
-            });
+        // adds the second added entry and button layout
+        $('#entry-two').click(function (e) {
+            e.preventDefault();
+            if (existingBlog.length === 5)
+                var entryTwo = {
+                    title: "The Sixth Post",
+                    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                    categories: ["Birthday", "Family", "Dinner", "Cake", "presents"],
+                    date: "April 10, 2015"
+                }
+            existingBlog.push(entryTwo);
 
-            // adds the third added entry and button layout
-            $('#entry-three').click(function (e) {
-                e.preventDefault();
-                if (existingBlog.length === 6)
-                    var entryThree = {
-                        title: "The Seventh Post",
-                        content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-                        categories: ["Friends", "Games", "Comedy"],
-                        date: "May 5, 2015"
-                    }
-                existingBlog.push(entryThree);
-
-                //this sets it on page but above saves it to the object
-                localStorage.setItem("appendData", JSON.stringify(existingBlog));
-                addEntry(existingBlog);
+            //this sets it on page but above saves it to the object
+            localStorage.setItem("appendData", JSON.stringify(existingBlog));
+            addEntry(existingBlog);
 
 
+            $('#entry-three').removeClass("d-none");
+            $('#entry-two').addClass("d-none");
+        });
 
-                $('#entry-three').addClass("d-none");
-            });
+        // adds the third added entry and button layout
+        $('#entry-three').click(function (e) {
+            e.preventDefault();
+            if (existingBlog.length === 6)
+                var entryThree = {
+                    title: "The Seventh Post",
+                    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                    categories: ["Friends", "Games", "Comedy"],
+                    date: "May 5, 2015"
+                }
+            existingBlog.push(entryThree);
+
+            //this sets it on page but above saves it to the object
+            localStorage.setItem("appendData", JSON.stringify(existingBlog));
+            addEntry(existingBlog);
 
 
-    $('#remove-btn-one').click(function() {
-        localStorage.clear();
-        location.reload();
-    });
+            $('#entry-three').addClass("d-none");
+        });
+
+
+        $('#remove-btn-one').click(function () {
+            localStorage.clear();
+            location.reload();
+        });
 
     })();
 </script>
