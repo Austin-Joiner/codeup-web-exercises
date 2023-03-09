@@ -9,34 +9,60 @@
     <link href='https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.css' rel='stylesheet'/>
 </head>
 <body>
-<h1>Map Box API</h1>
+<div class="wrap">
+    <h1>Map Box API</h1>
 
-<div>
-    <div id='map' style='width: 400px; height: 300px;'></div>
-    <!--<div>-->
-    <!--    <button id="zoom-in" type="button">Zoom In</button>-->
-    <!--    <button id="zoom-out" type="button">Zoom Out</button>-->
-    <!--</div>-->
 
-    <div class="zoom-wrap border">
-        <select id="zoom-select">
-            <option>Zoom Select</option>
-            <option>Zoom 5</option>
-            <option>Zoom 15</option>
-            <option>Zoom 20</option>
-        </select>
-        <div class="zoom-set zoom-wrap"><p id="zoom-counter"></p></div>
+    <div>
+        <input id="search-geo" type="search" placeholder="search address">
+    </div>
+
+
+    <div>
+        <div id='map' style='width: 400px; height: 300px;'></div>
+        <!--<div>-->
+        <!--    <button id="zoom-in" type="button">Zoom In</button>-->
+        <!--    <button id="zoom-out" type="button">Zoom Out</button>-->
+        <!--</div>-->
+
+        <div class="zoom-wrap">
+            <select id="zoom-select">
+                <option>Zoom Select</option>
+                <option>Zoom 5</option>
+                <option>Zoom 15</option>
+                <option>Zoom 20</option>
+            </select>
+            <div class="zoom-wrap"><p id="zoom-counter"></p></div>
+        </div>
     </div>
 </div>
 
-
 <style>
-    .zoom-set {
-        margin-left: 165px;
+    .wrap {
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 410px;
+        border: 5px black solid;
+    }
+    h1 {
+        /*text-align: center;*/
+    }
+
+    #search-geo {
+        width: 400px;
+        margin-bottom: 10px;
+        border: grey 2px solid;
+
+
     }
 
     .zoom-wrap {
-        display: inline-block;
+        display: flex;
+        justify-content: space-evenly;
+        width: 400px;
+
     }
 
     .img-banner img {
