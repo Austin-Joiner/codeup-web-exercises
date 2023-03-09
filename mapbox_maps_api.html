@@ -220,7 +220,7 @@
                 .addTo(map)
             map.flyTo({
                 center: coordinates,
-                zoom: 15,
+                zoom: 10,
                 speed: 1,
             });
         });
@@ -231,7 +231,7 @@
         var searchInput = searchGeo.value;
         var accessToken = 'pk.eyJ1IjoiYXVzdGluajk1IiwiYSI6ImNsZXp6Mnl1ejAwdmIzdG1ra3FkNHdzdXoifQ.PMmC9psSUgno2UcUPJEWdw'
 
-        searchGeocode(searchInput, accessToken, map);
+        searchGeocode(searchInput, accessToken);
     });
 
     // buttons that zoom in and out.
