@@ -151,15 +151,12 @@
        switch(zoomChosen) {
            case 'Zoom 5':
                map.setZoom(5);
-               // console.log("Zoom set to: " + map.getZoom());
                break;
            case 'Zoom 15':
                map.setZoom(15);
-               // console.log("Zoom set to: " + map.getZoom());
                break;
            case 'Zoom 20':
                map.setZoom(20);
-               // console.log("Zoom set to: " + map.getZoom());
                break;
        }
    }
@@ -172,7 +169,6 @@ zoomSelect.addEventListener('change', zoomSelection)
         var zoomNumber = map.getZoom();
 
 
-        console.log("Zoom set to: " + parseInt(map.getZoom()));
         $(zoomCount).html("Zoom set to: " + parseInt(zoomNumber));
     });
 
