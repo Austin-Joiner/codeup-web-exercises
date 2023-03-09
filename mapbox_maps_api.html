@@ -15,6 +15,7 @@
 
     <div>
         <input id="search-geo" type="search" placeholder="search address">
+        <input id="submit" type="submit"/>
     </div>
 
 
@@ -86,6 +87,7 @@
         integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
 <script>
     // https://docs.mapbox.com/mapbox-gl-js/api/map/#map#on
+    ////////////////////BASIC INFO NEEDED FOR MAP BOX API
     accessToken = 'pk.eyJ1IjoiYXVzdGluajk1IiwiYSI6ImNsZXp6Mnl1ejAwdmIzdG1ra3FkNHdzdXoifQ.PMmC9psSUgno2UcUPJEWdw'
     mapboxgl.accessToken = accessToken;
     const map = new mapboxgl.Map({
@@ -96,6 +98,8 @@
     });
 
     // this geocodes the given address which means by string name ex: tallahassee console logs tallahassee coordinates.
+
+    /////////////////ORIGIN SETTING ON TALLAHASSEE FL
     function geocode(search, token) {
         var baseUrl = 'https://api.mapbox.com';
         var endPoint = '/geocoding/v5/mapbox.places/';
@@ -114,7 +118,7 @@
         map.setZoom(10);
     });
 
-
+///////////////////OBJECT FOR RESTAURANT
     var restaurantList = [{
         ID: 1,
         Name: "<div><h3>El Jalisco</h3><hr>",
@@ -141,6 +145,7 @@
         imageExtra: "<div class='img-slide'><a href='img/nagoya-menu.png' target='_blank'><img src='img/nagoya-menu.png'></a><a href='img/nagoya-chef.png' target='_blank'><img src='img/nagoya-chef.png'></a><a href='img/nagoya-sushi.png' target='_blank'><img src='img/nagoya-sushi.png'></a><a href='img/nagoya-inside.png' target='_blank'><img src='img/nagoya-inside.png'></a></div>"
     }]
 
+    ///////////////////FOR EACH LOOP FOR 3 MARKERS
     function markerPins(restaurantList, token, map) {
         restaurantList.forEach(info => {
             geocode(info.address, token).then(function (coordinates) {
@@ -165,10 +170,10 @@
             });
         });
     }
-
     markerPins(restaurantList, accessToken, map);
 
 
+    //////////////// ZOOM SELECT
     var zoomSelect = document.querySelector('#zoom-select');
 
     function zoomSelection(e) {
@@ -187,18 +192,39 @@
                 break;
         }
     }
-
     zoomSelect.addEventListener('change', zoomSelection)
 
-
+    ///////////////ZOOM COUNTER
     map.on('zoom', function () {
         var zoomCount = document.querySelector('#zoom-counter');
         var zoomNumber = map.getZoom();
 
-
         $(zoomCount).html("Zoom set to: " + parseInt(zoomNumber));
     });
 
+
+
+
+    ///////////////////GEOCODE SEARCH BAR
+    var searchGeo = document.querySelector('#search-geo');
+    var submitButton = document.querySelector('#submit');
+    function searchGeocode(search, token) {
+        var searchInput = searchGeo.value
+
+
+        geocode(searchInput, token).then(function (coordinates) {
+                    let marker = new mapboxgl.Marker()
+                        .setLngLat(coordinates)
+                        .addTo(map)
+                });
+
+    }
+    submitButton.addEventListener('click', function() {
+       var searchInput = searchGeo.value;
+       var accessToken = 'pk.eyJ1IjoiYXVzdGluajk1IiwiYSI6ImNsZXp6Mnl1ejAwdmIzdG1ra3FkNHdzdXoifQ.PMmC9psSUgno2UcUPJEWdw'
+
+        searchGeocode(searchInput, accessToken);
+    });
 
     // buttons that zoom in and out.
 
