@@ -47,6 +47,7 @@
         width: 410px;
         border: 5px black solid;
     }
+
     h1 {
         /*text-align: center;*/
     }
@@ -118,7 +119,7 @@
         map.setZoom(10);
     });
 
-///////////////////OBJECT FOR RESTAURANT
+    ///////////////////OBJECT FOR RESTAURANT
     var restaurantList = [{
         ID: 1,
         Name: "<div><h3>El Jalisco</h3><hr>",
@@ -170,6 +171,7 @@
             });
         });
     }
+
     markerPins(restaurantList, accessToken, map);
 
 
@@ -192,6 +194,7 @@
                 break;
         }
     }
+
     zoomSelect.addEventListener('change', zoomSelection)
 
     ///////////////ZOOM COUNTER
@@ -203,27 +206,32 @@
     });
 
 
-
-
     ///////////////////GEOCODE SEARCH BAR
     var searchGeo = document.querySelector('#search-geo');
     var submitButton = document.querySelector('#submit');
+
     function searchGeocode(search, token) {
         var searchInput = searchGeo.value
 
 
         geocode(searchInput, token).then(function (coordinates) {
-                    let marker = new mapboxgl.Marker()
-                        .setLngLat(coordinates)
-                        .addTo(map)
-                });
+            let marker = new mapboxgl.Marker()
+                .setLngLat(coordinates)
+                .addTo(map)
+            map.flyTo({
+                center: coordinates,
+                zoom: 15,
+                speed: 1,
+            });
+        });
 
     }
-    submitButton.addEventListener('click', function() {
-       var searchInput = searchGeo.value;
-       var accessToken = 'pk.eyJ1IjoiYXVzdGluajk1IiwiYSI6ImNsZXp6Mnl1ejAwdmIzdG1ra3FkNHdzdXoifQ.PMmC9psSUgno2UcUPJEWdw'
 
-        searchGeocode(searchInput, accessToken);
+    submitButton.addEventListener('click', function () {
+        var searchInput = searchGeo.value;
+        var accessToken = 'pk.eyJ1IjoiYXVzdGluajk1IiwiYSI6ImNsZXp6Mnl1ejAwdmIzdG1ra3FkNHdzdXoifQ.PMmC9psSUgno2UcUPJEWdw'
+
+        searchGeocode(searchInput, accessToken, map);
     });
 
     // buttons that zoom in and out.
