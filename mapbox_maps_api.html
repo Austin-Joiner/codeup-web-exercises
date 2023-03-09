@@ -13,10 +13,21 @@
 
 
 <div id='map' style='width: 400px; height: 300px;'></div>
+<!--<div>-->
+<!--    <button id="zoom-in" type="button">Zoom In</button>-->
+<!--    <button id="zoom-out" type="button">Zoom Out</button>-->
+<!--</div>-->
+
 <div>
-    <button id="zoom-in" type="button">Zoom In</button>
-    <button id="zoom-out" type="button">Zoom Out</button>
+    <label for="zoom-select">Zoom Change</label>
+    <select id="zoom-select">
+        <option>Zoom 5</option>
+        <option>Zoom 15</option>
+        <option>Zoom 20</option>
+    </select>
 </div>
+
+
 
 
 
@@ -125,28 +136,58 @@
     markerPins(restaurantList, accessToken, map);
 
 
+
+
+
+
+
+
+    var zoomSelect = document.querySelector('#zoom-select');
+   function zoomSelection(e) {
+       e.preventDefault();
+       var zoomChosen = zoomSelect.value;
+
+       switch(zoomChosen) {
+           case 'Zoom 5':
+               console.log("Zoom set to: 5");
+               map.setZoom(5);
+               break;
+           case 'Zoom 15':
+               console.log("Zoom set to: 15");
+               map.setZoom(15);
+               break;
+           case 'Zoom 20':
+               console.log("Zoom set to: 20");
+               map.setZoom(20);
+               break;
+       }
+   }
+
+zoomSelect.addEventListener('change', zoomSelection)
+
+
     // buttons that zoom in and out.
 
-    $('#zoom-in').click(function () {
-        let zoom = map.getZoom();
-        if (zoom < 20) {
-            map.setZoom(zoom + 1);
-            console.log("You Zoomed in to level: " + (parseInt(zoom) + 1));
-        } else {
-            alert("You are zoomed in all the way!")
-
-        }
-    });
-    $('#zoom-out').click(function () {
-        let zoom = map.getZoom();
-
-        if (zoom > 1) {
-            map.setZoom(zoom - 1);
-            console.log("You Zoomed out to level: " + (parseInt(zoom) + -1));
-        } else {
-            alert("You are zoomed in all the way!")
-        }
-    });
+    // $('#zoom-in').click(function () {
+    //     let zoom = map.getZoom();
+    //     if (zoom < 20) {
+    //         map.setZoom(zoom + 1);
+    //         console.log("You Zoomed in to level: " + (parseInt(zoom) + 1));
+    //     } else {
+    //         alert("You are zoomed in all the way!")
+    //
+    //     }
+    // });
+    // $('#zoom-out').click(function () {
+    //     let zoom = map.getZoom();
+    //
+    //     if (zoom > 1) {
+    //         map.setZoom(zoom - 1);
+    //         console.log("You Zoomed out to level: " + (parseInt(zoom) + -1));
+    //     } else {
+    //         alert("You are zoomed in all the way!")
+    //     }
+    // });
 
 
     //Original way with out ForEach loop
