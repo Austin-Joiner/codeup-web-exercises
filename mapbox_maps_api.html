@@ -14,10 +14,12 @@
 <button id="zoom-in" type="button">Zoom In</button>
 <button id="zoom-out" type="button">Zoom Out</button>
 
+<button id="fly" type="button">fly</button>
 
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"
         integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
 <script>
+    // https://docs.mapbox.com/mapbox-gl-js/api/map/#map#on
     accessToken = 'pk.eyJ1IjoiYXVzdGluajk1IiwiYSI6ImNsZXp6Mnl1ejAwdmIzdG1ra3FkNHdzdXoifQ.PMmC9psSUgno2UcUPJEWdw'
     mapboxgl.accessToken = accessToken;
     const map = new mapboxgl.Map({
@@ -46,6 +48,79 @@
         map.setZoom(10);
     });
 
+
+
+
+    var restaurantList = [{
+        ID: 1,
+        Name: "El Jalisco",
+        address: "2915 Kerry Forest Pkwy #301, Tallahassee, FL 32309",
+        information: "Mexican restraunt"
+    }, {
+        ID: 2,
+        Name: "Sonny's",
+        address: "1460 Timberlane Rd, Tallahassee, FL 32312",
+        information: "BBQ"
+    }, {
+        ID: 3,
+        Name: "Nagoya",
+        address: "1925 N Monroe St, Tallahassee, FL 32303",
+        information: "Japanese Steakhouse"
+    }]
+    function markerPins(restaurantList, token, map) {
+        restaurantList.forEach(info => {
+            geocode(info.address, token).then(function (coordinates) {
+                let popup = new mapboxgl.Popup()
+                    .setHTML(info.Name + ' --- ' + info.information);
+                let marker = new mapboxgl.Marker()
+                    .setLngLat(coordinates)
+                    .addTo(map)
+                    .setPopup(popup);
+                    var element = marker.getElement();
+                    console.log(element);
+
+
+
+                marker.getElement().addEventListener('click', function() {
+                    console.log("clicked");
+                    map.flyTo({
+                        center: coordinates,
+                        zoom: 15,
+                        speed: 1,
+                    });
+                });
+            });
+        });
+    }
+     markerPins(restaurantList, accessToken, map);
+
+
+// buttons that zoom in and out.
+
+    $('#zoom-in').click(function () {
+        let zoom = map.getZoom();
+        if (zoom < 20) {
+            map.setZoom(zoom + 1);
+            console.log("You Zoomed in to level: " + (parseInt(zoom) + 1));
+        } else {
+            alert("You are zoomed in all the way!")
+
+        }
+    });
+    $('#zoom-out').click(function () {
+        let zoom = map.getZoom();
+
+        if (zoom > 1) {
+            map.setZoom(zoom - 1);
+            console.log("You Zoomed out to level: " + (parseInt(zoom) + -1));
+        } else {
+            alert("You are zoomed in all the way!")
+        }
+    });
+
+
+//Original way with out ForEach loop
+
     // var firstMarkerInfo = {
     //     address: "2915 Kerry Forest Pkwy #301, Tallahassee, FL 32309",
     //     popupHTML: "<p>El Jalisco! Happy Hour All Day!</p>"
@@ -58,36 +133,6 @@
     //     address: "1925 N Monroe St, Tallahassee, FL 32303",
     //     popupHTML: "<p>Nagoya! Japanese Steakhouse!</p>"
     // };
-
-
-    var restaurantList = [{
-        Name: "El Jalisco",
-        address: "2915 Kerry Forest Pkwy #301, Tallahassee, FL 32309",
-        information: "Mexican restraunt"
-    }, {
-        Name: "Sonny's",
-        address: "1460 Timberlane Rd, Tallahassee, FL 32312",
-        information: "BBQ"
-    }, {
-        Name: "Nagoya",
-        address: "1925 N Monroe St, Tallahassee, FL 32303",
-        information: "Japanese Steakhouse"
-    }]
-    function test(restaurantList, token, map) {
-        Object.values(restaurantList).forEach(info => {
-            console.log(info);
-            geocode(info.address, token).then(function (coordinates) {
-                let popup = new mapboxgl.Popup()
-                    .setHTML(info.Name + ' --- ' + info.information);
-                let marker = new mapboxgl.Marker()
-                    .setLngLat(coordinates)
-                    .addTo(map)
-                    .setPopup(popup);
-            });
-        });
-    }
-     test(restaurantList, accessToken, map);
-
 
     // function firstRestraunt(info, token, map) {
     //     geocode(info.address, token).then(function (coordinates) {
@@ -128,7 +173,10 @@
     // thirdRestraunt(thirdMarkerInfo, accessToken, map);
 
 
-    //reverse geocode for using given coordinates to console log string of place.
+
+
+//reverse geocode for using given coordinates to console log string of place.
+
     // function reverseGeocode(coordinates, token) {
     //     var baseUrl = 'https://api.mapbox.com';
     //     var endPoint = '/geocoding/v5/mapbox.places/';
@@ -149,26 +197,7 @@
     //     map.setZoom(10);
     // });
 
-    $('#zoom-in').click(function () {
-        let zoom = map.getZoom();
-        if (zoom < 20) {
-            map.setZoom(zoom + 1);
-            console.log("You Zoomed in to level: " + (parseInt(zoom) + 1));
-        } else {
-            alert("You are zoomed in all the way!")
 
-        }
-    });
-    $('#zoom-out').click(function () {
-        let zoom = map.getZoom();
-
-        if (zoom > 1) {
-            map.setZoom(zoom - 1);
-            console.log("You Zoomed out to level: " + (parseInt(zoom) + -1));
-        } else {
-            alert("You are zoomed in all the way!")
-        }
-    });
 
 
 </script>
