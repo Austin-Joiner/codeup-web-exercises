@@ -16,6 +16,9 @@
     <div>
         <input id="search-geo" type="search" placeholder="search address">
         <input id="submit" type="submit"/>
+<div class="clear-wrap">
+        <a id="clear-markers" type="button">Clear Markers</a>
+</div>
     </div>
 
 
@@ -59,7 +62,9 @@
 
 
     }
-
+    .clear-wrap {
+        float: right;
+    }
     .zoom-wrap {
         display: flex;
         justify-content: space-evenly;
@@ -156,8 +161,6 @@
                     .setLngLat(coordinates)
                     .addTo(map)
                     .setPopup(popup);
-                var element = marker.getElement();
-                console.log(element);
 
 
                 marker.getElement().addEventListener('click', function () {
@@ -212,27 +215,69 @@
 
     function searchGeocode(search, token) {
         var searchInput = searchGeo.value
-
+        var addSearch = {
+            ID: restaurantList.length + 1,
+            name: searchInput,
+            information: searchInput,
+        };
 
         geocode(searchInput, token).then(function (coordinates) {
+            restaurantList.push(addSearch);
+            localStorage.setItem('loadList', JSON.stringify(restaurantList));
             let marker = new mapboxgl.Marker()
                 .setLngLat(coordinates)
                 .addTo(map)
+
+            marker.getElement().addEventListener('click', function () {
+                console.log("clicked");
             map.flyTo({
                 center: coordinates,
-                zoom: 10,
+                zoom: 17,
                 speed: 1,
             });
+            });
         });
-
     }
-
     submitButton.addEventListener('click', function () {
         var searchInput = searchGeo.value;
         var accessToken = 'pk.eyJ1IjoiYXVzdGluajk1IiwiYSI6ImNsZXp6Mnl1ejAwdmIzdG1ra3FkNHdzdXoifQ.PMmC9psSUgno2UcUPJEWdw'
 
         searchGeocode(searchInput, accessToken);
     });
+
+    ///////////////CLEAR MARKER FUNCTION
+    var clearMarker = document.querySelector('#clear-markers');
+    clearMarker.addEventListener('click', removeMarkers);
+
+    function removeMarkers() {
+        console.log("you cleared me");
+        const markers = document.querySelector('.mapboxgl-marker');
+
+        markers.remove();
+
+    }
+
+
+
+
+    // function myLoad() {
+    //     var loadMyList = localStorage.getItem('loadList');
+    //     if (loadMyList) {  // If 'loadedCoffees' is truthy
+    //         restaurantList = JSON.parse(loadMyList);  // Puts the array back together from stringify
+    //         // tbody.innerHTML = renderCoffees(coffees);
+    //     }
+    //
+    // }
+    // window.addEventListener('load', function () {
+    //     myLoad();
+    // });
+
+
+    ////////////////remove markers buttons
+
+
+
+
 
     // buttons that zoom in and out.
 

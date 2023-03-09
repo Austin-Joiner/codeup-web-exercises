@@ -133,19 +133,17 @@
         });
 
 
-        $('#quantity').click(function() {
-            $('tr').each(function() {
-                var itemName = $(this).find('td:first').text().toLowerCase();
-                if (itemName === 'drill') {
-                    var quantity = parseInt($(this).find('td:eq(1)').text());
-                    if (quantity > 0) {
-                        quantity--;
-                        $(this).find('td:eq(1)').text(quantity);
-                        console.log('Quantity of drill:', quantity);
-                    }
-                }
-            });
-        });
+        // $('#quantity').click(function() {
+        //    $('tr').each(function() {
+        //       if($(this).find('td:first').text().toLowerCase() === 'drill') {
+        //           var quantity = parseInt($(this).find('td:eq(1)').text());
+        //           quantity--;
+        //           console.log('Quantity of drill:', quantity);
+        //       }
+        //
+        //    });
+        //
+        // });
 
 
 
