@@ -17,7 +17,8 @@
         <input id="search-geo" type="search" placeholder="search address">
         <input id="submit" type="submit"/>
 <div class="clear-wrap">
-        <a id="clear-markers" type="button">Clear Markers</a>
+        <a id="clear-markers" type="button">Hide Markers</a>
+        <a id="show-markers" type="button">Show Markers</a>
 </div>
     </div>
 
@@ -64,6 +65,9 @@
     }
     .clear-wrap {
         float: right;
+    }
+    #show-markers {
+        margin-left: 15px;
     }
     .zoom-wrap {
         display: flex;
@@ -245,17 +249,45 @@
         searchGeocode(searchInput, accessToken);
     });
 
-    ///////////////CLEAR MARKER FUNCTION
+
     var clearMarker = document.querySelector('#clear-markers');
     clearMarker.addEventListener('click', removeMarkers);
 
-    function removeMarkers() {
-        console.log("you cleared me");
-        const markers = document.querySelector('.mapboxgl-marker');
 
-        markers.remove();
+
+    ///////////////////Hide ALL markers
+    function removeMarkers() {
+
+        console.log("you are hiding the markers");
+        const markers = document.querySelectorAll('.mapboxgl-marker');
+
+        function cycleMarkers(marker) {
+            marker.style.display = 'none';
+        }
+        markers.forEach(cycleMarkers)
 
     }
+
+    var showMarker = document.querySelector('#show-markers');
+    showMarker.addEventListener('click', showMarkers);
+
+
+
+    ///////////////////Show ALL markers
+    function showMarkers() {
+        console.log("you are showing the markers");
+        const markers = document.querySelectorAll('.mapboxgl-marker');
+
+        function cycleMarkers(marker) {
+            marker.style.display = 'block';
+        }
+        markers.forEach(cycleMarkers)
+    }
+
+
+
+
+
 
 
 
