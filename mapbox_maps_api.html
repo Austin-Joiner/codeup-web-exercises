@@ -19,12 +19,13 @@
 <!--</div>-->
 
 <div>
-    <label for="zoom-select">Zoom Change</label>
     <select id="zoom-select">
+        <option>Zoom Select</option>
         <option>Zoom 5</option>
         <option>Zoom 15</option>
         <option>Zoom 20</option>
     </select>
+    <div><p id="zoom-counter"></p></div>
 </div>
 
 
@@ -149,21 +150,31 @@
 
        switch(zoomChosen) {
            case 'Zoom 5':
-               console.log("Zoom set to: 5");
                map.setZoom(5);
+               // console.log("Zoom set to: " + map.getZoom());
                break;
            case 'Zoom 15':
-               console.log("Zoom set to: 15");
                map.setZoom(15);
+               // console.log("Zoom set to: " + map.getZoom());
                break;
            case 'Zoom 20':
-               console.log("Zoom set to: 20");
                map.setZoom(20);
+               // console.log("Zoom set to: " + map.getZoom());
                break;
        }
    }
 
 zoomSelect.addEventListener('change', zoomSelection)
+
+
+    map.on('zoom', function() {
+        var zoomCount = document.querySelector('#zoom-counter');
+        var zoomNumber = map.getZoom();
+
+
+        console.log("Zoom set to: " + parseInt(map.getZoom()));
+        $(zoomCount).html("Zoom set to: " + parseInt(zoomNumber));
+    });
 
 
     // buttons that zoom in and out.
