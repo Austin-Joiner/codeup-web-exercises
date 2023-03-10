@@ -1,0 +1,18 @@
+
+.container-wrap {
+   background: darkred;
+}
+.temp-wrap {
+    border: #0fb784 3px solid;
+}
+.humid-wrap{
+    border: #0fb784 3px solid;
+}
+.weather-wrap{
+    border: #0fb784 3px solid;
+}
+.wind-wrap{
+    border: #0fb784 3px solid;
+}
+
+
