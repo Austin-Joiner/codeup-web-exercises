@@ -64,7 +64,11 @@
         height: 50px;
         cursor: pointer;
     }
+    body {
+        background-color: limegreen;
+    }
     .wrap {
+        background-color: grey;
         margin: auto;
         display: flex;
         flex-direction: column;
@@ -74,9 +78,12 @@
     }
 
     h1 {
-        /*text-align: center;*/
+        color: blue;
     }
 
+    p {
+        color: blue;
+    }
     #search-geo {
         width: 400px;
         margin-bottom: 10px;
@@ -91,6 +98,11 @@
 
     #show-markers {
         margin-left: 15px;
+        color: blue;
+    }
+
+    #clear-markers {
+        color: blue;
     }
 
     .zoom-wrap {
@@ -256,6 +268,12 @@
                 .setLngLat(coordinates)
                 .addTo(map)
 
+            map.flyTo({
+                center: coordinates,
+                zoom: 10,
+                speed: 1,
+            });
+
             marker.getElement().addEventListener('click', function () {
                 console.log("clicked");
                 map.flyTo({
@@ -275,11 +293,10 @@
     });
 
 
+    ////////////////////Hide Markers
     var clearMarker = document.querySelector('#clear-markers');
     clearMarker.addEventListener('click', removeMarkers);
 
-
-    ///////////////////Hide ALL markers
     function removeMarkers() {
 
         console.log("you are hiding the markers");
@@ -293,11 +310,11 @@
 
     }
 
+
+    ///////////////////Show ALL markers
     var showMarker = document.querySelector('#show-markers');
     showMarker.addEventListener('click', showMarkers);
 
-
-    ///////////////////Show ALL markers
     function showMarkers() {
         console.log("you are showing the markers");
         const markers = document.querySelectorAll('.mapboxgl-marker');
@@ -309,7 +326,7 @@
         markers.forEach(cycleMarkers)
     }
 
-
+////////////////////////Load localStorage
     function myLoad() {
         var loadMyList = localStorage.getItem('loadList');
         if (loadMyList) {  // If 'loadedCoffees' is truthy
@@ -318,11 +335,12 @@
         }
 
     }
-
     window.addEventListener('load', function () {
         myLoad();
     });
 
+
+    ////////////////////////ADD ID attribute to first 3 markers
     map.on("load", function () {
         const markerCheck = document.getElementsByClassName('mapboxgl-marker');
 
@@ -334,6 +352,7 @@
         }
     });
 
+    ////////////////////////ADD Class attribute to first 3 markers
     map.on("load", function () {
         const markerCheck = document.getElementsByClassName('mapboxgl-marker');
         console.log("markers class's created");
@@ -342,6 +361,7 @@
         }
     });
 
+    ////////////////////////Hide SVG for the first 3 markers
     map.on("load", function () {
         const svgCheck = document.getElementsByTagName('svg')
         console.log("svg removed");
@@ -350,9 +370,40 @@
         }
     });
 
+    ////////////////////////Animation Coding Starts here
+
+    var counter = 0;
+    var stopCounter = 120;
+
+    const threeMarkers = document.getElementsByClassName('marker');
+
+    map.on("load", function () {
+
+        //////
+        function animateMarker(timestamp) {
+            const radius = 6;
+
+
+
+
+            for (let  i = 0; i < threeMarkers.length; i++) {
+                const marker = threeMarkers[i];
+
+
+                marker.style.top = Math.sin(timestamp / 100 + i) * radius + 'px';
+                marker.style.down = Math.sin(timestamp / 25 + i) * radius + 'px';
+
+            }
+
+
+            requestAnimationFrame(animateMarker);
+
+        }
+        requestAnimationFrame(animateMarker);
+        //////
+    });
+
     /////////////remove markers buttons
-
-
     // buttons that zoom in and out.
 
     // $('#zoom-in').click(function () {
