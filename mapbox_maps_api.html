@@ -33,9 +33,9 @@
         <div class="zoom-wrap">
             <select id="zoom-select">
                 <option>Zoom Select</option>
-                <option>Zoom 5</option>
-                <option>Zoom 15</option>
-                <option>Zoom 20</option>
+                <option value="5">Zoom 5</option>
+                <option value="15">Zoom 15</option>
+                <option value="20">Zoom 20</option>
             </select>
             <div class="zoom-wrap"><p id="zoom-counter"></p></div>
         </div>
@@ -50,6 +50,7 @@
         height: 50px;
         cursor: pointer;
     }
+
     #marker-2 {
         background-image: url('img/bbq.png');
         background-size: cover;
@@ -57,6 +58,7 @@
         height: 50px;
         cursor: pointer;
     }
+
     #marker-3 {
         background-image: url('img/japanese-sushi.png');
         background-size: cover;
@@ -64,9 +66,11 @@
         height: 50px;
         cursor: pointer;
     }
+
     body {
         background-color: limegreen;
     }
+
     .wrap {
         background-color: grey;
         margin: auto;
@@ -84,6 +88,7 @@
     p {
         color: blue;
     }
+
     #search-geo {
         width: 400px;
         margin-bottom: 10px;
@@ -223,19 +228,7 @@
 
     function zoomSelection(e) {
         e.preventDefault();
-        var zoomChosen = zoomSelect.value;
-
-        switch (zoomChosen) {
-            case 'Zoom 5':
-                map.setZoom(5);
-                break;
-            case 'Zoom 15':
-                map.setZoom(15);
-                break;
-            case 'Zoom 20':
-                map.setZoom(20);
-                break;
-        }
+        map.setZoom(zoomSelect.value);
     }
 
     zoomSelect.addEventListener('change', zoomSelection)
@@ -326,7 +319,7 @@
         markers.forEach(cycleMarkers)
     }
 
-////////////////////////Load localStorage
+    ////////////////////////Load localStorage
     function myLoad() {
         var loadMyList = localStorage.getItem('loadList');
         if (loadMyList) {  // If 'loadedCoffees' is truthy
@@ -335,6 +328,7 @@
         }
 
     }
+
     window.addEventListener('load', function () {
         myLoad();
     });
@@ -347,8 +341,6 @@
         for (let i = 0; i < markerCheck.length; i++) {
             console.log("marker id's created");
             markerCheck[i].id = "marker-" + restaurantList[i].ID;
-
-
         }
     });
 
@@ -373,7 +365,7 @@
     ////////////////////////Animation Coding Starts here
 
     var counter = 0;
-    var stopCounter = 120;
+    var stopCounter = 400;
 
     const threeMarkers = document.getElementsByClassName('marker');
 
@@ -384,21 +376,20 @@
             const radius = 6;
 
 
-
-
-            for (let  i = 0; i < threeMarkers.length; i++) {
+            for (let i = 0; i < threeMarkers.length; i++) {
                 const marker = threeMarkers[i];
-
-
-                marker.style.top = Math.sin(timestamp / 100 + i) * radius + 'px';
-                marker.style.down = Math.sin(timestamp / 25 + i) * radius + 'px';
-
+                if (counter < stopCounter) {
+                    counter++;
+                    marker.style.top = Math.sin(timestamp / 100 + i) * radius + 'px';
+                    marker.style.down = Math.sin(timestamp / 25 + i) * radius + 'px';
+                }
             }
 
 
             requestAnimationFrame(animateMarker);
 
         }
+
         requestAnimationFrame(animateMarker);
         //////
     });
