@@ -1,4 +1,4 @@
-$.get("https://api.openweathermap.org/data/2.5/forecast?lat=30&lon=-84&appid=" + OPEN_WEATHER_APPID)
+$.get("https://api.openweathermap.org/data/2.5/forecast?units=imperial&lat=30&lon=-84&appid=" + OPEN_WEATHER_APPID)
     // {lon: -84.2807, lat: 30.4383}
     .done(function (data) {
         console.log(data);
