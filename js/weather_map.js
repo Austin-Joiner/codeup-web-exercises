@@ -1,4 +1,4 @@
-$.get("https://api.openweathermap.org/data/2.5/forecast?units=imperial&lat=30&lon=-84&appid=" + OPEN_WEATHER_APPID)
+$.get("https://api.openweathermap.org/data/2.5/forecast?units=imperial&lat=-84.280933&lon=30.438083&appid=" + OPEN_WEATHER_APPID)
     // {lon: -84.2807, lat: 30.4383}
     .done(function (data) {
         console.log(data);
@@ -32,6 +32,7 @@ $.get("https://api.openweathermap.org/data/2.5/forecast?units=imperial&lat=30&lo
 
         }
         $('#forecast').html(html);
+    });
 
 
 
@@ -70,6 +71,8 @@ $.get("https://api.openweathermap.org/data/2.5/forecast?units=imperial&lat=30&lo
         var searchGeo = document.querySelector('#search-geo');
         var submitButton = document.querySelector('#submit');
         var grabCoordinates;
+        var lonInput = -84.280933;
+        var latInput = 30.438083;
 
         function searchGeocode(search, token) {
             var searchInput = searchGeo.value
@@ -81,7 +84,11 @@ $.get("https://api.openweathermap.org/data/2.5/forecast?units=imperial&lat=30&lo
                     .setLngLat(coordinates)
                     .addTo(map)
                     grabCoordinates = coordinates;
+                    lonInput = grabCoordinates[0];
+                    latInput = grabCoordinates[1];
                     console.log(grabCoordinates);
+                    console.log("longitude: " + lonInput);
+                    console.log("latitude: " + latInput);
 
 
                 map.flyTo({
@@ -99,6 +106,41 @@ $.get("https://api.openweathermap.org/data/2.5/forecast?units=imperial&lat=30&lo
 
                     });
                 });
+                $.get("https://api.openweathermap.org/data/2.5/forecast?units=imperial&lat=" + latInput + "&lon=" + lonInput + "&appid=" + OPEN_WEATHER_APPID)
+                    // {lon: -84.2807, lat: 30.4383}
+                    .done(function (data) {
+                        console.log(data);
+
+
+                        var forecastInfo = data.list;
+                        var html = '';
+
+                        for (var i = 0; i < 5; i++) {
+
+
+                            html += '<div class="container-wrap card col-md-2">';
+                            html += '<div class="date-wrap">';
+                            html += '<h4></h4>'
+                            html += '</div>';
+                            html += '<div class="temp-wrap">';
+                            html += '<h4 class="temp">Temperature: ' + forecastInfo[i].main.temp + '°F' + '</h4>';
+                            html += '</div>';
+                            html += '<div class="humid-wrap">';
+                            html += '<h4 class="humid">Humidity: ' + forecastInfo[i].main.humidity + '%</h4>';
+                            html += '</div>';
+                            html += '<div class="weather-wrap">';
+                            html += '<div class="forecast-icon">';
+                            html += '<img src="https://openweathermap.org/img/w/' + forecastInfo[i].weather[0].icon + '.png"></div>';
+                            html += '<h4 class="weather">Weather: ' + forecastInfo[i].weather[0].main + '</h4>';
+                            html += '</div>';
+                            html += '<div class="wind-wrap">';
+                            html += '<h4 class="wind">Wind: ' + forecastInfo[i].wind.speed + 'MPH</h4>';
+                            html += '</div>';
+                            html += '</div>';
+
+                        }
+                        $('#forecast').html(html);
+                    });
             });
         }
 
@@ -111,4 +153,8 @@ $.get("https://api.openweathermap.org/data/2.5/forecast?units=imperial&lat=30&lo
         });
 
 
-    });
+
+
+
+
+
