@@ -1,4 +1,4 @@
-$.get("https://api.openweathermap.org/data/2.5/forecast?q=Tallahassee, US&units=imperial&appid=" + OPEN_WEATHER_APPID)
+$.get("https://api.openweathermap.org/data/2.5/forecast?lat=30&lon=-84&appid=" + OPEN_WEATHER_APPID)
     // {lon: -84.2807, lat: 30.4383}
     .done(function (data) {
         console.log(data);
@@ -10,7 +10,7 @@ $.get("https://api.openweathermap.org/data/2.5/forecast?q=Tallahassee, US&units=
         for (var i = 0; i < 5; i++) {
 
 
-            html += '<div class="container-wrap">';
+            html += '<div class="container-wrap card col-md-2">';
             html += '<div class="date-wrap">';
             html += '<h4></h4>'
             html += '</div>';
@@ -32,6 +32,83 @@ $.get("https://api.openweathermap.org/data/2.5/forecast?q=Tallahassee, US&units=
 
         }
         $('#forecast').html(html);
+
+
+
+
+        accessToken = MAPBOX_KEY
+        mapboxgl.accessToken = accessToken;
+        const map = new mapboxgl.Map({
+            container: 'map', // container ID
+            style: 'mapbox://styles/mapbox/streets-v12', // style URL
+            center: [-84.2807, 30.4383], // starting position [lng, lat]
+            zoom: 10, // starting zoom
+        });
+
+
+
+        /////////////////ORIGIN SETTING ON TALLAHASSEE FL
+        function geocode(search, token) {
+            var baseUrl = 'https://api.mapbox.com';
+            var endPoint = '/geocoding/v5/mapbox.places/';
+            return fetch(baseUrl + endPoint + encodeURIComponent(search) + '.json' + "?" + 'access_token=' + token)
+                .then(function (res) {
+                    return res.json();
+                    // to get all the data from the request, comment out the following three lines...
+                }).then(function (data) {
+                    return data.features[0].center;
+                });
+        }
+        geocode("Tallahassee, FL", mapboxgl.accessToken).then(function (result) {
+            console.log(result);
+            map.setCenter(result.center);
+            map.setZoom(10);
+        });
+
+
+
+        var searchGeo = document.querySelector('#search-geo');
+        var submitButton = document.querySelector('#submit');
+        var grabCoordinates;
+
+        function searchGeocode(search, token) {
+            var searchInput = searchGeo.value
+
+
+            geocode(searchInput, token).then(function (coordinates) {
+
+                let marker = new mapboxgl.Marker()
+                    .setLngLat(coordinates)
+                    .addTo(map)
+                    grabCoordinates = coordinates;
+                    console.log(grabCoordinates);
+
+
+                map.flyTo({
+                    center: coordinates,
+                    zoom: 10,
+                    speed: 1,
+                });
+
+                marker.getElement().addEventListener('click', function () {
+
+                    map.flyTo({
+                        center: coordinates,
+                        zoom: 17,
+                        speed: 1
+
+                    });
+                });
+            });
+        }
+
+
+        submitButton.addEventListener('click', function () {
+            var searchInput = searchGeo.value;
+
+
+            searchGeocode(searchInput, MAPBOX_KEY);
+        });
 
 
     });
