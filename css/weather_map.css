@@ -1,18 +1,19 @@
 
 .container-wrap {
-   background: darkred;
+border: black 5px solid;
+    margin: 10px;
 }
 .temp-wrap {
-    border: #0fb784 3px solid;
+    border: #0fb784 1px solid;
 }
 .humid-wrap{
-    border: #0fb784 3px solid;
+    border: #0fb784 1px solid;
 }
 .weather-wrap{
-    border: #0fb784 3px solid;
+    border: #0fb784 1px solid;
 }
 .wind-wrap{
-    border: #0fb784 3px solid;
+    border: #0fb784 1px solid;
 }
 
 
