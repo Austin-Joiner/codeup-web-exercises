@@ -24,7 +24,7 @@ $.get("https://api.openweathermap.org/data/2.5/forecast?units=imperial&lat=30.43
             html += '<h4>Date Here</h4>'
             html += '</div>';
             html += '<div class="temp-wrap">';
-            html += '<h4 class="temp">' + forecastInfo[i].main.temp + '°F' + '</h4>';
+            html += '<h4 class="temp">' + parseInt(forecastInfo[i].main.temp) + '°F' + '</h4>';
             html += '</div>';
             html += '<div class="weather-wrap">';
             html += '<div class="forecast-icon">';
@@ -228,7 +228,6 @@ submitButton.addEventListener('click', function () {
 
 
 
-
 ///////////////
 ///////////////Functions to be called on later
 ///////////////
@@ -260,7 +259,7 @@ function runForecast() {
                 html += '<h4>Date Here</h4>'
                 html += '</div>';
                 html += '<div class="temp-wrap">';
-                html += '<h4 class="temp">' + forecastInfo[i].main.temp + '°F' + '</h4>';
+                html += '<h4 class="temp">' + parseInt(forecastInfo[i].main.temp) + '°F' + '</h4>';
                 html += '</div>';
                 html += '<div class="weather-wrap">';
                 html += '<div class="forecast-icon">';
@@ -333,8 +332,13 @@ function forecastOneChart() {
         .done(function (data) {
 
 
+
+
             var forecastInfo = data.list;
             var htmlBottom = '';
+
+            var windSpeed = forecastInfo[0].wind.speed * 1.151;
+
 
 
             htmlBottom += '<div class="solo-container-wrap card">';
@@ -342,8 +346,8 @@ function forecastOneChart() {
             htmlBottom += '<h4>Date Here</h4>'
             htmlBottom += '</div>';
             htmlBottom += '<div class="solo-temp-wrap">';
-            htmlBottom += '<h4 class="solo-temp">' + forecastInfo[0].main.temp + '°F</h4>';
-            htmlBottom += '<p>Feels Like: ' + forecastInfo[0].main.feels_like + '°F</p>'
+            htmlBottom += '<h4 class="solo-temp">' + parseInt(forecastInfo[0].main.temp) + '°F</h4>';
+            htmlBottom += '<p>Feels Like: ' + parseInt(forecastInfo[0].main.feels_like) + '°F</p>'
             htmlBottom += '</div>';
             htmlBottom += '<div class="solo-humid-wrap">';
             htmlBottom += '<h4 class="solo-humid">Humidity: ' + forecastInfo[0].main.humidity + '%</h4>';
@@ -351,10 +355,10 @@ function forecastOneChart() {
             htmlBottom += '<div class="solo-weather-wrap">';
             htmlBottom += '<div class="solo-forecast-icon">';
             htmlBottom += '<img src="https://openweathermap.org/img/w/' + forecastInfo[0].weather[0].icon + '.png"></div>';
-            htmlBottom += '<h4 class="solo-weather">Weather: ' + forecastInfo[0].weather[0].description + '</h4>';
+            htmlBottom += '<h4 class="solo-weather">' + forecastInfo[0].weather[0].description.toUpperCase() + '</h4>';
             htmlBottom += '</div>';
             htmlBottom += '<div class="solo-wind-wrap">';
-            htmlBottom += '<h4 class="solo-wind">Wind: ' + forecastInfo[0].wind.speed + 'MPH</h4>';
+            htmlBottom += '<h4 class="solo-wind">Wind: ' + parseInt(windSpeed) + 'MPH</h4>';
             htmlBottom += '</div>';
             htmlBottom += '</div>';
 
@@ -372,13 +376,15 @@ function forecastTwoChart() {
             var htmlBottom = '';
 
 
+            var windSpeed = forecastInfo[1].wind.speed * 1.151;
+
             htmlBottom += '<div class="solo-container-wrap card">';
             htmlBottom += '<div class="solo-date-wrap">';
             htmlBottom += '<h4>Date Here</h4>'
             htmlBottom += '</div>';
             htmlBottom += '<div class="solo-temp-wrap">';
-            htmlBottom += '<h4 class="solo-temp">' + forecastInfo[1].main.temp + '°F</h4>';
-            htmlBottom += '<p>Feels Like: ' + forecastInfo[1].main.feels_like + '°F</p>'
+            htmlBottom += '<h4 class="solo-temp">' + parseInt(forecastInfo[1].main.temp) + '°F</h4>';
+            htmlBottom += '<p>Feels Like: ' + parseInt(forecastInfo[1].main.feels_like) + '°F</p>'
             htmlBottom += '</div>';
             htmlBottom += '<div class="solo-humid-wrap">';
             htmlBottom += '<h4 class="solo-humid">Humidity: ' + forecastInfo[1].main.humidity + '%</h4>';
@@ -386,10 +392,10 @@ function forecastTwoChart() {
             htmlBottom += '<div class="solo-weather-wrap">';
             htmlBottom += '<div class="solo-forecast-icon">';
             htmlBottom += '<img src="https://openweathermap.org/img/w/' + forecastInfo[1].weather[0].icon + '.png"></div>';
-            htmlBottom += '<h4 class="solo-weather">Weather: ' + forecastInfo[1].weather[0].description + '</h4>';
+            htmlBottom += '<h4 class="solo-weather">' + forecastInfo[1].weather[0].description.toUpperCase() + '</h4>';
             htmlBottom += '</div>';
             htmlBottom += '<div class="solo-wind-wrap">';
-            htmlBottom += '<h4 class="solo-wind">Wind: ' + forecastInfo[1].wind.speed + 'MPH</h4>';
+            htmlBottom += '<h4 class="solo-wind">Wind: ' + parseInt(windSpeed) + 'MPH</h4>';
             htmlBottom += '</div>';
             htmlBottom += '</div>';
 
@@ -407,13 +413,17 @@ function forecastThreeChart() {
             var htmlBottom = '';
 
 
+            var windSpeed = forecastInfo[2].wind.speed * 1.151;
+
+
+
             htmlBottom += '<div class="solo-container-wrap card">';
             htmlBottom += '<div class="solo-date-wrap">';
             htmlBottom += '<h4>Date Here</h4>'
             htmlBottom += '</div>';
             htmlBottom += '<div class="solo-temp-wrap">';
-            htmlBottom += '<h4 class="solo-temp">' + forecastInfo[2].main.temp + '°F</h4>';
-            htmlBottom += '<p>Feels Like: ' + forecastInfo[2].main.feels_like + '°F</p>'
+            htmlBottom += '<h4 class="solo-temp">' + parseInt(forecastInfo[2].main.temp) + '°F</h4>';
+            htmlBottom += '<p>Feels Like: ' + parseInt(forecastInfo[2].main.feels_like) + '°F</p>'
             htmlBottom += '</div>';
             htmlBottom += '<div class="solo-humid-wrap">';
             htmlBottom += '<h4 class="solo-humid">Humidity: ' + forecastInfo[2].main.humidity + '%</h4>';
@@ -421,10 +431,10 @@ function forecastThreeChart() {
             htmlBottom += '<div class="solo-weather-wrap">';
             htmlBottom += '<div class="solo-forecast-icon">';
             htmlBottom += '<img src="https://openweathermap.org/img/w/' + forecastInfo[2].weather[0].icon + '.png"></div>';
-            htmlBottom += '<h4 class="solo-weather">Weather: ' + forecastInfo[2].weather[0].description + '</h4>';
+            htmlBottom += '<h4 class="solo-weather">' + forecastInfo[2].weather[0].description.toUpperCase() + '</h4>';
             htmlBottom += '</div>';
             htmlBottom += '<div class="solo-wind-wrap">';
-            htmlBottom += '<h4 class="solo-wind">Wind: ' + forecastInfo[2].wind.speed + 'MPH</h4>';
+            htmlBottom += '<h4 class="solo-wind">Wind: ' + parseInt(windSpeed) + 'MPH</h4>';
             htmlBottom += '</div>';
             htmlBottom += '</div>';
 
@@ -442,13 +452,16 @@ function forecastFourChart() {
             var htmlBottom = '';
 
 
+            var windSpeed = forecastInfo[3].wind.speed * 1.151;
+
+
             htmlBottom += '<div class="solo-container-wrap card">';
             htmlBottom += '<div class="solo-date-wrap">';
             htmlBottom += '<h4>Date Here</h4>'
             htmlBottom += '</div>';
             htmlBottom += '<div class="solo-temp-wrap">';
-            htmlBottom += '<h4 class="solo-temp">' + forecastInfo[3].main.temp + '°F</h4>';
-            htmlBottom += '<p>Feels Like: ' + forecastInfo[3].main.feels_like + '°F</p>'
+            htmlBottom += '<h4 class="solo-temp">' + parseInt(forecastInfo[3].main.temp) + '°F</h4>';
+            htmlBottom += '<p>Feels Like: ' + parseInt(forecastInfo[3].main.feels_like) + '°F</p>'
             htmlBottom += '</div>';
             htmlBottom += '<div class="solo-humid-wrap">';
             htmlBottom += '<h4 class="solo-humid">Humidity: ' + forecastInfo[3].main.humidity + '%</h4>';
@@ -456,10 +469,10 @@ function forecastFourChart() {
             htmlBottom += '<div class="solo-weather-wrap">';
             htmlBottom += '<div class="solo-forecast-icon">';
             htmlBottom += '<img src="https://openweathermap.org/img/w/' + forecastInfo[3].weather[0].icon + '.png"></div>';
-            htmlBottom += '<h4 class="solo-weather">Weather: ' + forecastInfo[3].weather[0].description + '</h4>';
+            htmlBottom += '<h4 class="solo-weather">' + forecastInfo[3].weather[0].description.toUpperCase() + '</h4>';
             htmlBottom += '</div>';
             htmlBottom += '<div class="solo-wind-wrap">';
-            htmlBottom += '<h4 class="solo-wind">Wind: ' + forecastInfo[3].wind.speed + 'MPH</h4>';
+            htmlBottom += '<h4 class="solo-wind">Wind: ' + parseInt(windSpeed) + 'MPH</h4>';
             htmlBottom += '</div>';
             htmlBottom += '</div>';
 
@@ -477,13 +490,16 @@ function forecastFiveChart() {
             var htmlBottom = '';
 
 
+            var windSpeed = forecastInfo[4].wind.speed * 1.151;
+
+
             htmlBottom += '<div class="solo-container-wrap card">';
             htmlBottom += '<div class="solo-date-wrap">';
             htmlBottom += '<h4>Date Here</h4>'
             htmlBottom += '</div>';
             htmlBottom += '<div class="solo-temp-wrap">';
-            htmlBottom += '<h4 class="solo-temp">' + forecastInfo[4].main.temp + '°F</h4>';
-            htmlBottom += '<p>Feels Like: ' + forecastInfo[4].main.feels_like + '°F</p>'
+            htmlBottom += '<h4 class="solo-temp">' + parseInt(forecastInfo[4].main.temp) + '°F</h4>';
+            htmlBottom += '<p>Feels Like: ' + parseInt(forecastInfo[4].main.feels_like) + '°F</p>'
             htmlBottom += '</div>';
             htmlBottom += '<div class="solo-humid-wrap">';
             htmlBottom += '<h4 class="solo-humid">Humidity: ' + forecastInfo[4].main.humidity + '%</h4>';
@@ -491,10 +507,10 @@ function forecastFiveChart() {
             htmlBottom += '<div class="solo-weather-wrap">';
             htmlBottom += '<div class="solo-forecast-icon">';
             htmlBottom += '<img src="https://openweathermap.org/img/w/' + forecastInfo[4].weather[0].icon + '.png"></div>';
-            htmlBottom += '<h4 class="solo-weather">Weather: ' + forecastInfo[4].weather[0].description + '</h4>';
+            htmlBottom += '<h4 class="solo-weather">' + forecastInfo[4].weather[0].description.toUpperCase() + '</h4>';
             htmlBottom += '</div>';
             htmlBottom += '<div class="solo-wind-wrap">';
-            htmlBottom += '<h4 class="solo-wind">Wind: ' + forecastInfo[4].wind.speed + 'MPH</h4>';
+            htmlBottom += '<h4 class="solo-wind">Wind: ' + parseInt(windSpeed) + 'MPH</h4>';
             htmlBottom += '</div>';
             htmlBottom += '</div>';
 
