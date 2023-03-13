@@ -15,29 +15,50 @@
 
 <div class="container">
 
-<div class="forecast-banner">
-    <div class="logo">
-        <h3 class="weather-header">Weather</h3>
-        <h3 class="alert-header">Alert</h3>
+    <div class="forecast-banner">
+        <div class="logo">
+            <h3 class="weather-header">Weather</h3>
+            <h3 class="alert-header">Alert</h3>
+        </div>
+        <div class="forecast-title">
+            <h1 class="d-md-none">FORECAST</h1>
+            <h1 class="d-none d-md-block">5 DAY FORECAST</h1>
+        </div>
+        <div class="location-tracker">
+            <p>Location: </p>
+            <p id="location-input"></p>
+        </div>
     </div>
-    <div class="forecast-title">
-        <h1 class="d-md-none">FORECAST</h1><h1 class="d-none d-md-block">5 DAY FORECAST</h1>
-    </div>
-    <div class="location-tracker">
-        <p>Location: </p>
-        <p id="location-input"></p>
-    </div>
-</div>
 
-<div id="search-div">
-<input id="search-geo" type="search" placeholder="search address">
-<input id="submit" type="submit"/>
-</div>
+
+    <div>
+        <div id="search-div">
+            <input id="search-geo" type="search" placeholder="search address">
+            <input id="submit" type="submit"/>
+        </div>
+
+        <div>
+            <select id="style-change">
+                <option>Streets</option>
+                <option>Outdoors</option>
+                <option>Light</option>
+                <option>Dark</option>
+                <option>Satellite</option>
+                <option>Satellite Streets</option>
+                <option>Navigation Day</option>
+                <option>Navigation Night</option>
+            </select>
+        </div>
+    </div>
 
 
     <div id="forecast" class="row"></div>
 </div>
 <div id="map"></div>
+
+<div id="singleForecast">
+
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"

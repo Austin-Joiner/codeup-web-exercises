@@ -8,6 +8,11 @@ body {
 .container-wrap {
     text-decoration: none;
     color: black;
+    border: black 2px solid;
+    box-shadow: 5px 10px #24244d;
+    border-radius: 20px;
+    margin-bottom: 20px;
+
 }
 .container-wrap:hover{
     transform: scale(1.05);
@@ -71,7 +76,7 @@ body {
     height: 300px;
 }
 .container-wrap {
-border: black 2px solid;
+
 }
 .temp-wrap {
     border: #0fb784 1px solid;
@@ -85,5 +90,10 @@ border: black 2px solid;
 .wind-wrap{
     border: #0fb784 1px solid;
 }
+
+
+
+
+
 
 
