@@ -72,11 +72,8 @@ $.get("https://api.openweathermap.org/data/2.5/forecast?units=imperial&lat=30.43
     });
 
 ////////////////////////////////
+///////////////current weather event listener
 ////////////////////////////////
-////////////////////////////////
-
-
-
 
 function currentWeatherEvent() {
 
@@ -91,20 +88,16 @@ function currentWeatherEvent() {
 
 
 
-////////////////Weather API
+//////////////// current Weather API
 
 function currentWeather() {
-
-    // var latInput = document.querySelector('#lat-input').value;
-    // var lonInput = document.querySelector('#lon-input').value;
-
 
     $.get("https://api.openweathermap.org/data/2.5/weather?units=imperial&lat=" + latInput + "&lon=" + lonInput + "&appid=" + OPEN_WEATHER_APPID)
         .done(function (currentData) {
             console.log(currentData);
 
 
-////////////////Weather INFO add to HTML
+////////////////Current Weather INFO add to HTML
             var currentInfo = currentData;
             var htmlBottom = '';
 
@@ -177,7 +170,7 @@ function geocode(search, token) {
     return fetch(baseUrl + endPoint + encodeURIComponent(search) + '.json' + "?" + 'access_token=' + token)
         .then(function (res) {
             return res.json();
-            // to get all the data from the request, comment out the following three lines...
+
         }).then(function (data) {
             return data.features[0].center;
         });
@@ -251,17 +244,18 @@ function searchGeocode(search, token) {
 
         });
 ////////////////marker function on click fly to inside the  function
-        marker.getElement().addEventListener('click', function () {
 
+        marker.getElement().addEventListener('click', function () {
             map.flyTo({
                 center: marker.getLngLat(),
                 zoom: 10,
-                speed: 1
-
+                speed: 1,
             });
         });
-        ////////////////runs the get request on bottom similar to top
-        runForecast();
+
+
+
+        runForecast(marker.getLngLat(), MAPBOX_KEY);
     });
 }
 
@@ -276,6 +270,47 @@ submitButton.addEventListener('click', function () {
 });
 
 
+
+
+
+// Add a new marker when the map is clicked and change the forecast using runForecast function.
+map.on('dblclick', function (event) {
+    for (var i = marker.length - 1; i >= 0; i--) {
+        marker[i].remove();
+    }
+
+    var newMarker = new mapboxgl.Marker({draggable: true})
+        .setLngLat(event.lngLat)
+        .addTo(map);
+        lonInput = newMarker.getLngLat().lng;
+        latInput = newMarker.getLngLat().lat;
+
+        runForecast();
+
+    newMarker.on('dragend', function () {
+        lonInput = newMarker.getLngLat().lng;
+        latInput = newMarker.getLngLat().lat;
+        console.log("you dragged to: " + newMarker.getLngLat());
+        runForecast();
+    });
+
+    newMarker.getElement().addEventListener('click', function () {
+        map.flyTo({
+            center: newMarker.getLngLat(),
+            zoom: 10,
+            speed: 1,
+        });
+    });
+    // lonInput = event.lngLat.lng;
+    // latInput = event.lngLat.lat;
+    console.log("lon" + lonInput);
+    console.log("lat" + latInput);
+});
+
+
+
+
+
 ////////////////Map BOX API STYLE CHANGER
 
 
@@ -286,15 +321,15 @@ submitButton.addEventListener('click', function () {
         switch (styleSwap.value) {
             case 'Streets':
                 map.setStyle(styleStreets);
-                console.log('streets');
+
                 break;
             case 'Outdoors':
                 map.setStyle(styleOutdoors);
-                console.log('streets');
+
                 break;
             case 'Light':
                 map.setStyle(styleLight);
-                console.log('streets');
+
                 break;
             case 'Dark':
                 map.setStyle(styleDark);
@@ -395,6 +430,7 @@ function runForecast() {
             dailyWeatherFour();
             dailyWeatherFive();
             currentWeather();
+
         });
 
 }
