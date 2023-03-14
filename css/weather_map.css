@@ -30,7 +30,7 @@ body {
 
 /*TOP BANNER*/
 .forecast-banner {
-    background: white;
+    background: #dedada;
     width: 100%;
     display: flex;
     align-items: center;
@@ -87,25 +87,28 @@ body {
 .container-wrap {
     text-decoration: none;
     color: black;
-    border: black 2px solid;
-    box-shadow: 5px 10px #24244d;
+    box-shadow: 3px 5px #24244d;
     border-radius: 20px;
     margin-bottom: 20px;
-
-
 }
-
+.date-wrap h4{
+    /*font-size: 20px;*/
+}
 .container-wrap:hover{
     transform: scale(1.05);
     z-index: 1000;
-    color: white;
-    background: lightsteelblue;
+    color: black;
+    background: rgb(180,160,11);
+    background: linear-gradient(100deg, rgba(180,160,11,1) 0%, rgba(255,216,32,1) 18%, rgba(255,252,216,1) 38%, rgba(240,240,15,1) 92%, rgba(222,235,80,1) 100%);
+    border: black 2px solid;
 }
 .container-wrap:focus {
-    color: white;
-    background: lightsteelblue;
+    color: black;
+    background: rgb(180,160,11);
+    background: linear-gradient(100deg, rgba(180,160,11,1) 0%, rgba(255,216,32,1) 18%, rgba(255,252,216,1) 38%, rgba(240,240,15,1) 92%, rgba(222,235,80,1) 100%);
     transform: scale(1.05);
     z-index: 1000;
+    border: black 2px solid;
 }
 .temp-wrap, .date-wrap{
     display: flex;
@@ -120,8 +123,14 @@ body {
     height: 100px;
     width: 100px;
 }
+/* CSS FOR ADDED HTML CARDS*/
+.card {
+    background: rgb(94,96,97);
+    background: linear-gradient(60deg, rgba(94,96,97,1) 0%, rgba(113,116,117,1) 10%, rgba(197,200,201,1) 35%, rgba(173,177,177,1) 59%);
+    box-shadow: 3px 5px #24244d;
+    border: gold 2px solid;
 
-
+}
 
 
 /*MAP API*/

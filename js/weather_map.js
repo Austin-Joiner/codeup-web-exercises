@@ -1,7 +1,8 @@
-////////////////Weather API
+////////////////Weather API Forecast
 $.get("https://api.openweathermap.org/data/2.5/forecast?units=imperial&lat=30.438083&lon=-84.280933&appid=" + OPEN_WEATHER_APPID)
-    // {lon: -84.2807, lat: 30.4383}
+
     .done(function (data) {
+        console.log("Forecast: ");
         console.log(data);
 
 ////////////////Weather INFO add to HTML
@@ -12,7 +13,7 @@ $.get("https://api.openweathermap.org/data/2.5/forecast?units=imperial&lat=30.43
         var locationFinderCity = data.city.name;
         var locationFinderCountry = data.city.country;
 
-        console.log(locationFinderCity + ', ' + locationFinderCountry);
+        console.log("Origin Location: " + locationFinderCity + ', ' + locationFinderCountry);
 
         $('#location-input').html(locationFinderCity + ', ' + locationFinderCountry);
 
@@ -25,10 +26,11 @@ $.get("https://api.openweathermap.org/data/2.5/forecast?units=imperial&lat=30.43
 
 
             const day = new Date(data.list[i].dt * 1000).toLocaleDateString([], {
+
                 month: 'short',
                 day: '2-digit'
-
             });
+
             const time = new Date(data.list[i].dt * 1000).toLocaleTimeString([], {
                 hour: "numeric",
                 minute: "2-digit",
@@ -94,6 +96,7 @@ function currentWeather() {
 
     $.get("https://api.openweathermap.org/data/2.5/weather?units=imperial&lat=" + latInput + "&lon=" + lonInput + "&appid=" + OPEN_WEATHER_APPID)
         .done(function (currentData) {
+            console.log("Current Weather Data: ");
             console.log(currentData);
 
 
@@ -178,7 +181,6 @@ function geocode(search, token) {
 
 /////////////////ORIGIN SETTING ON TALLAHASSEE FL
 geocode("Tallahassee, FL", mapboxgl.accessToken).then(function (result) {
-    console.log(result);
     map.setCenter(result.center);
     map.setZoom(10);
     var marker = new mapboxgl.Marker({draggable: true})
@@ -301,10 +303,7 @@ map.on('dblclick', function (event) {
             speed: 1,
         });
     });
-    // lonInput = event.lngLat.lng;
-    // latInput = event.lngLat.lat;
-    console.log("lon" + lonInput);
-    console.log("lat" + latInput);
+
 });
 
 
@@ -410,10 +409,12 @@ function runForecast() {
                     html += '<div class="temp-wrap">';
                     html += '<h4 class="temp">' + parseInt(forecastInfo[i].main.temp) + '°F' + '</h4>';
                     html += '</div>';
+                    html += '<div class="">';
                     html += '<div class="weather-wrap">';
                     html += '<div class="forecast-icon">';
                     html += '<img src="https://openweathermap.org/img/w/' + forecastInfo[i].weather[0].icon + '.png"></div>';
                     html += '<h4 class="weather">' + forecastInfo[i].weather[0].main + '</h4>';
+                    html += '</div>';
                     html += '</div>';
                     html += '</a>';
                     prevDay = day;
@@ -435,10 +436,21 @@ function runForecast() {
 
 }
 
-//////////////////////function event listener
+
+
+
+
+
+
+
+
+
+
+
+////////////////////function event listener
 
 function dailyWeatherOne() {
-        let card = '#card-' + indexArray[0];
+    let card = '#card-' + indexArray[0];
     var forecastOne = document.querySelector(card);
     forecastOne.addEventListener('click', function () {
 
@@ -483,14 +495,8 @@ function dailyWeatherFive() {
     });
 }
 
-// new date data.dt * 1000.tolocaldatestring
-// new date data.dt * 1000.tolocaltimestring
-////////////////////single weather chart function
-// const timeCheck = new Date(data.list[i].dt * 1000).toLocaleTimeString([], {
-//     hour: "numeric",
-//     minute: "2-digit",
-//     hour12: true
-// });
+
+
 function forecastOneChart() {
     $.get("https://api.openweathermap.org/data/2.5/forecast?units=imperial&lat=" + latInput + "&lon=" + lonInput + "&appid=" + OPEN_WEATHER_APPID)
         // {lon: -84.2807, lat: 30.4383}
@@ -704,4 +710,34 @@ function forecastFiveChart() {
 }
 
 
+var direction;
+function converterCompass () {
+    switch (direction) {
+        case direction < 30 || direction > 315:
+            console.log("North");
+            break;
+        case direction <= 60 && direction >= 30:
+            console.log("North East");
+            break;
+        case direction < 110 && direction > 60:
+            console.log("East");
+            break;
+        case direction <= 150 && direction >= 110:
+            console.log("South East");
+            break;
+        case direction < 210 && direction > 150:
+            console.log("South");
+            break;
+        case direction <= 240 && direction >= 210:
+            console.log("South West");
+            break;
+        case direction < 300 && direction >= 240:
+            console.log("West");
+            break;
+        case direction <= 315 && direction >= 300:
+            console.log("North West");
+            break;
+
+    }
+}
 
