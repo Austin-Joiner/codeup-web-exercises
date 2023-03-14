@@ -13,54 +13,55 @@
 </head>
 <body>
 
-
-<!---->
-<!--TOP BANNER-->
-<!---->
-<div class="container">
-
-    <div class="forecast-banner">
-        <div class="logo">
-            <h3 class="weather-header">Weather</h3>
-            <h3 class="alert-header">Alert</h3>
-        </div>
-        <div class="forecast-title">
-            <h1 class="d-md-none">FORECAST</h1>
-            <h1 class="d-none d-md-block">5 DAY FORECAST</h1>
-        </div>
-        <div class="location-tracker">
-            <p>Location: </p>
-            <p id="location-input"></p>
-        </div>
-    </div>
-
-<!---->
-<!--INPUT OPTIONS-->
-<!---->
-    <div class="input-options">
-        <div id="search-div">
-            <input id="search-geo" type="search" placeholder="search address">
-            <input id="submit" type="submit"/>
-        </div>
-
-        <div>
-            <select id="style-change">
-                <option>Streets</option>
-                <option>Outdoors</option>
-                <option>Light</option>
-                <option>Dark</option>
-                <option>Satellite</option>
-                <option>Satellite Streets</option>
-                <option>Navigation Day</option>
-                <option>Navigation Night</option>
-            </select>
-        </div>
-    </div>
-
+<div class="top-background">
     <!---->
-    <!--HTML JS ADDED SPOT FOR 5 DAY FORECAST-->
+    <!--TOP BANNER-->
     <!---->
-    <div id="forecast" class="row"></div>
+    <div class="container">
+
+        <div class="forecast-banner">
+            <div class="logo">
+                <h3 class="weather-header">Weather</h3>
+                <h3 class="alert-header">Alert</h3>
+            </div>
+            <div class="forecast-title">
+                <h1 class="d-md-none">FORECAST</h1>
+                <h1 class="d-none d-md-block">5 DAY FORECAST</h1>
+            </div>
+            <div class="location-tracker">
+                <p>Location: </p>
+                <a href="#singleForecast" id="location-input"></a>
+            </div>
+        </div>
+
+        <!---->
+        <!--INPUT OPTIONS-->
+        <!---->
+        <div class="input-options">
+            <div id="search-div">
+                <input id="search-geo" type="search" placeholder="search address">
+                <input id="submit" type="submit"/>
+            </div>
+
+            <div>
+                <select id="style-change">
+                    <option>Streets</option>
+                    <option>Outdoors</option>
+                    <option>Light</option>
+                    <option>Dark</option>
+                    <option>Satellite</option>
+                    <option>Satellite Streets</option>
+                    <option>Navigation Day</option>
+                    <option>Navigation Night</option>
+                </select>
+            </div>
+        </div>
+
+        <!---->
+        <!--HTML JS ADDED SPOT FOR 5 DAY FORECAST-->
+        <!---->
+        <div id="forecast" class="row"></div>
+    </div>
 </div>
 <!---->
 <!--MAP API-->
@@ -70,10 +71,10 @@
 <!--HTML JS ADDED SPOT FOR SOLO WEATHER CHART-->
 <!---->
 <div class="single-wrap">
-<div id="singleForecast"></div>
+    <div id="singleForecast"></div>
 </div>
 
-
+<video class="background" src="img/clouds.mp4" autoplay loop muted/>
 <!---->
 <!--CDN/LINKS-->
 <!---->

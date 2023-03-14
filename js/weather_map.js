@@ -16,22 +16,48 @@ $.get("https://api.openweathermap.org/data/2.5/forecast?units=imperial&lat=30.43
 
         $('#location-input').html(locationFinderCity + ', ' + locationFinderCountry);
 
-        for (var i = 0; i < 5; i++) {
+
+        var prevDay = '';
+        var prevTime = '';
 
 
-            html += '<a href="#" type="button" id="card-' + [i] + '" class="container-wrap card col-sm-4 col-lg-2">';
-            html += '<div class="date-wrap">';
-            html += '<h4>Date Here</h4>'
-            html += '</div>';
-            html += '<div class="temp-wrap">';
-            html += '<h4 class="temp">' + parseInt(forecastInfo[i].main.temp) + '°F' + '</h4>';
-            html += '</div>';
-            html += '<div class="weather-wrap">';
-            html += '<div class="forecast-icon">';
-            html += '<img src="https://openweathermap.org/img/w/' + forecastInfo[i].weather[0].icon + '.png"></div>';
-            html += '<h4 class="weather">' + forecastInfo[i].weather[0].main + '</h4>';
-            html += '</div>';
-            html += '</a>';
+        for (var i = 0; i < 40; i++) {
+
+
+            const day = new Date(data.list[i].dt * 1000).toLocaleDateString([], {
+                month: 'short',
+                day: '2-digit'
+
+            });
+            const time = new Date(data.list[i].dt * 1000).toLocaleTimeString([], {
+                hour: "numeric",
+                minute: "2-digit",
+                hour12: true
+            });
+
+
+            if (day === false || day !== prevDay && time === '5:00 PM' ) {
+                html += '<a href="#" type="button" id="card-' + [i] + '" class="container-wrap card col-sm-4 col-lg-2">';
+                html += '<div class="date-wrap">';
+                html += '<h4>' + day + '</h4>'
+                html += '</div>';
+                html += '<div class="temp-wrap">';
+                html += '<h4 class="temp">' + parseInt(forecastInfo[i].main.temp) + '°F' + '</h4>';
+                html += '</div>';
+                html += '<div class="weather-wrap">';
+                html += '<div class="forecast-icon">';
+                html += '<img src="https://openweathermap.org/img/w/' + forecastInfo[i].weather[0].icon + '.png"></div>';
+                html += '<h4 class="weather">' + forecastInfo[i].weather[0].main + '</h4>';
+                html += '</div>';
+                html += '</a>';
+                prevDay = day;
+                prevTime = time;
+                dayData.push(day);
+                indexArray.push(i);
+
+            } else {
+
+            }
 
         }
         $('#forecast').html(html);
@@ -40,12 +66,85 @@ $.get("https://api.openweathermap.org/data/2.5/forecast?units=imperial&lat=30.43
         dailyWeatherThree();
         dailyWeatherFour();
         dailyWeatherFive();
-
+        currentWeather();
+        currentWeatherEvent()
 
     });
 
+////////////////////////////////
+////////////////////////////////
+////////////////////////////////
+
+
+
+
+function currentWeatherEvent() {
+
+    var currentEvent = document.querySelector('#location-input');
+    currentEvent.addEventListener('click', function () {
+
+        currentWeather();
+
+    });
+}
+
+
+
+
+////////////////Weather API
+
+function currentWeather() {
+
+    // var latInput = document.querySelector('#lat-input').value;
+    // var lonInput = document.querySelector('#lon-input').value;
+
+
+    $.get("https://api.openweathermap.org/data/2.5/weather?units=imperial&lat=" + latInput + "&lon=" + lonInput + "&appid=" + OPEN_WEATHER_APPID)
+        .done(function (currentData) {
+            console.log(currentData);
+
+
+////////////////Weather INFO add to HTML
+            var currentInfo = currentData;
+            var htmlBottom = '';
+
+
+            var windSpeed = currentInfo.wind.speed * 1.151;
+
+
+            htmlBottom += '<div class="solo-container-wrap card">';
+            htmlBottom += '<div class="solo-date-wrap">';
+            htmlBottom += '<h4>Current Weather</h4>'
+            htmlBottom += '</div>';
+            htmlBottom += '<div class="solo-temp-wrap">';
+            htmlBottom += '<h4 class="solo-temp">' + parseInt(currentInfo.main.temp) + '°F</h4>';
+            htmlBottom += '<p>Feels Like: ' + parseInt(currentInfo.main.feels_like) + '°F</p>'
+            htmlBottom += '</div>';
+            htmlBottom += '<div class="solo-humid-wrap">';
+            htmlBottom += '<h4 class="solo-humid">Humidity: ' + currentInfo.main.humidity + '%</h4>';
+            htmlBottom += '</div>';
+            htmlBottom += '<div class="solo-weather-wrap">';
+            htmlBottom += '<div class="solo-forecast-icon">';
+            htmlBottom += '<img src="https://openweathermap.org/img/w/' + currentInfo.weather[0].icon + '.png"></div>';
+            htmlBottom += '<h4 class="solo-weather">' + currentInfo.weather[0].description.toUpperCase() + '</h4>';
+            htmlBottom += '</div>';
+            htmlBottom += '<div class="solo-wind-wrap">';
+            htmlBottom += '<h4 class="solo-wind">Wind: ' + parseInt(windSpeed) + 'MPH</h4>';
+            htmlBottom += '</div>';
+            htmlBottom += '</div>';
+
+
+            $('#singleForecast').html(htmlBottom);
+        });
+}
+
+
+
+
 ////////////////GLOBAL VARIABLES 1
 
+var indexArray = [];
+var dayData = [];
 var lonInput = -84.280933;
 var latInput = 30.438083;
 var marker = document.getElementsByClassName('mapboxgl-marker');
@@ -251,24 +350,43 @@ function runForecast() {
             $('#location-input').html(locationFinderCity + ', ' + locationFinderCountry);
 
 
-            for (var i = 0; i < 5; i++) {
+            var prevDay = '';
+            var prevTime = '';
+            for (var i = 0; i < 40; i++) {
 
 
-                html += '<a href="#" type="button" id="card-' + [i] + '" class="container-wrap card col-sm-4 col-lg-2">';
-                html += '<div class="date-wrap">';
-                html += '<h4>Date Here</h4>'
-                html += '</div>';
-                html += '<div class="temp-wrap">';
-                html += '<h4 class="temp">' + parseInt(forecastInfo[i].main.temp) + '°F' + '</h4>';
-                html += '</div>';
-                html += '<div class="weather-wrap">';
-                html += '<div class="forecast-icon">';
-                html += '<img src="https://openweathermap.org/img/w/' + forecastInfo[i].weather[0].icon + '.png"></div>';
-                html += '<h4 class="weather">' + forecastInfo[i].weather[0].main + '</h4>';
-                html += '</div>';
-                html += '</a>';
+                const day = new Date(data.list[i].dt * 1000).toLocaleDateString([], {
+                    month: 'short',
+                    day: '2-digit'
+
+                });
+                const time = new Date(data.list[i].dt * 1000).toLocaleTimeString([], {
+                    hour: "numeric",
+                    minute: "2-digit",
+                    hour12: true
+                });
 
 
+                if (day === false || day !== prevDay && time === '5:00 PM' ) {
+                    html += '<a href="#" type="button" id="card-' + [i] + '" class="container-wrap card col-sm-4 col-lg-2">';
+                    html += '<div class="date-wrap">';
+                    html += '<h4>' + day + '</h4>'
+                    html += '</div>';
+                    html += '<div class="temp-wrap">';
+                    html += '<h4 class="temp">' + parseInt(forecastInfo[i].main.temp) + '°F' + '</h4>';
+                    html += '</div>';
+                    html += '<div class="weather-wrap">';
+                    html += '<div class="forecast-icon">';
+                    html += '<img src="https://openweathermap.org/img/w/' + forecastInfo[i].weather[0].icon + '.png"></div>';
+                    html += '<h4 class="weather">' + forecastInfo[i].weather[0].main + '</h4>';
+                    html += '</div>';
+                    html += '</a>';
+                    prevDay = day;
+                    prevTime = time;
+
+                } else {
+
+                }
             }
             $('#forecast').html(html);
             dailyWeatherOne();
@@ -276,6 +394,7 @@ function runForecast() {
             dailyWeatherThree();
             dailyWeatherFour();
             dailyWeatherFive();
+            currentWeather();
         });
 
 }
@@ -283,7 +402,8 @@ function runForecast() {
 //////////////////////function event listener
 
 function dailyWeatherOne() {
-    var forecastOne = document.querySelector('#card-0');
+        let card = '#card-' + indexArray[0];
+    var forecastOne = document.querySelector(card);
     forecastOne.addEventListener('click', function () {
 
         forecastOneChart();
@@ -291,7 +411,8 @@ function dailyWeatherOne() {
     });
 }
 function dailyWeatherTwo() {
-    var forecastTwo = document.querySelector('#card-1');
+    let card = '#card-' + indexArray[1];
+    var forecastTwo = document.querySelector(card);
     forecastTwo.addEventListener('click', function () {
 
         forecastTwoChart();
@@ -299,7 +420,8 @@ function dailyWeatherTwo() {
     });
 }
 function dailyWeatherThree() {
-    var forecastThree = document.querySelector('#card-2');
+    let card = '#card-' + indexArray[2];
+    var forecastThree = document.querySelector(card);
     forecastThree.addEventListener('click', function () {
 
         forecastThreeChart();
@@ -307,7 +429,8 @@ function dailyWeatherThree() {
     });
 }
 function dailyWeatherFour() {
-    var forecastFour = document.querySelector('#card-3');
+    let card = '#card-' + indexArray[3];
+    var forecastFour = document.querySelector(card);
     forecastFour.addEventListener('click', function () {
 
         forecastFourChart();
@@ -315,7 +438,8 @@ function dailyWeatherFour() {
     });
 }
 function dailyWeatherFive() {
-    var forecastFive = document.querySelector('#card-4');
+    let card = '#card-' + indexArray[4];
+    var forecastFive = document.querySelector(card);
     forecastFive.addEventListener('click', function () {
 
         forecastFiveChart();
@@ -323,9 +447,14 @@ function dailyWeatherFive() {
     });
 }
 
-
+// new date data.dt * 1000.tolocaldatestring
+// new date data.dt * 1000.tolocaltimestring
 ////////////////////single weather chart function
-
+// const timeCheck = new Date(data.list[i].dt * 1000).toLocaleTimeString([], {
+//     hour: "numeric",
+//     minute: "2-digit",
+//     hour12: true
+// });
 function forecastOneChart() {
     $.get("https://api.openweathermap.org/data/2.5/forecast?units=imperial&lat=" + latInput + "&lon=" + lonInput + "&appid=" + OPEN_WEATHER_APPID)
         // {lon: -84.2807, lat: 30.4383}
@@ -334,28 +463,32 @@ function forecastOneChart() {
 
 
 
+            day = dayData[0];
+
+            let weatherPlace = indexArray[0];
+
             var forecastInfo = data.list;
             var htmlBottom = '';
 
-            var windSpeed = forecastInfo[0].wind.speed * 1.151;
+            var windSpeed = forecastInfo[weatherPlace].wind.speed * 1.151;
 
 
 
             htmlBottom += '<div class="solo-container-wrap card">';
             htmlBottom += '<div class="solo-date-wrap">';
-            htmlBottom += '<h4>Date Here</h4>'
+            htmlBottom += '<h4>'+ day +'</h4>'
             htmlBottom += '</div>';
             htmlBottom += '<div class="solo-temp-wrap">';
-            htmlBottom += '<h4 class="solo-temp">' + parseInt(forecastInfo[0].main.temp) + '°F</h4>';
-            htmlBottom += '<p>Feels Like: ' + parseInt(forecastInfo[0].main.feels_like) + '°F</p>'
+            htmlBottom += '<h4 class="solo-temp">' + parseInt(forecastInfo[weatherPlace].main.temp) + '°F</h4>';
+            htmlBottom += '<p>Feels Like: ' + parseInt(forecastInfo[weatherPlace].main.feels_like) + '°F</p>'
             htmlBottom += '</div>';
             htmlBottom += '<div class="solo-humid-wrap">';
-            htmlBottom += '<h4 class="solo-humid">Humidity: ' + forecastInfo[0].main.humidity + '%</h4>';
+            htmlBottom += '<h4 class="solo-humid">Humidity: ' + forecastInfo[weatherPlace].main.humidity + '%</h4>';
             htmlBottom += '</div>';
             htmlBottom += '<div class="solo-weather-wrap">';
             htmlBottom += '<div class="solo-forecast-icon">';
-            htmlBottom += '<img src="https://openweathermap.org/img/w/' + forecastInfo[0].weather[0].icon + '.png"></div>';
-            htmlBottom += '<h4 class="solo-weather">' + forecastInfo[0].weather[0].description.toUpperCase() + '</h4>';
+            htmlBottom += '<img src="https://openweathermap.org/img/w/' + forecastInfo[weatherPlace].weather[0].icon + '.png"></div>';
+            htmlBottom += '<h4 class="solo-weather">' + forecastInfo[weatherPlace].weather[0].description.toUpperCase() + '</h4>';
             htmlBottom += '</div>';
             htmlBottom += '<div class="solo-wind-wrap">';
             htmlBottom += '<h4 class="solo-wind">Wind: ' + parseInt(windSpeed) + 'MPH</h4>';
@@ -372,27 +505,31 @@ function forecastTwoChart() {
         .done(function (data) {
 
 
+            day = dayData[1];
+
+            let weatherPlace = indexArray[1];
+
             var forecastInfo = data.list;
             var htmlBottom = '';
 
 
-            var windSpeed = forecastInfo[1].wind.speed * 1.151;
+            var windSpeed = forecastInfo[weatherPlace].wind.speed * 1.151;
 
             htmlBottom += '<div class="solo-container-wrap card">';
             htmlBottom += '<div class="solo-date-wrap">';
-            htmlBottom += '<h4>Date Here</h4>'
+            htmlBottom += '<h4>'+ day +'</h4>'
             htmlBottom += '</div>';
             htmlBottom += '<div class="solo-temp-wrap">';
-            htmlBottom += '<h4 class="solo-temp">' + parseInt(forecastInfo[1].main.temp) + '°F</h4>';
-            htmlBottom += '<p>Feels Like: ' + parseInt(forecastInfo[1].main.feels_like) + '°F</p>'
+            htmlBottom += '<h4 class="solo-temp">' + parseInt(forecastInfo[weatherPlace].main.temp) + '°F</h4>';
+            htmlBottom += '<p>Feels Like: ' + parseInt(forecastInfo[weatherPlace].main.feels_like) + '°F</p>'
             htmlBottom += '</div>';
             htmlBottom += '<div class="solo-humid-wrap">';
-            htmlBottom += '<h4 class="solo-humid">Humidity: ' + forecastInfo[1].main.humidity + '%</h4>';
+            htmlBottom += '<h4 class="solo-humid">Humidity: ' + forecastInfo[weatherPlace].main.humidity + '%</h4>';
             htmlBottom += '</div>';
             htmlBottom += '<div class="solo-weather-wrap">';
             htmlBottom += '<div class="solo-forecast-icon">';
-            htmlBottom += '<img src="https://openweathermap.org/img/w/' + forecastInfo[1].weather[0].icon + '.png"></div>';
-            htmlBottom += '<h4 class="solo-weather">' + forecastInfo[1].weather[0].description.toUpperCase() + '</h4>';
+            htmlBottom += '<img src="https://openweathermap.org/img/w/' + forecastInfo[weatherPlace].weather[0].icon + '.png"></div>';
+            htmlBottom += '<h4 class="solo-weather">' + forecastInfo[weatherPlace].weather[0].description.toUpperCase() + '</h4>';
             htmlBottom += '</div>';
             htmlBottom += '<div class="solo-wind-wrap">';
             htmlBottom += '<h4 class="solo-wind">Wind: ' + parseInt(windSpeed) + 'MPH</h4>';
@@ -408,30 +545,33 @@ function forecastThreeChart() {
         // {lon: -84.2807, lat: 30.4383}
         .done(function (data) {
 
+            day = dayData[2];
+
+            let weatherPlace = indexArray[2];
 
             var forecastInfo = data.list;
             var htmlBottom = '';
 
 
-            var windSpeed = forecastInfo[2].wind.speed * 1.151;
+            var windSpeed = forecastInfo[weatherPlace].wind.speed * 1.151;
 
 
 
             htmlBottom += '<div class="solo-container-wrap card">';
             htmlBottom += '<div class="solo-date-wrap">';
-            htmlBottom += '<h4>Date Here</h4>'
+            htmlBottom += '<h4>'+ day +'</h4>'
             htmlBottom += '</div>';
             htmlBottom += '<div class="solo-temp-wrap">';
-            htmlBottom += '<h4 class="solo-temp">' + parseInt(forecastInfo[2].main.temp) + '°F</h4>';
-            htmlBottom += '<p>Feels Like: ' + parseInt(forecastInfo[2].main.feels_like) + '°F</p>'
+            htmlBottom += '<h4 class="solo-temp">' + parseInt(forecastInfo[weatherPlace].main.temp) + '°F</h4>';
+            htmlBottom += '<p>Feels Like: ' + parseInt(forecastInfo[weatherPlace].main.feels_like) + '°F</p>'
             htmlBottom += '</div>';
             htmlBottom += '<div class="solo-humid-wrap">';
-            htmlBottom += '<h4 class="solo-humid">Humidity: ' + forecastInfo[2].main.humidity + '%</h4>';
+            htmlBottom += '<h4 class="solo-humid">Humidity: ' + forecastInfo[weatherPlace].main.humidity + '%</h4>';
             htmlBottom += '</div>';
             htmlBottom += '<div class="solo-weather-wrap">';
             htmlBottom += '<div class="solo-forecast-icon">';
-            htmlBottom += '<img src="https://openweathermap.org/img/w/' + forecastInfo[2].weather[0].icon + '.png"></div>';
-            htmlBottom += '<h4 class="solo-weather">' + forecastInfo[2].weather[0].description.toUpperCase() + '</h4>';
+            htmlBottom += '<img src="https://openweathermap.org/img/w/' + forecastInfo[weatherPlace].weather[0].icon + '.png"></div>';
+            htmlBottom += '<h4 class="solo-weather">' + forecastInfo[weatherPlace].weather[0].description.toUpperCase() + '</h4>';
             htmlBottom += '</div>';
             htmlBottom += '<div class="solo-wind-wrap">';
             htmlBottom += '<h4 class="solo-wind">Wind: ' + parseInt(windSpeed) + 'MPH</h4>';
@@ -448,28 +588,32 @@ function forecastFourChart() {
         .done(function (data) {
 
 
+            day = dayData[3];
+
+            let weatherPlace = indexArray[3];
+
             var forecastInfo = data.list;
             var htmlBottom = '';
 
 
-            var windSpeed = forecastInfo[3].wind.speed * 1.151;
+            var windSpeed = forecastInfo[weatherPlace].wind.speed * 1.151;
 
 
             htmlBottom += '<div class="solo-container-wrap card">';
             htmlBottom += '<div class="solo-date-wrap">';
-            htmlBottom += '<h4>Date Here</h4>'
+            htmlBottom += '<h4>'+ day +'</h4>'
             htmlBottom += '</div>';
             htmlBottom += '<div class="solo-temp-wrap">';
-            htmlBottom += '<h4 class="solo-temp">' + parseInt(forecastInfo[3].main.temp) + '°F</h4>';
-            htmlBottom += '<p>Feels Like: ' + parseInt(forecastInfo[3].main.feels_like) + '°F</p>'
+            htmlBottom += '<h4 class="solo-temp">' + parseInt(forecastInfo[weatherPlace].main.temp) + '°F</h4>';
+            htmlBottom += '<p>Feels Like: ' + parseInt(forecastInfo[weatherPlace].main.feels_like) + '°F</p>'
             htmlBottom += '</div>';
             htmlBottom += '<div class="solo-humid-wrap">';
-            htmlBottom += '<h4 class="solo-humid">Humidity: ' + forecastInfo[3].main.humidity + '%</h4>';
+            htmlBottom += '<h4 class="solo-humid">Humidity: ' + forecastInfo[weatherPlace].main.humidity + '%</h4>';
             htmlBottom += '</div>';
             htmlBottom += '<div class="solo-weather-wrap">';
             htmlBottom += '<div class="solo-forecast-icon">';
-            htmlBottom += '<img src="https://openweathermap.org/img/w/' + forecastInfo[3].weather[0].icon + '.png"></div>';
-            htmlBottom += '<h4 class="solo-weather">' + forecastInfo[3].weather[0].description.toUpperCase() + '</h4>';
+            htmlBottom += '<img src="https://openweathermap.org/img/w/' + forecastInfo[weatherPlace].weather[0].icon + '.png"></div>';
+            htmlBottom += '<h4 class="solo-weather">' + forecastInfo[weatherPlace].weather[0].description.toUpperCase() + '</h4>';
             htmlBottom += '</div>';
             htmlBottom += '<div class="solo-wind-wrap">';
             htmlBottom += '<h4 class="solo-wind">Wind: ' + parseInt(windSpeed) + 'MPH</h4>';
@@ -486,28 +630,32 @@ function forecastFiveChart() {
         .done(function (data) {
 
 
+            day = dayData[4];
+
+            let weatherPlace = indexArray[4];
+
             var forecastInfo = data.list;
             var htmlBottom = '';
 
 
-            var windSpeed = forecastInfo[4].wind.speed * 1.151;
+            var windSpeed = forecastInfo[weatherPlace].wind.speed * 1.151;
 
 
             htmlBottom += '<div class="solo-container-wrap card">';
             htmlBottom += '<div class="solo-date-wrap">';
-            htmlBottom += '<h4>Date Here</h4>'
+            htmlBottom += '<h4>' + day + '</h4>'
             htmlBottom += '</div>';
             htmlBottom += '<div class="solo-temp-wrap">';
-            htmlBottom += '<h4 class="solo-temp">' + parseInt(forecastInfo[4].main.temp) + '°F</h4>';
-            htmlBottom += '<p>Feels Like: ' + parseInt(forecastInfo[4].main.feels_like) + '°F</p>'
+            htmlBottom += '<h4 class="solo-temp">' + parseInt(forecastInfo[weatherPlace].main.temp) + '°F</h4>';
+            htmlBottom += '<p>Feels Like: ' + parseInt(forecastInfo[weatherPlace].main.feels_like) + '°F</p>'
             htmlBottom += '</div>';
             htmlBottom += '<div class="solo-humid-wrap">';
-            htmlBottom += '<h4 class="solo-humid">Humidity: ' + forecastInfo[4].main.humidity + '%</h4>';
+            htmlBottom += '<h4 class="solo-humid">Humidity: ' + forecastInfo[weatherPlace].main.humidity + '%</h4>';
             htmlBottom += '</div>';
             htmlBottom += '<div class="solo-weather-wrap">';
             htmlBottom += '<div class="solo-forecast-icon">';
-            htmlBottom += '<img src="https://openweathermap.org/img/w/' + forecastInfo[4].weather[0].icon + '.png"></div>';
-            htmlBottom += '<h4 class="solo-weather">' + forecastInfo[4].weather[0].description.toUpperCase() + '</h4>';
+            htmlBottom += '<img src="https://openweathermap.org/img/w/' + forecastInfo[weatherPlace].weather[0].icon + '.png"></div>';
+            htmlBottom += '<h4 class="solo-weather">' + forecastInfo[weatherPlace].weather[0].description.toUpperCase() + '</h4>';
             htmlBottom += '</div>';
             htmlBottom += '<div class="solo-wind-wrap">';
             htmlBottom += '<h4 class="solo-wind">Wind: ' + parseInt(windSpeed) + 'MPH</h4>';

@@ -6,6 +6,26 @@ body {
     background: #3B94D9;
 }
 
+.background {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -1000;
+}
+
+/*.top-background {*/
+/*    background: rgb(43,145,168);*/
+/*    background: linear-gradient(225deg, rgba(43,145,168,1) 0%, rgba(126,195,210,1) 45%, rgba(160,179,184,1) 91%);*/
+
+/*    z-index: -500;*/
+/*}*/
+.top-background {
+    background: rgb(43,145,168);
+    background: radial-gradient(circle, rgba(43,145,168,1) 0%, rgba(126,195,210,1) 45%, rgba(160,179,184,1) 91%);
+    z-index: -500;
+}
 
 
 /*TOP BANNER*/
@@ -123,7 +143,7 @@ body {
     width: 100%;
     display: flex;
     justify-content: center;
-    border: black 10px solid;
+
 }
 .solo-container-wrap {
     width: 100%;
@@ -150,6 +170,18 @@ body {
 .solo-weather {
     display: flex;
     justify-content: start;
+    position: relative;
+    top: 35px;
+    margin-left: 10px;
+}
+
+.solo-forecast-icon img {
+    height: 150px;
+    width: 150px;
+}
+.solo-forecast-icon {
+    display: flex;
+    justify-content: center;
 }
 
 
