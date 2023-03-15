@@ -1,4 +1,5 @@
 ////////////////Weather API Forecast
+
 $.get("https://api.openweathermap.org/data/2.5/forecast?units=imperial&lat=30.438083&lon=-84.280933&appid=" + OPEN_WEATHER_APPID)
 
     .done(function (data) {
@@ -7,8 +8,8 @@ $.get("https://api.openweathermap.org/data/2.5/forecast?units=imperial&lat=30.43
 
 ////////////////Weather INFO add to HTML
         var forecastInfo = data.list;
-        var html = '';
 
+        var html = '';
 
         var locationFinderCity = data.city.name;
         var locationFinderCountry = data.city.country;
@@ -24,6 +25,9 @@ $.get("https://api.openweathermap.org/data/2.5/forecast?units=imperial&lat=30.43
 
         for (var i = 0; i < 40; i++) {
 
+            // dataTemp = forecastInfo[i].main.temp;
+            // dataTime = forecastInfo[i].dt_txt;
+            // dataList = forecastInfo[i];
 
             const day = new Date(data.list[i].dt * 1000).toLocaleDateString([], {
 
@@ -39,6 +43,7 @@ $.get("https://api.openweathermap.org/data/2.5/forecast?units=imperial&lat=30.43
 
 
             if (day === false || day !== prevDay && time === '2:00 PM' ) {
+
                 html += '<a href="#singleForecast" type="button" id="card-' + [i] + '" class="container-wrap card col-sm-4 col-lg-2">';
                 html += '<div class="date-wrap">';
                 html += '<h4>' + day + '</h4>'
@@ -60,7 +65,7 @@ $.get("https://api.openweathermap.org/data/2.5/forecast?units=imperial&lat=30.43
             } else {
 
             }
-
+            console.log("first API did this");
         }
         $('#forecast').html(html);
         dailyWeatherOne();
@@ -86,9 +91,6 @@ function currentWeatherEvent() {
 
     });
 }
-
-
-
 
 //////////////// current Weather API
 
@@ -117,7 +119,7 @@ function currentWeather() {
             htmlBottom += '<h4>Current Weather</h4>'
             htmlBottom += '</div>';
             htmlBottom += '<div class="solo-temp-wrap">';
-            htmlBottom += '<h4 class="solo-temp"> <img class="testing" src="../img/hot.png">' + parseInt(currentInfo.main.temp) + '°F</h4>';
+            htmlBottom += '<h4 class="solo-temp"><img class="testing" src="../img/hot.png">' + parseInt(currentInfo.main.temp) + '°F</h4>';
             htmlBottom += '<p>Feels Like: ' + parseInt(currentInfo.main.feels_like) + '°F</p>'
             htmlBottom += '</div>';
             htmlBottom += '<div class="solo-humid-wrap">';
@@ -186,6 +188,8 @@ function geocode(search, token) {
             return data.features[0].center;
         });
 }
+
+// var markerSet;
 
 /////////////////ORIGIN SETTING ON TALLAHASSEE FL
 geocode("Tallahassee, FL", mapboxgl.accessToken).then(function (result) {
@@ -292,10 +296,10 @@ map.on('dblclick', function (event) {
     var newMarker = new mapboxgl.Marker({draggable: true})
         .setLngLat(event.lngLat)
         .addTo(map);
-        lonInput = newMarker.getLngLat().lng;
-        latInput = newMarker.getLngLat().lat;
+    lonInput = newMarker.getLngLat().lng;
+    latInput = newMarker.getLngLat().lat;
 
-        runForecast();
+    runForecast();
 
     newMarker.on('dragend', function () {
         lonInput = newMarker.getLngLat().lng;
@@ -321,42 +325,42 @@ map.on('dblclick', function (event) {
 ////////////////Map BOX API STYLE CHANGER
 
 
-    var styleSwap = document.querySelector('#style-change');
+var styleSwap = document.querySelector('#style-change');
 
-    function styleChanger() {
+function styleChanger() {
 
-        switch (styleSwap.value) {
-            case 'Streets':
-                map.setStyle(styleStreets);
-                break;
-            case 'Outdoors':
-                map.setStyle(styleOutdoors);
-                break;
-            case 'Light':
-                map.setStyle(styleLight);
+    switch (styleSwap.value) {
+        case 'Streets':
+            map.setStyle(styleStreets);
+            break;
+        case 'Outdoors':
+            map.setStyle(styleOutdoors);
+            break;
+        case 'Light':
+            map.setStyle(styleLight);
 
-                break;
-            case 'Dark':
-                map.setStyle(styleDark);
-                break;
-            case 'Satellite':
-                map.setStyle(styleSatellite);
-                break;
-            case 'Satellite Streets':
-                map.setStyle(styleSatelliteStreets);
-                break;
-            case 'Navigation Day':
-                map.setStyle(styleNavigationDay);
-                break;
-            case 'Navigation Night':
-                map.setStyle(styleNavigationNight);
-                break;
-        }
-
-
+            break;
+        case 'Dark':
+            map.setStyle(styleDark);
+            break;
+        case 'Satellite':
+            map.setStyle(styleSatellite);
+            break;
+        case 'Satellite Streets':
+            map.setStyle(styleSatelliteStreets);
+            break;
+        case 'Navigation Day':
+            map.setStyle(styleNavigationDay);
+            break;
+        case 'Navigation Night':
+            map.setStyle(styleNavigationNight);
+            break;
     }
 
-    styleSwap.addEventListener('change', styleChanger)
+
+}
+
+styleSwap.addEventListener('change', styleChanger)
 
 
 
@@ -392,7 +396,8 @@ function runForecast() {
 
             var prevDay = '';
             var prevTime = '';
-            for (var i = 0; i < 40; i++) {
+
+            for (let i = 0; i < 40; i++) {
 
 
                 const day = new Date(data.list[i].dt * 1000).toLocaleDateString([], {
@@ -407,7 +412,7 @@ function runForecast() {
                 });
 
 
-                if (day === false || day !== prevDay && time === '5:00 PM' ) {
+                if (day === false || day !== prevDay && time === '2:00 PM' ) {
                     html += '<a href="#singleForecast" type="button" id="card-' + [i] + '" class="container-wrap card col-sm-4 col-lg-2">';
                     html += '<div class="date-wrap">';
                     html += '<h4>' + day + '</h4>'
@@ -429,15 +434,17 @@ function runForecast() {
                 } else {
 
                 }
+                console.log("runforecast function did this");
+
             }
             $('#forecast').html(html);
+
+            currentWeather();
             dailyWeatherOne();
             dailyWeatherTwo();
             dailyWeatherThree();
             dailyWeatherFour();
             dailyWeatherFive();
-            currentWeather();
-
         });
 
 }
@@ -457,21 +464,25 @@ function runForecast() {
 
 function dailyWeatherOne() {
     let card = '#card-' + indexArray[0];
+    // if (card) {
+    console.log(card);
     var forecastOne = document.querySelector(card);
+    console.log(forecastOne);
     forecastOne.addEventListener('click', function () {
 
-        forecastOneChart();
+            forecastOneChart();
 
-    });
+        });
+    // }
 }
 function dailyWeatherTwo() {
     let card = '#card-' + indexArray[1];
-    var forecastTwo = document.querySelector(card);
-    forecastTwo.addEventListener('click', function () {
+        var forecastTwo = document.querySelector(card);
+        forecastTwo.addEventListener('click', function () {
 
-        forecastTwoChart();
+            forecastTwoChart();
 
-    });
+        });
 }
 function dailyWeatherThree() {
     let card = '#card-' + indexArray[2];
@@ -540,7 +551,7 @@ function forecastOneChart() {
             htmlBottom += '<h4>'+ day +'</h4>'
             htmlBottom += '</div>';
             htmlBottom += '<div class="solo-temp-wrap">';
-            htmlBottom += '<h4 class="solo-temp">' + parseInt(forecastInfo[weatherPlace].main.temp) + '°F</h4>';
+            htmlBottom += '<h4 class="solo-temp"><img class="testing" src="../img/hot.png">' + parseInt(forecastInfo[weatherPlace].main.temp) + '°F</h4>';
             htmlBottom += '<p>Feels Like: ' + parseInt(forecastInfo[weatherPlace].main.feels_like) + '°F</p>'
             htmlBottom += '</div>';
             htmlBottom += '<div class="solo-humid-wrap">';
@@ -552,17 +563,19 @@ function forecastOneChart() {
             htmlBottom += '<div class="solo-forecast-icon">';
             htmlBottom += '<img src="https://openweathermap.org/img/w/' + forecastInfo[weatherPlace].weather[0].icon + '.png"></div>';
             htmlBottom += '<h4 class="solo-weather">' + forecastInfo[weatherPlace].weather[0].description.toUpperCase() + '</h4>';
+            htmlBottom += '<button id="dataBtn">Data</button>';
             htmlBottom += '</div>';
             htmlBottom += '<div class="solo-wind-wrap">';
-            htmlBottom += '<h4 class="solo-wind">Wind: ' + parseInt(windSpeed) + 'MPH</h4>';
+            htmlBottom += '<h4 class="solo-wind"><img class="testing" src="../img/wind.png">' + parseInt(windSpeed) + 'MPH</h4>';
             htmlBottom += addGust;
-            htmlBottom += '<p class="direction">' + directionWind + '</p>'
+            htmlBottom += '<p class="direction">' + pointHTML + directionWind + '</p>'
             htmlBottom += '</div>';
             htmlBottom += '</div>';
             console.log(forecastInfo[weatherPlace]);
             console.log(time);
 
             $('#singleForecast').html(htmlBottom);
+            modalConnectOne();
         });
 }
 function forecastTwoChart() {
@@ -597,7 +610,7 @@ function forecastTwoChart() {
             htmlBottom += '<h4>'+ day +'</h4>'
             htmlBottom += '</div>';
             htmlBottom += '<div class="solo-temp-wrap">';
-            htmlBottom += '<h4 class="solo-temp">' + parseInt(forecastInfo[weatherPlace].main.temp) + '°F</h4>';
+            htmlBottom += '<h4 class="solo-temp"><img class="testing" src="../img/hot.png">' + parseInt(forecastInfo[weatherPlace].main.temp) + '°F</h4>';
             htmlBottom += '<p>Feels Like: ' + parseInt(forecastInfo[weatherPlace].main.feels_like) + '°F</p>'
             htmlBottom += '</div>';
             htmlBottom += '<div class="solo-humid-wrap">';
@@ -609,11 +622,12 @@ function forecastTwoChart() {
             htmlBottom += '<div class="solo-forecast-icon">';
             htmlBottom += '<img src="https://openweathermap.org/img/w/' + forecastInfo[weatherPlace].weather[0].icon + '.png"></div>';
             htmlBottom += '<h4 class="solo-weather">' + forecastInfo[weatherPlace].weather[0].description.toUpperCase() + '</h4>';
+            htmlBottom += '<button id="dataBtn">Data</button>';
             htmlBottom += '</div>';
             htmlBottom += '<div class="solo-wind-wrap">';
-            htmlBottom += '<h4 class="solo-wind">Wind: ' + parseInt(windSpeed) + 'MPH</h4>';
+            htmlBottom += '<h4 class="solo-wind"><img class="testing" src="../img/wind.png">' + parseInt(windSpeed) + 'MPH</h4>';
             htmlBottom += addGust;
-            htmlBottom += '<p class="direction">' + directionWind + '</p>'
+            htmlBottom += '<p class="direction">' + pointHTML + directionWind + '</p>'
             htmlBottom += '</div>';
             htmlBottom += '</div>';
             console.log(forecastInfo[weatherPlace]);
@@ -621,6 +635,7 @@ function forecastTwoChart() {
 
 
             $('#singleForecast').html(htmlBottom);
+            modalConnectOne();
         });
 }
 function forecastThreeChart() {
@@ -657,7 +672,7 @@ function forecastThreeChart() {
             htmlBottom += '<h4>'+ day +'</h4>'
             htmlBottom += '</div>';
             htmlBottom += '<div class="solo-temp-wrap">';
-            htmlBottom += '<h4 class="solo-temp">' + parseInt(forecastInfo[weatherPlace].main.temp) + '°F</h4>';
+            htmlBottom += '<h4 class="solo-temp"><img class="testing" src="../img/hot.png">' + parseInt(forecastInfo[weatherPlace].main.temp) + '°F</h4>';
             htmlBottom += '<p>Feels Like: ' + parseInt(forecastInfo[weatherPlace].main.feels_like) + '°F</p>'
             htmlBottom += '</div>';
             htmlBottom += '<div class="solo-humid-wrap">';
@@ -669,17 +684,19 @@ function forecastThreeChart() {
             htmlBottom += '<div class="solo-forecast-icon">';
             htmlBottom += '<img src="https://openweathermap.org/img/w/' + forecastInfo[weatherPlace].weather[0].icon + '.png"></div>';
             htmlBottom += '<h4 class="solo-weather">' + forecastInfo[weatherPlace].weather[0].description.toUpperCase() + '</h4>';
+            htmlBottom += '<button id="dataBtn">Data</button>';
             htmlBottom += '</div>';
             htmlBottom += '<div class="solo-wind-wrap">';
-            htmlBottom += '<h4 class="solo-wind">Wind: ' + parseInt(windSpeed) + 'MPH</h4>';
+            htmlBottom += '<h4 class="solo-wind"><img class="testing" src="../img/wind.png">' + parseInt(windSpeed) + 'MPH</h4>';
             htmlBottom += addGust;
-            htmlBottom += '<p class="direction">' + directionWind + '</p>'
+            htmlBottom += '<p class="direction">' + pointHTML + directionWind + '</p>'
             htmlBottom += '</div>';
             htmlBottom += '</div>';
             console.log(forecastInfo[weatherPlace]);
             console.log(time);
 
             $('#singleForecast').html(htmlBottom);
+            modalConnectOne();
         });
 }
 function forecastFourChart() {
@@ -716,7 +733,7 @@ function forecastFourChart() {
             htmlBottom += '<h4>'+ day +'</h4>'
             htmlBottom += '</div>';
             htmlBottom += '<div class="solo-temp-wrap">';
-            htmlBottom += '<h4 class="solo-temp">' + parseInt(forecastInfo[weatherPlace].main.temp) + '°F</h4>';
+            htmlBottom += '<h4 class="solo-temp"><img class="testing" src="../img/hot.png">' + parseInt(forecastInfo[weatherPlace].main.temp) + '°F</h4>';
             htmlBottom += '<p>Feels Like: ' + parseInt(forecastInfo[weatherPlace].main.feels_like) + '°F</p>'
             htmlBottom += '</div>';
             htmlBottom += '<div class="solo-humid-wrap">';
@@ -728,23 +745,26 @@ function forecastFourChart() {
             htmlBottom += '<div class="solo-forecast-icon">';
             htmlBottom += '<img src="https://openweathermap.org/img/w/' + forecastInfo[weatherPlace].weather[0].icon + '.png"></div>';
             htmlBottom += '<h4 class="solo-weather">' + forecastInfo[weatherPlace].weather[0].description.toUpperCase() + '</h4>';
+            htmlBottom += '<button id="dataBtn">Data</button>';
             htmlBottom += '</div>';
             htmlBottom += '<div class="solo-wind-wrap">';
-            htmlBottom += '<h4 class="solo-wind">Wind: ' + parseInt(windSpeed) + 'MPH</h4>';
+            htmlBottom += '<h4 class="solo-wind"><img class="testing" src="../img/wind.png">' + parseInt(windSpeed) + 'MPH</h4>';
             htmlBottom += addGust;
-            htmlBottom += '<p class="direction">' + directionWind + '</p>'
+            htmlBottom += '<p class="direction">' + pointHTML + directionWind + '</p>'
             htmlBottom += '</div>';
             htmlBottom += '</div>';
             console.log(forecastInfo[weatherPlace]);
             console.log(time);
 
             $('#singleForecast').html(htmlBottom);
+            modalConnectOne();
         });
 }
 function forecastFiveChart() {
     $.get("https://api.openweathermap.org/data/2.5/forecast?units=imperial&lat=" + latInput + "&lon=" + lonInput + "&appid=" + OPEN_WEATHER_APPID)
         // {lon: -84.2807, lat: 30.4383}
         .done(function (data) {
+
 
 
             day = dayData[4];
@@ -758,6 +778,8 @@ function forecastFiveChart() {
             var windSpeed = forecastInfo[weatherPlace].wind.speed * 1.151;
 
             var direction = forecastInfo[weatherPlace].wind.deg;
+
+
 
 
             time = new Date(forecastInfo[weatherPlace].dt * 1000).toLocaleTimeString([], {
@@ -776,7 +798,7 @@ function forecastFiveChart() {
             htmlBottom += '<h4>' + day + '</h4>'
             htmlBottom += '</div>';
             htmlBottom += '<div class="solo-temp-wrap">';
-            htmlBottom += '<h4 class="solo-temp">' + parseInt(forecastInfo[weatherPlace].main.temp) + '°F</h4>';
+            htmlBottom += '<h4 class="solo-temp"><img class="testing" src="../img/hot.png">' + parseInt(forecastInfo[weatherPlace].main.temp) + '°F</h4>';
             htmlBottom += '<p>Feels Like: ' + parseInt(forecastInfo[weatherPlace].main.feels_like) + '°F</p>'
             htmlBottom += '</div>';
             htmlBottom += '<div class="solo-humid-wrap">';
@@ -788,18 +810,21 @@ function forecastFiveChart() {
             htmlBottom += '<div class="solo-forecast-icon">';
             htmlBottom += '<img src="https://openweathermap.org/img/w/' + forecastInfo[weatherPlace].weather[0].icon + '.png"></div>';
             htmlBottom += '<h4 class="solo-weather">' + forecastInfo[weatherPlace].weather[0].description.toUpperCase() + '</h4>';
+            htmlBottom += '<button id="dataBtn">Data</button>';
             htmlBottom += '</div>';
             htmlBottom += '<div class="solo-wind-wrap">';
-            htmlBottom += '<h4 class="solo-wind">Wind: ' + parseInt(windSpeed) + 'MPH</h4>';
+            htmlBottom += '<h4 class="solo-wind"><img class="testing" src="../img/wind.png">' + parseInt(windSpeed) + 'MPH</h4>';
             htmlBottom += addGust;
-            htmlBottom += '<p class="direction">' + directionWind + '</p>'
+            htmlBottom += '<p class="direction">' + pointHTML + directionWind + '</p>'
             htmlBottom += '</div>';
             htmlBottom += '</div>';
             console.log(forecastInfo[weatherPlace]);
             console.log(time);
 
             $('#singleForecast').html(htmlBottom);
+            modalConnectOne();
         });
+
 }
 
 
@@ -809,7 +834,7 @@ function forecastFiveChart() {
 
 
 var directionWind;
-    var pointHTML;
+var pointHTML;
 function converterCompass (direction) {
     if (direction < 30 || direction > 315) {
         directionWind = "North";
@@ -846,6 +871,7 @@ function converterCompass (direction) {
     } else {
         console.log('error');
     }
+
 }
 
 
@@ -861,3 +887,76 @@ function gustCheck (windGust) {
 
 
 var time;
+
+
+//////////////modal for chart
+
+function modalConnectOne() {
+    let dataOpen = '#dataBtn';
+    var modalOpen = document.querySelector(dataOpen);
+    modalOpen.addEventListener('click', function () {
+        modalPopUp();
+
+    });
+}
+function modalPopUp() {
+    $.get("https://api.openweathermap.org/data/2.5/forecast?units=imperial&lat=" + latInput + "&lon=" + lonInput + "&appid=" + OPEN_WEATHER_APPID)
+        // {lon: -84.2807, lat: 30.4383}
+        .done(function (result) {
+
+
+            var forecastInfo = result.list;
+
+
+
+
+
+    var modalPop = document.getElementById('chartModal');
+    var modalButton = document.getElementById('dataBtn');
+    var modalSpan = document.getElementsByClassName("pop")[0];
+
+
+    modalPop.style.display = "block";
+
+
+
+    modalSpan.onclick = function () {
+        modalPop.style.display = "none";
+    };
+
+    window.onclick = function (event) {
+        if (event.target == modalPop) {
+            modalPop.style.display = "none";
+        }
+    };
+
+
+    var labels = [];
+    var graphData = [];
+
+    for (let i = 0; i < forecastInfo.length; i++) {
+        labels.push(forecastInfo[i].dt_txt);
+        graphData.push(forecastInfo[i].main.temp);
+
+    }
+
+    const data = {
+        labels: labels,
+        datasets: [{
+            data: graphData,
+            backgroundColor: 'rgb(66, 221, 245'
+        }]
+    };
+
+    const config = {
+        type: 'bar',
+        data: data
+    };
+
+    const chart = new Chart(
+        document.getElementById('myChart'),
+        config
+    );
+
+})
+}
