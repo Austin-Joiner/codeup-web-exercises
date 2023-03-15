@@ -436,6 +436,7 @@ function runForecast() {
                 }
                 console.log("runforecast function did this");
 
+
             }
             $('#forecast').html(html);
 
@@ -922,17 +923,17 @@ function modalPopUp() {
 
     modalSpan.onclick = function () {
         modalPop.style.display = "none";
+        chart.destroy();
     };
 
     window.onclick = function (event) {
         if (event.target == modalPop) {
             modalPop.style.display = "none";
+            chart.destroy();
         }
     };
-
-
-    var labels = [];
-    var graphData = [];
+            var labels = [];
+            var graphData = [];
 
     for (let i = 0; i < forecastInfo.length; i++) {
         labels.push(forecastInfo[i].dt_txt);
@@ -943,13 +944,14 @@ function modalPopUp() {
     const data = {
         labels: labels,
         datasets: [{
+            label: "Temperature",
             data: graphData,
             backgroundColor: 'rgb(66, 221, 245'
         }]
     };
 
     const config = {
-        type: 'bar',
+        type: 'line',
         data: data
     };
 
@@ -957,6 +959,7 @@ function modalPopUp() {
         document.getElementById('myChart'),
         config
     );
+
 
 })
 }
