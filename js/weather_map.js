@@ -963,3 +963,49 @@ function modalPopUp() {
 
 })
 }
+
+
+
+//////////////SECRET CODE
+
+var keyCode = [65, 90, 69, 66, 65, 78, 13];//cohort name
+var secret = [65, 90, 69, 66, 65, 78, 13];
+var ind = 0; //starts index at 0 so we can increment it up
+var newInd = 0;
+
+$(document).keyup(function(event) {
+    console.log(event.keyCode);
+    if (event.which === keyCode[ind]) {
+        ind++;  // adds 1 to index if input code correctly making it to where it will be 11 in total
+    } else {
+        ind = 0; // this it to reset the code if typed wrong
+    }
+    if (ind === keyCode.length) { // once ind = 11 it will successfully pass through this if statement and reset it to zero
+        ind = 0;
+        alert('Hello from Azeban and Codey The Duck!');
+
+
+        var hiddenHTML = '';
+        hiddenHTML += '<div class="azeban-div d-flex"><img class="secretIMG" src="../img/racoon.png"></div>';
+        hiddenHTML += '<div class="codey-div d-flex"><img class="secretIMG" src="../img/duck.png"></div>';
+        $('#secretDiv').html(hiddenHTML);
+    }
+
+
+
+});
+
+
+$(document).keyup(function(newEvent) {
+    if (newEvent.which === secret[newInd]) {
+        newInd++;
+    } else {
+        newInd = 0; // this it to reset the code if typed wrong
+    }
+    if (newInd === secret.length) {
+        newInd = 0;
+
+
+    }
+
+});
