@@ -1,7 +1,14 @@
 
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed&family=Orbitron:wght@400;700&display=swap');
 
+/*font-family: 'Barlow Condensed', sans-serif;*/
+/*font-family: 'Orbitron', sans-serif;*/
 
-
+* {
+    font-family: 'Orbitron', sans-serif;
+    paddding: 0;
+    margin: 0;
+}
 body {
     background: #3B94D9;
 }
@@ -25,6 +32,7 @@ body {
     background: rgb(43,145,168);
     background: radial-gradient(circle, rgba(43,145,168,1) 0%, rgba(126,195,210,1) 45%, rgba(160,179,184,1) 91%);
     z-index: -500;
+    width: 100%;
 }
 
 
@@ -39,10 +47,11 @@ body {
     display: flex;
     margin-right: auto;
     margin-left: auto;
+    font-family: 'Orbitron', sans-serif;
+
 }
 .logo {
     display: flex;
-
 }
 .weather-header{
     background: black;
@@ -205,9 +214,32 @@ body {
     margin-bottom: auto;
 }
 
+.testing {
+    width: 50px;
+    height: 50px;
+}
 
-
-
-
-
-
+.north {
+    rotate: 270deg;
+}
+.north-east {
+    rotate: 315deg;
+}
+.east {
+    rotate: 0deg;
+}
+.south-east {
+    rotate: 45deg;
+}
+.south {
+    rotate: 90deg;
+}
+.south-west {
+    rotate: 135deg;
+}
+.west {
+    rotate: 180deg;
+}
+.north-west {
+    rotate: 225deg;
+}

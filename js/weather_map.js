@@ -31,14 +31,14 @@ $.get("https://api.openweathermap.org/data/2.5/forecast?units=imperial&lat=30.43
                 day: '2-digit'
             });
 
-            const time = new Date(data.list[i].dt * 1000).toLocaleTimeString([], {
+            time = new Date(data.list[i].dt * 1000).toLocaleTimeString([], {
                 hour: "numeric",
                 minute: "2-digit",
                 hour12: true
             });
 
 
-            if (day === false || day !== prevDay && time === '5:00 PM' ) {
+            if (day === false || day !== prevDay && time === '2:00 PM' ) {
                 html += '<a href="#singleForecast" type="button" id="card-' + [i] + '" class="container-wrap card col-sm-4 col-lg-2">';
                 html += '<div class="date-wrap">';
                 html += '<h4>' + day + '</h4>'
@@ -117,23 +117,23 @@ function currentWeather() {
             htmlBottom += '<h4>Current Weather</h4>'
             htmlBottom += '</div>';
             htmlBottom += '<div class="solo-temp-wrap">';
-            htmlBottom += '<h4 class="solo-temp">' + parseInt(currentInfo.main.temp) + '°F</h4>';
+            htmlBottom += '<h4 class="solo-temp"> <img class="testing" src="../img/hot.png">' + parseInt(currentInfo.main.temp) + '°F</h4>';
             htmlBottom += '<p>Feels Like: ' + parseInt(currentInfo.main.feels_like) + '°F</p>'
             htmlBottom += '</div>';
             htmlBottom += '<div class="solo-humid-wrap">';
             htmlBottom += '<h4 class="solo-humid">Humidity: ' + currentInfo.main.humidity + '%</h4>';
             htmlBottom += '</div>';
             htmlBottom += '<p class="temp-high-low">High: ' + parseInt(currentInfo.main.temp_max) + '°F</p>'
-            htmlBottom += '<p class="temp-high-low">Low: ' + parseInt(currentInfo.main.temp_max) + '°F</p>'
+            htmlBottom += '<p class="temp-high-low">Low: ' + parseInt(currentInfo.main.temp_min) + '°F</p>'
             htmlBottom += '<div class="solo-weather-wrap">';
             htmlBottom += '<div class="solo-forecast-icon">';
             htmlBottom += '<img src="https://openweathermap.org/img/w/' + currentInfo.weather[0].icon + '.png"></div>';
             htmlBottom += '<h4 class="solo-weather">' + currentInfo.weather[0].description.toUpperCase() + '</h4>';
             htmlBottom += '</div>';
             htmlBottom += '<div class="solo-wind-wrap">';
-            htmlBottom += '<h4 class="solo-wind">Wind: ' + parseInt(windSpeed) + 'MPH</h4>';
+            htmlBottom += '<h4 class="solo-wind"><img class="testing" src="../img/wind.png"> ' + parseInt(windSpeed) + 'MPH</h4>';
             htmlBottom += addGust;
-            htmlBottom += '<p class="direction">' + directionWind + '</p>'
+            htmlBottom += '<p class="direction">' + pointHTML + directionWind + '</p>'
             htmlBottom += '</div>';
             htmlBottom += '</div>';
 
@@ -328,11 +328,9 @@ map.on('dblclick', function (event) {
         switch (styleSwap.value) {
             case 'Streets':
                 map.setStyle(styleStreets);
-
                 break;
             case 'Outdoors':
                 map.setStyle(styleOutdoors);
-
                 break;
             case 'Light':
                 map.setStyle(styleLight);
@@ -354,7 +352,7 @@ map.on('dblclick', function (event) {
                 map.setStyle(styleNavigationNight);
                 break;
         }
-        // map.style(styleSwap.value);
+
 
     }
 
@@ -503,7 +501,7 @@ function dailyWeatherFive() {
     });
 }
 
-
+///////////////////add to bottom functions (5)
 
 function forecastOneChart() {
     $.get("https://api.openweathermap.org/data/2.5/forecast?units=imperial&lat=" + latInput + "&lon=" + lonInput + "&appid=" + OPEN_WEATHER_APPID)
@@ -525,6 +523,13 @@ function forecastOneChart() {
             var windSpeed = forecastInfo[weatherPlace].wind.speed * 1.151;
             var direction = forecastInfo[weatherPlace].wind.deg;
 
+
+            time = new Date(forecastInfo[weatherPlace].dt * 1000).toLocaleTimeString([], {
+                hour: "numeric",
+                minute: "2-digit",
+                hour12: true
+            });
+
             gustCheck(windGust);
             converterCompass(direction);
 
@@ -541,7 +546,7 @@ function forecastOneChart() {
             htmlBottom += '<div class="solo-humid-wrap">';
             htmlBottom += '<h4 class="solo-humid">Humidity: ' + forecastInfo[weatherPlace].main.humidity + '%</h4>';
             htmlBottom += '<p class="temp-high-low">High: ' + parseInt(forecastInfo[weatherPlace].main.temp_max) + '°F</p>'
-            htmlBottom += '<p class="temp-high-low">Low: ' + parseInt(forecastInfo[weatherPlace].main.temp_max) + '°F</p>'
+            htmlBottom += '<p class="temp-high-low">Low: ' + parseInt(forecastInfo[weatherPlace].main.temp_min) + '°F</p>'
             htmlBottom += '</div>';
             htmlBottom += '<div class="solo-weather-wrap">';
             htmlBottom += '<div class="solo-forecast-icon">';
@@ -554,7 +559,8 @@ function forecastOneChart() {
             htmlBottom += '<p class="direction">' + directionWind + '</p>'
             htmlBottom += '</div>';
             htmlBottom += '</div>';
-
+            console.log(forecastInfo[weatherPlace]);
+            console.log(time);
 
             $('#singleForecast').html(htmlBottom);
         });
@@ -574,8 +580,14 @@ function forecastTwoChart() {
 
             var windGust = forecastInfo[weatherPlace].wind.gust * 1.151;
             var windSpeed = forecastInfo[weatherPlace].wind.speed * 1.151;
-
             var direction = forecastInfo[weatherPlace].wind.deg;
+
+
+            time = new Date(forecastInfo[weatherPlace].dt * 1000).toLocaleTimeString([], {
+                hour: "numeric",
+                minute: "2-digit",
+                hour12: true
+            });
 
             gustCheck(windGust);
             converterCompass(direction);
@@ -591,7 +603,7 @@ function forecastTwoChart() {
             htmlBottom += '<div class="solo-humid-wrap">';
             htmlBottom += '<h4 class="solo-humid">Humidity: ' + forecastInfo[weatherPlace].main.humidity + '%</h4>';
             htmlBottom += '<p class="temp-high-low">High: ' + parseInt(forecastInfo[weatherPlace].main.temp_max) + '°F</p>'
-            htmlBottom += '<p class="temp-high-low">Low: ' + parseInt(forecastInfo[weatherPlace].main.temp_max) + '°F</p>'
+            htmlBottom += '<p class="temp-high-low">Low: ' + parseInt(forecastInfo[weatherPlace].main.temp_min) + '°F</p>'
             htmlBottom += '</div>';
             htmlBottom += '<div class="solo-weather-wrap">';
             htmlBottom += '<div class="solo-forecast-icon">';
@@ -604,6 +616,8 @@ function forecastTwoChart() {
             htmlBottom += '<p class="direction">' + directionWind + '</p>'
             htmlBottom += '</div>';
             htmlBottom += '</div>';
+            console.log(forecastInfo[weatherPlace]);
+            console.log(time);
 
 
             $('#singleForecast').html(htmlBottom);
@@ -626,6 +640,13 @@ function forecastThreeChart() {
 
             var direction = forecastInfo[weatherPlace].wind.deg;
 
+
+            time = new Date(forecastInfo[weatherPlace].dt * 1000).toLocaleTimeString([], {
+                hour: "numeric",
+                minute: "2-digit",
+                hour12: true
+            });
+
             gustCheck(windGust);
             converterCompass(direction);
 
@@ -642,7 +663,7 @@ function forecastThreeChart() {
             htmlBottom += '<div class="solo-humid-wrap">';
             htmlBottom += '<h4 class="solo-humid">Humidity: ' + forecastInfo[weatherPlace].main.humidity + '%</h4>';
             htmlBottom += '<p class="temp-high-low">High: ' + parseInt(forecastInfo[weatherPlace].main.temp_max) + '°F</p>'
-            htmlBottom += '<p class="temp-high-low">Low: ' + parseInt(forecastInfo[weatherPlace].main.temp_max) + '°F</p>'
+            htmlBottom += '<p class="temp-high-low">Low: ' + parseInt(forecastInfo[weatherPlace].main.temp_min) + '°F</p>'
             htmlBottom += '</div>';
             htmlBottom += '<div class="solo-weather-wrap">';
             htmlBottom += '<div class="solo-forecast-icon">';
@@ -655,7 +676,8 @@ function forecastThreeChart() {
             htmlBottom += '<p class="direction">' + directionWind + '</p>'
             htmlBottom += '</div>';
             htmlBottom += '</div>';
-
+            console.log(forecastInfo[weatherPlace]);
+            console.log(time);
 
             $('#singleForecast').html(htmlBottom);
         });
@@ -678,6 +700,13 @@ function forecastFourChart() {
 
             var direction = forecastInfo[weatherPlace].wind.deg;
 
+
+            time = new Date(forecastInfo[weatherPlace].dt * 1000).toLocaleTimeString([], {
+                hour: "numeric",
+                minute: "2-digit",
+                hour12: true
+            });
+
             gustCheck(windGust);
             converterCompass(direction);
 
@@ -693,7 +722,7 @@ function forecastFourChart() {
             htmlBottom += '<div class="solo-humid-wrap">';
             htmlBottom += '<h4 class="solo-humid">Humidity: ' + forecastInfo[weatherPlace].main.humidity + '%</h4>';
             htmlBottom += '<p class="temp-high-low">High: ' + parseInt(forecastInfo[weatherPlace].main.temp_max) + '°F</p>'
-            htmlBottom += '<p class="temp-high-low">Low: ' + parseInt(forecastInfo[weatherPlace].main.temp_max) + '°F</p>'
+            htmlBottom += '<p class="temp-high-low">Low: ' + parseInt(forecastInfo[weatherPlace].main.temp_min) + '°F</p>'
             htmlBottom += '</div>';
             htmlBottom += '<div class="solo-weather-wrap">';
             htmlBottom += '<div class="solo-forecast-icon">';
@@ -706,7 +735,8 @@ function forecastFourChart() {
             htmlBottom += '<p class="direction">' + directionWind + '</p>'
             htmlBottom += '</div>';
             htmlBottom += '</div>';
-
+            console.log(forecastInfo[weatherPlace]);
+            console.log(time);
 
             $('#singleForecast').html(htmlBottom);
         });
@@ -719,9 +749,6 @@ function forecastFiveChart() {
 
             day = dayData[4];
 
-
-
-
             let weatherPlace = indexArray[4];
 
             var forecastInfo = data.list;
@@ -731,6 +758,14 @@ function forecastFiveChart() {
             var windSpeed = forecastInfo[weatherPlace].wind.speed * 1.151;
 
             var direction = forecastInfo[weatherPlace].wind.deg;
+
+
+            time = new Date(forecastInfo[weatherPlace].dt * 1000).toLocaleTimeString([], {
+                hour: "numeric",
+                minute: "2-digit",
+                hour12: true
+            });
+
 
             gustCheck(windGust);
             converterCompass(direction);
@@ -747,7 +782,7 @@ function forecastFiveChart() {
             htmlBottom += '<div class="solo-humid-wrap">';
             htmlBottom += '<h4 class="solo-humid">Humidity: ' + forecastInfo[weatherPlace].main.humidity + '%</h4>';
             htmlBottom += '<p class="temp-high-low">High: ' + parseInt(forecastInfo[weatherPlace].main.temp_max) + '°F</p>'
-            htmlBottom += '<p class="temp-high-low">Low: ' + parseInt(forecastInfo[weatherPlace].main.temp_max) + '°F</p>'
+            htmlBottom += '<p class="temp-high-low">Low: ' + parseInt(forecastInfo[weatherPlace].main.temp_min) + '°F</p>'
             htmlBottom += '</div>';
             htmlBottom += '<div class="solo-weather-wrap">';
             htmlBottom += '<div class="solo-forecast-icon">';
@@ -760,31 +795,54 @@ function forecastFiveChart() {
             htmlBottom += '<p class="direction">' + directionWind + '</p>'
             htmlBottom += '</div>';
             htmlBottom += '</div>';
-
+            console.log(forecastInfo[weatherPlace]);
+            console.log(time);
 
             $('#singleForecast').html(htmlBottom);
         });
 }
 
 
-var directionind;
+
+/////////////////calculating functions
+
+
+
+var directionWind;
+    var pointHTML;
 function converterCompass (direction) {
     if (direction < 30 || direction > 315) {
         directionWind = "North";
+        pointHTML = '<img class="north" src="../img/decree.png">';
+
     } else if (direction <= 60 && direction >= 30) {
         directionWind = "North East";
+        pointHTML = '<img class="north-east" src="../img/decree.png">';
+
     } else if (direction < 110 && direction > 60) {
         directionWind = "East";
+        pointHTML = '<img class="east" src="../img/decree.png">';
+
     } else if (direction <= 150 && direction >= 110) {
         directionWind = "South East";
+        pointHTML = '<img class="south-east" src="../img/decree.png">';
+
     } else if (direction < 210 && direction > 150) {
         directionWind = "South";
+        pointHTML = '<img class="south" src="../img/decree.png">';
+
     } else if (direction <= 240 && direction >= 210) {
         directionWind = "South West";
+        pointHTML = '<img class="south-west" src="../img/decree.png">';
+
     } else if (direction < 300 && direction >= 240) {
         directionWind = "West";
+        pointHTML = '<img class="west" src="../img/decree.png">';
+
     } else if (direction <= 315 && direction >= 300) {
         directionWind = "North West";
+        pointHTML = '<img class="north-west" src="../img/decree.png">';
+
     } else {
         console.log('error');
     }
@@ -800,3 +858,6 @@ function gustCheck (windGust) {
         addGust = '<p class="gust">No Gust.</p>'
     }
 }
+
+
+var time;
