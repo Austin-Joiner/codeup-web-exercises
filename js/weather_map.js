@@ -39,7 +39,7 @@ $.get("https://api.openweathermap.org/data/2.5/forecast?units=imperial&lat=30.43
 
 
             if (day === false || day !== prevDay && time === '5:00 PM' ) {
-                html += '<a href="#" type="button" id="card-' + [i] + '" class="container-wrap card col-sm-4 col-lg-2">';
+                html += '<a href="#singleForecast" type="button" id="card-' + [i] + '" class="container-wrap card col-sm-4 col-lg-2">';
                 html += '<div class="date-wrap">';
                 html += '<h4>' + day + '</h4>'
                 html += '</div>';
@@ -105,8 +105,12 @@ function currentWeather() {
             var htmlBottom = '';
 
 
+            var windGust = currentInfo.wind.gust * 1.151;
             var windSpeed = currentInfo.wind.speed * 1.151;
+            var direction = currentInfo.wind.deg;
 
+            converterCompass(direction);
+            gustCheck(windGust);
 
             htmlBottom += '<div class="solo-container-wrap card">';
             htmlBottom += '<div class="solo-date-wrap">';
@@ -119,6 +123,8 @@ function currentWeather() {
             htmlBottom += '<div class="solo-humid-wrap">';
             htmlBottom += '<h4 class="solo-humid">Humidity: ' + currentInfo.main.humidity + '%</h4>';
             htmlBottom += '</div>';
+            htmlBottom += '<p class="temp-high-low">High: ' + parseInt(currentInfo.main.temp_max) + '°F</p>'
+            htmlBottom += '<p class="temp-high-low">Low: ' + parseInt(currentInfo.main.temp_max) + '°F</p>'
             htmlBottom += '<div class="solo-weather-wrap">';
             htmlBottom += '<div class="solo-forecast-icon">';
             htmlBottom += '<img src="https://openweathermap.org/img/w/' + currentInfo.weather[0].icon + '.png"></div>';
@@ -126,6 +132,8 @@ function currentWeather() {
             htmlBottom += '</div>';
             htmlBottom += '<div class="solo-wind-wrap">';
             htmlBottom += '<h4 class="solo-wind">Wind: ' + parseInt(windSpeed) + 'MPH</h4>';
+            htmlBottom += addGust;
+            htmlBottom += '<p class="direction">' + directionWind + '</p>'
             htmlBottom += '</div>';
             htmlBottom += '</div>';
 
@@ -402,7 +410,7 @@ function runForecast() {
 
 
                 if (day === false || day !== prevDay && time === '5:00 PM' ) {
-                    html += '<a href="#" type="button" id="card-' + [i] + '" class="container-wrap card col-sm-4 col-lg-2">';
+                    html += '<a href="#singleForecast" type="button" id="card-' + [i] + '" class="container-wrap card col-sm-4 col-lg-2">';
                     html += '<div class="date-wrap">';
                     html += '<h4>' + day + '</h4>'
                     html += '</div>';
@@ -512,7 +520,13 @@ function forecastOneChart() {
             var forecastInfo = data.list;
             var htmlBottom = '';
 
+
+            var windGust = forecastInfo[weatherPlace].wind.gust * 1.151;
             var windSpeed = forecastInfo[weatherPlace].wind.speed * 1.151;
+            var direction = forecastInfo[weatherPlace].wind.deg;
+
+            gustCheck(windGust);
+            converterCompass(direction);
 
 
 
@@ -526,6 +540,8 @@ function forecastOneChart() {
             htmlBottom += '</div>';
             htmlBottom += '<div class="solo-humid-wrap">';
             htmlBottom += '<h4 class="solo-humid">Humidity: ' + forecastInfo[weatherPlace].main.humidity + '%</h4>';
+            htmlBottom += '<p class="temp-high-low">High: ' + parseInt(forecastInfo[weatherPlace].main.temp_max) + '°F</p>'
+            htmlBottom += '<p class="temp-high-low">Low: ' + parseInt(forecastInfo[weatherPlace].main.temp_max) + '°F</p>'
             htmlBottom += '</div>';
             htmlBottom += '<div class="solo-weather-wrap">';
             htmlBottom += '<div class="solo-forecast-icon">';
@@ -534,6 +550,8 @@ function forecastOneChart() {
             htmlBottom += '</div>';
             htmlBottom += '<div class="solo-wind-wrap">';
             htmlBottom += '<h4 class="solo-wind">Wind: ' + parseInt(windSpeed) + 'MPH</h4>';
+            htmlBottom += addGust;
+            htmlBottom += '<p class="direction">' + directionWind + '</p>'
             htmlBottom += '</div>';
             htmlBottom += '</div>';
 
@@ -554,8 +572,13 @@ function forecastTwoChart() {
             var forecastInfo = data.list;
             var htmlBottom = '';
 
-
+            var windGust = forecastInfo[weatherPlace].wind.gust * 1.151;
             var windSpeed = forecastInfo[weatherPlace].wind.speed * 1.151;
+
+            var direction = forecastInfo[weatherPlace].wind.deg;
+
+            gustCheck(windGust);
+            converterCompass(direction);
 
             htmlBottom += '<div class="solo-container-wrap card">';
             htmlBottom += '<div class="solo-date-wrap">';
@@ -567,6 +590,8 @@ function forecastTwoChart() {
             htmlBottom += '</div>';
             htmlBottom += '<div class="solo-humid-wrap">';
             htmlBottom += '<h4 class="solo-humid">Humidity: ' + forecastInfo[weatherPlace].main.humidity + '%</h4>';
+            htmlBottom += '<p class="temp-high-low">High: ' + parseInt(forecastInfo[weatherPlace].main.temp_max) + '°F</p>'
+            htmlBottom += '<p class="temp-high-low">Low: ' + parseInt(forecastInfo[weatherPlace].main.temp_max) + '°F</p>'
             htmlBottom += '</div>';
             htmlBottom += '<div class="solo-weather-wrap">';
             htmlBottom += '<div class="solo-forecast-icon">';
@@ -575,6 +600,8 @@ function forecastTwoChart() {
             htmlBottom += '</div>';
             htmlBottom += '<div class="solo-wind-wrap">';
             htmlBottom += '<h4 class="solo-wind">Wind: ' + parseInt(windSpeed) + 'MPH</h4>';
+            htmlBottom += addGust;
+            htmlBottom += '<p class="direction">' + directionWind + '</p>'
             htmlBottom += '</div>';
             htmlBottom += '</div>';
 
@@ -594,8 +621,13 @@ function forecastThreeChart() {
             var forecastInfo = data.list;
             var htmlBottom = '';
 
-
+            var windGust = forecastInfo[weatherPlace].wind.gust * 1.151;
             var windSpeed = forecastInfo[weatherPlace].wind.speed * 1.151;
+
+            var direction = forecastInfo[weatherPlace].wind.deg;
+
+            gustCheck(windGust);
+            converterCompass(direction);
 
 
 
@@ -609,6 +641,8 @@ function forecastThreeChart() {
             htmlBottom += '</div>';
             htmlBottom += '<div class="solo-humid-wrap">';
             htmlBottom += '<h4 class="solo-humid">Humidity: ' + forecastInfo[weatherPlace].main.humidity + '%</h4>';
+            htmlBottom += '<p class="temp-high-low">High: ' + parseInt(forecastInfo[weatherPlace].main.temp_max) + '°F</p>'
+            htmlBottom += '<p class="temp-high-low">Low: ' + parseInt(forecastInfo[weatherPlace].main.temp_max) + '°F</p>'
             htmlBottom += '</div>';
             htmlBottom += '<div class="solo-weather-wrap">';
             htmlBottom += '<div class="solo-forecast-icon">';
@@ -617,6 +651,8 @@ function forecastThreeChart() {
             htmlBottom += '</div>';
             htmlBottom += '<div class="solo-wind-wrap">';
             htmlBottom += '<h4 class="solo-wind">Wind: ' + parseInt(windSpeed) + 'MPH</h4>';
+            htmlBottom += addGust;
+            htmlBottom += '<p class="direction">' + directionWind + '</p>'
             htmlBottom += '</div>';
             htmlBottom += '</div>';
 
@@ -637,8 +673,13 @@ function forecastFourChart() {
             var forecastInfo = data.list;
             var htmlBottom = '';
 
-
+            var windGust = forecastInfo[weatherPlace].wind.gust * 1.151;
             var windSpeed = forecastInfo[weatherPlace].wind.speed * 1.151;
+
+            var direction = forecastInfo[weatherPlace].wind.deg;
+
+            gustCheck(windGust);
+            converterCompass(direction);
 
 
             htmlBottom += '<div class="solo-container-wrap card">';
@@ -651,6 +692,8 @@ function forecastFourChart() {
             htmlBottom += '</div>';
             htmlBottom += '<div class="solo-humid-wrap">';
             htmlBottom += '<h4 class="solo-humid">Humidity: ' + forecastInfo[weatherPlace].main.humidity + '%</h4>';
+            htmlBottom += '<p class="temp-high-low">High: ' + parseInt(forecastInfo[weatherPlace].main.temp_max) + '°F</p>'
+            htmlBottom += '<p class="temp-high-low">Low: ' + parseInt(forecastInfo[weatherPlace].main.temp_max) + '°F</p>'
             htmlBottom += '</div>';
             htmlBottom += '<div class="solo-weather-wrap">';
             htmlBottom += '<div class="solo-forecast-icon">';
@@ -659,6 +702,8 @@ function forecastFourChart() {
             htmlBottom += '</div>';
             htmlBottom += '<div class="solo-wind-wrap">';
             htmlBottom += '<h4 class="solo-wind">Wind: ' + parseInt(windSpeed) + 'MPH</h4>';
+            htmlBottom += addGust;
+            htmlBottom += '<p class="direction">' + directionWind + '</p>'
             htmlBottom += '</div>';
             htmlBottom += '</div>';
 
@@ -674,13 +719,21 @@ function forecastFiveChart() {
 
             day = dayData[4];
 
+
+
+
             let weatherPlace = indexArray[4];
 
             var forecastInfo = data.list;
             var htmlBottom = '';
 
-
+            var windGust = forecastInfo[weatherPlace].wind.gust * 1.151;
             var windSpeed = forecastInfo[weatherPlace].wind.speed * 1.151;
+
+            var direction = forecastInfo[weatherPlace].wind.deg;
+
+            gustCheck(windGust);
+            converterCompass(direction);
 
 
             htmlBottom += '<div class="solo-container-wrap card">';
@@ -693,6 +746,8 @@ function forecastFiveChart() {
             htmlBottom += '</div>';
             htmlBottom += '<div class="solo-humid-wrap">';
             htmlBottom += '<h4 class="solo-humid">Humidity: ' + forecastInfo[weatherPlace].main.humidity + '%</h4>';
+            htmlBottom += '<p class="temp-high-low">High: ' + parseInt(forecastInfo[weatherPlace].main.temp_max) + '°F</p>'
+            htmlBottom += '<p class="temp-high-low">Low: ' + parseInt(forecastInfo[weatherPlace].main.temp_max) + '°F</p>'
             htmlBottom += '</div>';
             htmlBottom += '<div class="solo-weather-wrap">';
             htmlBottom += '<div class="solo-forecast-icon">';
@@ -701,6 +756,8 @@ function forecastFiveChart() {
             htmlBottom += '</div>';
             htmlBottom += '<div class="solo-wind-wrap">';
             htmlBottom += '<h4 class="solo-wind">Wind: ' + parseInt(windSpeed) + 'MPH</h4>';
+            htmlBottom += addGust;
+            htmlBottom += '<p class="direction">' + directionWind + '</p>'
             htmlBottom += '</div>';
             htmlBottom += '</div>';
 
@@ -710,34 +767,36 @@ function forecastFiveChart() {
 }
 
 
-var direction;
-function converterCompass () {
-    switch (direction) {
-        case direction < 30 || direction > 315:
-            console.log("North");
-            break;
-        case direction <= 60 && direction >= 30:
-            console.log("North East");
-            break;
-        case direction < 110 && direction > 60:
-            console.log("East");
-            break;
-        case direction <= 150 && direction >= 110:
-            console.log("South East");
-            break;
-        case direction < 210 && direction > 150:
-            console.log("South");
-            break;
-        case direction <= 240 && direction >= 210:
-            console.log("South West");
-            break;
-        case direction < 300 && direction >= 240:
-            console.log("West");
-            break;
-        case direction <= 315 && direction >= 300:
-            console.log("North West");
-            break;
-
+var directionind;
+function converterCompass (direction) {
+    if (direction < 30 || direction > 315) {
+        directionWind = "North";
+    } else if (direction <= 60 && direction >= 30) {
+        directionWind = "North East";
+    } else if (direction < 110 && direction > 60) {
+        directionWind = "East";
+    } else if (direction <= 150 && direction >= 110) {
+        directionWind = "South East";
+    } else if (direction < 210 && direction > 150) {
+        directionWind = "South";
+    } else if (direction <= 240 && direction >= 210) {
+        directionWind = "South West";
+    } else if (direction < 300 && direction >= 240) {
+        directionWind = "West";
+    } else if (direction <= 315 && direction >= 300) {
+        directionWind = "North West";
+    } else {
+        console.log('error');
     }
 }
 
+
+
+var addGust;
+function gustCheck (windGust) {
+    if (parseInt(windGust) >= 10) {
+        addGust = '<p class="gust"> Gust: ' + parseInt(windGust) + 'MPH</p>' ;
+    } else {
+        addGust = '<p class="gust">No Gust.</p>'
+    }
+}

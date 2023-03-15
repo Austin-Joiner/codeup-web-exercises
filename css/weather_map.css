@@ -102,7 +102,7 @@ body {
     background: linear-gradient(100deg, rgba(180,160,11,1) 0%, rgba(255,216,32,1) 18%, rgba(255,252,216,1) 38%, rgba(240,240,15,1) 92%, rgba(222,235,80,1) 100%);
     border: black 2px solid;
 }
-.container-wrap:focus {
+.container-wrap:focus, .container-wrap:active {
     color: black;
     background: rgb(180,160,11);
     background: linear-gradient(100deg, rgba(180,160,11,1) 0%, rgba(255,216,32,1) 18%, rgba(255,252,216,1) 38%, rgba(240,240,15,1) 92%, rgba(222,235,80,1) 100%);
@@ -152,11 +152,13 @@ body {
     width: 100%;
     display: flex;
     justify-content: center;
+    margin-top: 10px;
 
 }
 .solo-container-wrap {
     width: 100%;
     border-radius: 10%;
+    margin-top: 50px;
 }
 .solo-date-wrap {
     display: flex;
@@ -168,13 +170,17 @@ body {
     justify-content: space-between;
 }
 
+
 .solo-wind-wrap {
     display: flex;
-    justify-content: end;
+    flex-direction: column;
+    align-items: end;
     margin-right: 10px;
+
 }
 .solo-humid-wrap {
     display: flex;
+    flex-direction: column;
 }
 .solo-weather {
     display: flex;
@@ -192,7 +198,12 @@ body {
     display: flex;
     justify-content: center;
 }
-
+.gust {
+    margin-bottom: auto;
+}
+.temp-high-low {
+    margin-bottom: auto;
+}
 
 
 
