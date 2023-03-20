@@ -4,16 +4,19 @@ const gitHub_Token = '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';
 var userInput = prompt('Type in username.');
 var username = userInput;
 
-//fetch(url, {headers: {'Authorization': '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'}})
-
-
 
 fetch('https:api.github.com/users/' + username +'/events',
     {headers: {'Authorization': gitHub_Token}})
     .then(response => response.json())
     .then(results => {
         console.log(results);
-        console.log('updated: ' + results[0]);
+        console.log('Login Name: ' + results[0].actor.login);
+        console.log('Commit Date: ' + results[0].created_at);
+        console.log('Repo Name: ' + results[0].repo.name);
+      var repoUrl = results[0].repo.url;
+      console.log('Repo URL: ' + repoUrl);
+        console.log('Commit Message: ' + results[0].payload.commits[0].message);
+
     });
 
 
