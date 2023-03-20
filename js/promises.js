@@ -5,7 +5,7 @@ var userInput = prompt('Type in username.');
 var username = userInput;
 
 
-fetch('https:api.github.com/users/' + username +'/events',
+fetch('https:api.github.com/users/' + username + '/events',
     {headers: {'Authorization': gitHub_Token}})
     .then(response => response.json())
     .then(results => {
