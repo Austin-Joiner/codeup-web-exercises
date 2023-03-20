@@ -1,12 +1,20 @@
+const gitHub_Token = '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';
+
+
+var userInput = prompt('Type in username.');
+var username = userInput;
 
 //fetch(url, {headers: {'Authorization': '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'}})
 
 
 
-
-function gitHub (username) {
-
-}
+fetch('https:api.github.com/users/' + username +'/events',
+    {headers: {'Authorization': gitHub_Token}})
+    .then(response => response.json())
+    .then(results => {
+        console.log(results);
+        console.log('updated: ' + results[0]);
+    });
 
 
 

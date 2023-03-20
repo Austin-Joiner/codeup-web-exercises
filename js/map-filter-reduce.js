@@ -92,6 +92,17 @@ console.log(allUsers);
     }, '');
 console.log(langName);
 
+// let uniquerList = function (x) {
+//     const uniqueList = x.reduce((list, user) => {
+//         list.push(...user.languages.filter(language => {
+//             return !list.includes(language);
+//         }))
+//         return list;
+//     },[]).join(', ');
+//     return uniqueList
+// }
+// console.log(uniquerList(users));
+
 
 
 

@@ -25,9 +25,7 @@ $.get("https://api.openweathermap.org/data/2.5/forecast?units=imperial&lat=30.43
 
         for (var i = 0; i < 40; i++) {
 
-            // dataTemp = forecastInfo[i].main.temp;
-            // dataTime = forecastInfo[i].dt_txt;
-            // dataList = forecastInfo[i];
+
 
             const day = new Date(data.list[i].dt * 1000).toLocaleDateString([], {
 
@@ -977,8 +975,10 @@ $(document).keyup(function(event) {
     console.log(event.keyCode);
     if (event.which === keyCode[ind]) {
         ind++;  // adds 1 to index if input code correctly making it to where it will be 11 in total
+
     } else {
         ind = 0; // this it to reset the code if typed wrong
+
     }
     if (ind === keyCode.length) { // once ind = 11 it will successfully pass through this if statement and reset it to zero
         ind = 0;
